@@ -51,6 +51,10 @@ group :test, :development do
   # test backend
   gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
   gem 'rb-inotify', '~> 0.9', require: RUBY_PLATFORM =~ /linux/i ? 'rb-inotify' : false
+
+  # spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 
@@ -64,8 +68,9 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  
+  gem 'guard'
+  gem 'guard-rspec', github: 'jgorset/guard-rspec', branch: 'rspec-3.0.0'
 end
 
 
