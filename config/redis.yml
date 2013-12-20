@@ -1,0 +1,17 @@
+defaults: &defaults
+  uri: <%= uri = URI.parse(ENV['REDIS_URL'] || "redis://localhost:6379") %>
+  host: <%= uri.host %>
+  port: <%= uri.port %>
+  password: <%= uri.password %>
+  db: 0
+  cache_db: 1
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  cache_db: 0

@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: kris
+  password:
+
+development:
+  <<: *default
+  database: ping_development
+
+test:
+  <<: *default
+  database: ping_test
+
+production:
+  <<: *default
+  database: ping_production
