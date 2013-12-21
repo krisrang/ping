@@ -71,6 +71,7 @@ group :development do
   
   gem 'guard'
   gem 'guard-rspec', github: 'jgorset/guard-rspec', branch: 'rspec-3.0.0'
+  gem 'terminal-notifier-guard'
 end
 
 
