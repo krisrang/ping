@@ -46,6 +46,7 @@ group :test, :development do
   gem 'mocha', require: false
   gem 'fabrication', require: false  
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
   gem 'certified', require: false
   
   # test backend

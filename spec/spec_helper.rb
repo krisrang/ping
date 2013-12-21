@@ -5,6 +5,9 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'fabrication'
 require 'mocha/api'
 require 'certified'
@@ -49,8 +52,8 @@ def freeze_time(now=Time.now)
   Time.stubs(:now).returns(Time.parse(now.to_s))
 end
 
-Spring.after_fork do
-  # $redis.client.reconnect
-  # Rails.cache.reconnect
-  # MessageBus.after_fork
-end
+# Spring.after_fork do
+#   # $redis.client.reconnect
+#   # Rails.cache.reconnect
+#   # MessageBus.after_fork
+# end
