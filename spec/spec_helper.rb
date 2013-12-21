@@ -13,7 +13,7 @@ require 'mocha/api'
 require 'certified'
 
 require 'fakeweb'
-FakeWeb.allow_net_connect = false
+FakeWeb.allow_net_connect = %r[^https?://coveralls.io]
 
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
