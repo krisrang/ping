@@ -35,6 +35,7 @@ RSpec.configure do |config|
   config.fail_fast = ENV['RSPEC_FAIL_FAST'] == "1"
   config.mock_framework = :mocha
   config.order = 'random'
+  config.include AuthHelpers
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -45,6 +46,22 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+
+  class TestCurrentUserProvider < Auth::CurrentUserProvider
+      def log_in_user(user,session,cookies)
+        session[:current_user_id] = user.id
+        super
+      end
+
+      def log_out_user(session,cookies)
+        session[:current_user_id] = nil
+        super
+      end
+    end
+
+    config.before(:all) do
+      Ping.current_user_provider = TestCurrentUserProvider
+    end
 end
 
 def freeze_time(now=Time.now)

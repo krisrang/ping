@@ -1,4 +1,4 @@
-require_dependency 'current_user'
+require 'current_user'
 
 class ApplicationController < ActionController::Base
   include CurrentUser

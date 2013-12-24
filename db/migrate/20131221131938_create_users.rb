@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email,            null: false
       t.string :auth_token,       limit: 32
       t.string :password_digest
+
+      t.timestamps
     end
   end
 end
