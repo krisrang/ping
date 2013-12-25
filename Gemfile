@@ -22,6 +22,7 @@ gem 'gemoji', github: 'github/gemoji'
 
 
 # BACKEND
+gem "sentry-raven", github: 'getsentry/raven-ruby'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby', '~> 3.1.2'
 # gem 'jbuilder', '~> 1.2'
