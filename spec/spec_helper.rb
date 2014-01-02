@@ -48,20 +48,20 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   class TestCurrentUserProvider < Auth::CurrentUserProvider
-      def log_in_user(user,session,cookies)
-        session[:current_user_id] = user.id
-        super
-      end
-
-      def log_out_user(session,cookies)
-        session[:current_user_id] = nil
-        super
-      end
+    def log_in_user(user,session,cookies)
+      session[:current_user_id] = user.id
+      super
     end
 
-    config.before(:all) do
-      Ping.current_user_provider = TestCurrentUserProvider
+    def log_out_user(session,cookies)
+      session[:current_user_id] = nil
+      super
     end
+  end
+
+  config.before(:all) do
+    Ping.current_user_provider = TestCurrentUserProvider
+  end
 end
 
 def freeze_time(now=Time.now)
