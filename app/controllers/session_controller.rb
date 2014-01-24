@@ -1,7 +1,4 @@
 class SessionController < ApplicationController
-  def new
-  end
-
   def create
     params.require(:login)
     params.require(:password)
@@ -17,7 +14,22 @@ class SessionController < ApplicationController
     user.email_confirmed? ? login(user) : not_activated(user)
   end
 
+  def forgot_password
+    params.require(:login)
+
+    user = User.find_by_username_or_email(params[:login])
+    if user.present?
+      email_token = user.email_tokens.create(email: user.email)
+      UserEmailer.perform_async(:forgot_password, {user_id: user.id, email_token: email_token.token})
+    end
+    # always render of so we don't leak information
+    render json: {result: "ok"}
+  end
+
   def destroy
+    reset_session
+    log_out_user
+    render nothing: true
   end
 
   private

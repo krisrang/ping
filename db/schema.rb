@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131224165342) do
+ActiveRecord::Schema.define(version: 20140124123349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,16 +29,15 @@ ActiveRecord::Schema.define(version: 20131224165342) do
   add_index "email_tokens", ["token"], name: "index_email_tokens_on_token", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",        limit: 20, null: false
-    t.string   "username_lower",  limit: 20, null: false
-    t.string   "email",                      null: false
+    t.string   "username",        limit: 20,                 null: false
+    t.string   "username_lower",  limit: 20,                 null: false
+    t.string   "email",                                      null: false
     t.string   "auth_token",      limit: 32
     t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.boolean  "active"
     t.datetime "last_seen"
     t.inet     "last_ip"
+    t.boolean  "admin",                      default: false, null: false
   end
 
 end

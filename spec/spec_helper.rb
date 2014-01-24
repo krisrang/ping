@@ -5,8 +5,10 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
-require 'coveralls'
-Coveralls.wear!
+if ENV["CI"]
+  require 'coveralls'
+  Coveralls.wear!
+end
 
 require 'fabrication'
 require 'mocha/api'

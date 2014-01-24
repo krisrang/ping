@@ -9,6 +9,10 @@ Bundler.require(*Rails.groups)
 module Ping
   class Application < Rails::Application
     require 'ping'
+    require 'rails_redis'
+    # Use redis for our cache
+    config.cache_store = RailsRedis.new_redis_store
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

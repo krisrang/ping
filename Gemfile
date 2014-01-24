@@ -6,7 +6,7 @@ gem 'rails', '4.1.0.beta1'
 gem 'pg'
 
 gem 'hiredis'
-gem 'redis', :require => ["redis", "redis/connection/hiredis"]
+gem 'redis', :require => ['redis', 'redis/connection/hiredis']
 gem 'redis-rails'
 
 # ASSETS
@@ -14,7 +14,7 @@ gem 'jquery-rails'
 gem 'less-rails'
 gem 'bourbon'
 gem 'sass-rails', '~> 4.0.0.rc1'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'therubyracer', require: 'v8'
 gem 'slim-rails'
 gem 'ember-rails'
@@ -22,10 +22,13 @@ gem 'gemoji', github: 'github/gemoji'
 
 
 # BACKEND
-gem "sentry-raven", github: 'getsentry/raven-ruby'
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidetiq'
+gem 'sinatra', require: nil
+gem 'sentry-raven', github: 'getsentry/raven-ruby'
 gem 'active_model_serializers'
-gem 'bcrypt-ruby', '~> 3.1.2'
-# gem 'jbuilder', '~> 1.2'
+gem 'bcrypt-ruby'
 
 
 # DEV & TEST
@@ -35,7 +38,7 @@ group :test, :development do
   gem 'pry-nav'
 
   # rspec
-  gem 'rspec-rails', '3.0.0.beta1', require: false
+  gem 'rspec-rails', require: false
   gem 'shoulda', require: false
   
   # javascript tests
@@ -62,7 +65,7 @@ end
 
 # TEST
 group :test do
-  gem 'fakeweb', '~> 1.3.0', require: false
+  gem 'fakeweb', require: false
 end
 
 
@@ -72,7 +75,7 @@ group :development do
   gem 'binding_of_caller'
   
   gem 'guard'
-  gem 'guard-rspec', github: 'jgorset/guard-rspec', branch: 'rspec-3.0.0'
+  gem 'guard-rspec'
   gem 'terminal-notifier-guard'
 end
 

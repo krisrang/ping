@@ -1,6 +1,8 @@
 require_dependency 'auth/current_user_provider'
 
 module Ping
+  class InvalidAccess < StandardError; end
+  
   def self.git_version
     return $git_version if $git_version
 

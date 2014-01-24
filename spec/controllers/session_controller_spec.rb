@@ -87,52 +87,50 @@ describe SessionController do
     end
   end
 
-  # describe '.destroy' do
-  #   before do
-  #     @user = log_in
-  #     xhr :delete, :destroy, id: @user.username
-  #   end
+  describe '.destroy' do
+    before do
+      @user = log_in
+      xhr :delete, :destroy, id: @user.username
+    end
 
-  #   it 'removes the session variable' do
-  #     session[:current_user_id].should be_blank
-  #   end
+    it 'removes the session variable' do
+      session[:current_user_id].should be_blank
+    end
 
 
-  #   it 'removes the auth token cookie' do
-  #     cookies[:_t].should be_blank
-  #   end
-  # end
+    it 'removes the auth token cookie' do
+      cookies[:_t].should be_blank
+    end
+  end
 
-  # describe '.forgot_password' do
+  describe '.forgot_password' do
 
-  #   it 'raises an error without a username parameter' do
-  #     lambda { xhr :post, :forgot_password }.should raise_error(ActionController::ParameterMissing)
-  #   end
+    it 'raises an error without a username parameter' do
+      lambda { xhr :post, :forgot_password }.should raise_error(ActionController::ParameterMissing)
+    end
 
-  #   context 'for a non existant username' do
-  #     it "doesn't generate a new token for a made up username" do
-  #       lambda { xhr :post, :forgot_password, login: 'made_up'}.should_not change(EmailToken, :count)
-  #     end
+    context 'for a non existant username' do
+      it "doesn't generate a new token for a made up username" do
+        lambda { xhr :post, :forgot_password, login: 'made_up'}.should_not change(EmailToken, :count)
+      end
 
-  #     it "doesn't enqueue an email" do
-  #       Jobs.expects(:enqueue).with(:user_mail, anything).never
-  #       xhr :post, :forgot_password, login: 'made_up'
-  #     end
-  #   end
+      it "doesn't enqueue an email" do
+        UserEmailer.expects(:perform_async).with(:forgot_password, anything).never
+        xhr :post, :forgot_password, login: 'made_up'
+      end
+    end
 
-  #   context 'for an existing username' do
-  #     let(:user) { Fabricate(:user) }
+    context 'for an existing username' do
+      let(:user) { Fabricate(:user) }
 
-  #     it "generates a new token for a made up username" do
-  #       lambda { xhr :post, :forgot_password, login: user.username}.should change(EmailToken, :count)
-  #     end
+      it "generates a new token for a made up username" do
+        lambda { xhr :post, :forgot_password, login: user.username}.should change(EmailToken, :count)
+      end
 
-  #     it "enqueues an email" do
-  #       Jobs.expects(:enqueue).with(:user_email, has_entries(type: :forgot_password, user_id: user.id))
-  #       xhr :post, :forgot_password, login: user.username
-  #     end
-  #   end
-
-  # end
-
+      it "enqueues an email" do
+        UserEmailer.expects(:perform_async).with(:forgot_password, has_entries(user_id: user.id))
+        xhr :post, :forgot_password, login: user.username
+      end
+    end
+  end
 end
