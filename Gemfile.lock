@@ -104,7 +104,7 @@ GEM
       lumberjack (~> 1.0)
       pry (>= 0.9.12)
       thor (>= 0.18.1)
-    guard-rspec (4.2.4)
+    guard-rspec (4.2.5)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
     handlebars-source (1.2.1)
@@ -112,7 +112,7 @@ GEM
     hike (1.2.3)
     hiredis (0.4.5)
     i18n (0.6.9)
-    ice_cube (0.11.1)
+    ice_cube (0.11.2)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -218,7 +218,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    sass (3.2.13)
+    sass (3.2.14)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -336,7 +336,7 @@ DEPENDENCIES
   redis
   redis-rails
   rspec-rails
-  sass-rails (~> 4.0.0.rc1)
+  sass-rails
   sentry-raven!
   shoulda
   sidekiq
