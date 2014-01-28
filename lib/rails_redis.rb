@@ -7,12 +7,11 @@ class RailsRedis
   end
 
   def self.config
-    @config ||= YAML.load(ERB.new(File.new("#{Rails.root}/config/redis.yml").read).result)[Rails.env]
+    conffile = "#{Rails.root}/config/redis.yml"
+    @config ||= YAML.load(ERB.new(File.new(conffile).read).result)[Rails.env]
 
     unless @config
-      puts '', "Redis config for environment '#{Rails.env}' was not found in #{Rails.root}/config/redis.yml."
-      puts "Did you forget to do RAILS_ENV=production?"
-      puts "Check your redis.yml and make sure it has configuration for the environment you're trying to use.", ''
+      puts '', "Redis config for environment '#{Rails.env}' was not found in #{conffile}."
       raise 'Redis config not found'
     end
 
@@ -20,12 +19,25 @@ class RailsRedis
   end
 
   def self.url(config)
-    "redis://#{(':' + config['password'] + '@') if config['password']}#{config['host']}:#{config['port']}/#{config['db']}"
+    pass = config['password'] ? ":#{config['password']}@" : ""
+    "redis://#{pass}#{config['host']}:#{config['port']}/#{config['db']}"
   end
 
   def self.new_redis_store
     redis_store = ActiveSupport::Cache::RedisStore.new(self.url(self.config))
     redis_store
+  end
+
+  def self.new_faye_engine
+    config = self.config
+    engine = {
+      type: Faye::Redis,
+      host: config['host'],
+      port: config['port']
+    }
+
+    engine['password'] = config['password'] if config['password']      
+    engine
   end
 
   def initialize

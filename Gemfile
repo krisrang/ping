@@ -6,8 +6,11 @@ gem 'rails', '4.1.0.beta1'
 gem 'pg'
 
 gem 'hiredis'
-gem 'redis', :require => ['redis', 'redis/connection/hiredis']
+gem 'redis', require: ['redis', 'redis/connection/hiredis']
 gem 'redis-rails'
+
+gem 'faye'
+gem 'faye-redis'
 
 # ASSETS
 gem 'jquery-rails'

@@ -1,7 +1,3 @@
-//= require jquery
-//= require handlebars
-//= require ember
-//= require ember-data
 //= require_self
 
 //= require ./store
@@ -15,4 +11,6 @@
 //= require ./router
 //= require_tree ./routes
 
-Ping = Ember.Application.create();
+window.Ping = Ember.Application.create({
+  rootElement: '#main'
+});

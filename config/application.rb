@@ -13,6 +13,19 @@ module Ping
     # Use redis for our cache
     config.cache_store = RailsRedis.new_redis_store
 
+    config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
+                            engine: RailsRedis.new_faye_engine   
+
+    # http cache upstream
+    config.action_dispatch.rack_cache = nil
+
+    config.handlebars.templates_root = 'ping/templates'
+    config.ember.variant = :development
+
+    # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
+    config.pbkdf2_iterations = 64000
+    config.pbkdf2_algorithm = "sha256"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -1,0 +1,1 @@
+Ping.IndexRoute = Ember.Route.extend({});
