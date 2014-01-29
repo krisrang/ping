@@ -1,3 +1,5 @@
-//= require handlebars.js
-//= require jquery_include.js
-//= require ember_include.js
+//= require handlebars
+//= require jquery_include
+//= require ember_include
+//= require modernizr
+//= require sugar

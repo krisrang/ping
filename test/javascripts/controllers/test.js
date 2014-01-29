@@ -1,6 +1,6 @@
 integration("Integration Tests");
 
-test("root lists first page of posts", function(){
+test("root shows index", function(){
   expect(1);
 
   visit("/").then(function() {
