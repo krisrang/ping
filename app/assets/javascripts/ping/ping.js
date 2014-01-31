@@ -1,3 +1,4 @@
+//= require ./env
 //= require_self
 
 //= require ./store
@@ -12,5 +13,5 @@
 //= require_tree ./routes
 
 window.Ping = Ember.Application.create({
-  rootElement: '#main'
+  // rootElement: '#main'
 });

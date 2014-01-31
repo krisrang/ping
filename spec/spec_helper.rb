@@ -2,12 +2,12 @@ require 'rubygems'
 
 if ENV['COVERAGE']
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start 'rails'
 end
 
 if ENV["CI"]
   require 'coveralls'
-  Coveralls.wear!
+  Coveralls.wear! 'rails'
 end
 
 require 'fabrication'
