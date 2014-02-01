@@ -1,5 +1,7 @@
-// For more information see: http://emberjs.com/guides/routing/
-
 Ping.Router.map(function() {
-  // this.resource('posts');
+  this.resource('lobby', { path: '/' });
+  
+  this.resource('room1');
 });
+
+Ping.Router.reopen({location: 'history'});

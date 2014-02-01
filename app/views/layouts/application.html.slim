@@ -3,12 +3,20 @@ html
   head
     meta charset="utf-8"
     title Ping
-    = stylesheet_link_tag     "application", media: "all"
-    = javascript_include_tag  "/faye/faye"
-    = javascript_include_tag  "vendor"
-    = javascript_include_tag  "application"
+    = stylesheet_link_tag     "application", media: "all"    
     = csrf_meta_tags
     meta content="width=device-width, initial-scale=1.0" name="viewport"
 
   body
     = yield
+
+    = javascript_include_tag  "/faye/faye"
+    = javascript_include_tag  "vendor"
+    = javascript_include_tag  "application"
+    
+    javascript:
+      Ping.Environment = '#{Rails.env}';
+      // Ping.SiteSettings = PreloadStore.get('settings');
+      // Ping.BaseUrl = '';
+      Ping.Locale = '#{I18n.locale}';
+      Ping.start();
