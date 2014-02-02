@@ -12,11 +12,10 @@ class User < ActiveRecord::Base
   after_create :create_user_stat
 
   validates_presence_of :username
-  # validate :username_validator
-  # validates :email, presence: true, uniqueness: true
-  # validates :email, email: true, if: :email_changed?
-  # validate :password_validator
-  # validates :ip_address, allowed_ip_address: {on: :create, message: :signup_not_allowed}
+  validate :username_validator
+  validates :email, presence: true, uniqueness: true
+  validates :email, email: true, if: :email_changed?
+  validate :password_validator
 
   def self.find_by_username_or_email(username_or_email)
     if username_or_email.include?('@')
@@ -44,8 +43,38 @@ class User < ActiveRecord::Base
     SecureRandom.hex(User.token_length)
   end
 
+  def self.username_length
+    3..15
+  end
+
   def self.token_length
     16
+  end
+
+  def password_required!
+    @password_required = true
+  end
+
+  def password_required?
+    !!@password_required
+  end
+
+  def username_validator
+    username_format_validator || begin
+      lower = username.downcase
+      existing = User.where(username_lower: lower).first
+      if username_changed? && existing && existing.id != self.id
+        errors.add(:username, I18n.t(:'user.username.unique'))
+      end
+    end
+  end
+
+  def username_format_validator
+    UsernameValidator.perform_validation(self, 'username')
+  end
+
+  def password_validator
+    PasswordValidator.new(attributes: :password).validate_each(self, :password, @raw_password)
   end
 
   def email_confirmed?

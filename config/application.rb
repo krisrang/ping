@@ -20,8 +20,8 @@ module Ping
     config.ember.variant = :development
 
     # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
-    config.pbkdf2_iterations = 64000
-    config.pbkdf2_algorithm = "sha256"
+    # config.pbkdf2_iterations = 64000
+    # config.pbkdf2_algorithm = "sha256"
 
     # route all exceptions via our router
     config.exceptions_app = self.routes
