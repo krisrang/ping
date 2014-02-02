@@ -1,12 +1,15 @@
 class SessionController < ApplicationController
+  skip_before_filter :redirect_to_login_if_required
+
+  layout 'login'
 
   def csrf
     render json: {csrf: form_authenticity_token }
   end
   
   def create
-    params.require(:login)
-    params.require(:password)
+    params.permit(:login)
+    params.permit(:password)
 
     login = params[:login].strip
     user = User.authenticate(login, params[:password])
@@ -20,7 +23,7 @@ class SessionController < ApplicationController
   end
 
   def forgot_password
-    params.require(:login)
+    params.permit(:login)
 
     user = User.find_by_username_or_email(params[:login])
     if user.present?
@@ -40,19 +43,30 @@ class SessionController < ApplicationController
   private
 
   def invalid_credentials
-    render json: {error: I18n.t("login.invalid")}
+    error = t("login.invalid")
+
+    respond_to do |format|
+      format.html { redirect_to :login, alert: error }
+      format.json { render json: {error: error} }
+    end
   end
 
   def not_activated(user)
-    render json: {
-      error: I18n.t("login.not_activated"),
-      reason: 'not_activated'
-    }
+    error = t("login.not_activated")
+
+    respond_to do |format|
+      format.html { redirect_to :login, alert: error }
+      format.json { render json: {error: error, reason: 'not_activated'} }
+    end
   end
 
   def log_in(user)
     log_in_user(user)
-    render json: user
+
+    respond_to do |format|
+      format.html { redirect_back_or_default(root_path) }
+      format.json { render json: user }
+    end
   end
 end
 

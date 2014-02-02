@@ -4,7 +4,7 @@
 **/
 Ping.Session = Em.Object.extend({
   init: function() {
-    this.set('highestSeenByTopic', {});
+    // this.set('initial', {});
   }
 });
 

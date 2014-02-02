@@ -57,6 +57,14 @@ class ApplicationController < ActionController::Base
     raise Ping::NotLoggedIn.new unless current_user.present?
   end
 
+  def redirect_back_or_default(default)
+    if session[:return_to].present?
+      return redirect_to(session[:return_to])
+    end
+
+    redirect_to default
+  end
+
   def redirect_to_login_if_required
     return if current_user || (request.format.json? && api_key_valid?)
 

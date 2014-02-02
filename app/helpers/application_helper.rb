@@ -17,4 +17,16 @@ module ApplicationHelper
   def ping_csrf
     csrf_meta_tags if current_user
   end
+
+  def flashes
+    alerts = flash.keys.map do |key|
+      type = key
+      type = 'success' if key == :notice
+      type = 'warning' if key == :alert
+
+      "<div class='alert alert-#{type}'>#{flash[key]}</div>"
+    end
+
+    raw alerts.join("")
+  end
 end

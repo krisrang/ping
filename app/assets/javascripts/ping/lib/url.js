@@ -6,7 +6,6 @@ Ping.URL = Em.Object.createWithMixins({
       return;
     }
 
-    var oldPath = window.location.pathname;
     path = path.replace(/https?\:\/\/[^\/]+/, '');
 
     // Be wary of looking up the router. In this case, we have links in our

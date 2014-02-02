@@ -12,7 +12,7 @@ gem 'redis-rails'
 gem 'faye'
 gem 'faye-redis'
 
-# ASSETS
+# FRONTEND
 gem 'jquery-rails'
 gem 'less-rails'
 gem 'bourbon'

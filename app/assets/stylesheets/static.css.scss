@@ -1,0 +1,88 @@
+@import 'variables';
+@import 'bourbon';
+
+.login {
+  background: #E4E7EF;
+
+  h1 {
+    text-align: center;
+  }
+
+  .form {
+    background: #fff;
+    max-width: 428px;
+    margin: 0 auto 30px;
+    padding: 30px 40px;
+    @include box-shadow(0 0 0 1px rgba(0, 0, 0, 0.05), 0 0 0px 0 rgba(0, 0, 0, 0.1));
+
+    h2, h3 {
+      color: $mild;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      margin-bottom: 30px;
+    }
+
+    .form-group.password {
+      position: relative;
+
+      .forgot-link {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        color: $mildblue;
+      }
+    }
+
+    .submit-btn {
+      width: 47.5%;
+      margin-right: 5%;
+      margin-bottom: 10px;
+      float: left;
+    }
+
+    .form-link {
+      width: 47.5%;
+    }
+
+    .btn-auth {
+      background: none;
+      border: none;
+      float: left;
+      width: 33.33%;
+
+      i {
+        padding: 20px;
+        border-radius: 64px;
+        color: #FFF;
+        font-size: 30px;
+        width: 70px;
+        @include transform(scale(1));
+        @include transition(all 0.2s ease 0s);
+
+        &:hover {
+          @include transform(scale(1.05));
+        }
+      }
+
+      &.btn-facebook i { background: #3B5998; }
+      &.btn-twitter i { background: #4099FF; }
+      &.btn-google i { background: #D34836; }
+    }
+
+    .external-options:after {
+      display: table;
+      content: "";
+    }
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .login {
+    .form {
+      padding: 30px 10px;
+    }
+  }
+}

@@ -2,3 +2,10 @@ en:
   login:
     invalid: "Wrong login or password!"
     not_activated: "Your account hasn't been activated yet. Please the following the link in your email."
+    title: "Sign in to continue"
+    login: "Email or Username"
+    password: "Password"
+    submit: "Sign in to %{app}"
+    signup: "Create an Account"
+    external: "Alternatively, you can log in using:"
+    forgot: "(forgot ?)"
