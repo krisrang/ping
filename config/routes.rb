@@ -14,5 +14,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get "session/csrf" => "session#csrf"
+
+  post 'login' => 'static#enter'
+  get 'login' => 'static#show', id: 'login'
+
   root 'home#index'
 end

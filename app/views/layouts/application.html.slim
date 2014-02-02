@@ -8,8 +8,6 @@ html
     = stylesheet_link_tag     "application", media: "all"    
     = javascript_include_tag  "preloader"
   body
-    = yield
-
     - if @preloaded.present?
       - @preloaded.each do |key, json|
         javascript:
@@ -24,3 +22,10 @@ html
       Ping.Settings = Preloader.get('settings');
       Ping.Locale = '#{I18n.locale}';
       Ping.start();
+
+    noscript data-path="#{request.env['PATH_INFO']}"
+      | page stuff
+      #main-outlet class="container"
+        /! preload-content:
+        = yield
+        /! :preload-content
