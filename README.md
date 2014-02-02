@@ -1,4 +1,4 @@
-![PING](https://raw.github.com/krisrang/ping/master/app/assets/images/logo.png)
+![PING](https://raw.github.com/krisrang/ping/master/doc/logo.png)
 ====
 
 [![Build Status](https://travis-ci.org/krisrang/ping.png?branch=master)](https://travis-ci.org/krisrang/ping)
