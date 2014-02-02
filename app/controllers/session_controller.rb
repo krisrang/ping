@@ -11,7 +11,7 @@ class SessionController < ApplicationController
       return
     end
 
-    user.email_confirmed? ? login(user) : not_activated(user)
+    user.email_confirmed? ? log_in(user) : not_activated(user)
   end
 
   def forgot_password
@@ -22,7 +22,7 @@ class SessionController < ApplicationController
       email_token = user.email_tokens.create(email: user.email)
       UserEmailer.perform_async(:forgot_password, {user_id: user.id, email_token: email_token.token})
     end
-    # always render of so we don't leak information
+    # always render ok so we don't leak information
     render json: {result: "ok"}
   end
 
@@ -45,7 +45,7 @@ class SessionController < ApplicationController
     }
   end
 
-  def login(user)
+  def log_in(user)
     log_in_user(user)
     render json: user
   end

@@ -3,12 +3,17 @@ html
   head
     meta charset="utf-8"
     title Ping
-    = stylesheet_link_tag     "application", media: "all"    
-    = csrf_meta_tags
     meta content="width=device-width, initial-scale=1.0" name="viewport"
-
+    = ping_csrf
+    = stylesheet_link_tag     "application", media: "all"    
+    = javascript_include_tag  "preloader"
   body
     = yield
+
+    - if @preloaded.present?
+      - @preloaded.each do |key, json|
+        javascript:
+          Preloader.store("#{key}", #{escape_unicode(json)});
 
     = javascript_include_tag  "/faye/faye"
     = javascript_include_tag  "vendor"
@@ -16,7 +21,6 @@ html
     
     javascript:
       Ping.Environment = '#{Rails.env}';
-      // Ping.SiteSettings = PreloadStore.get('settings');
-      // Ping.BaseUrl = '';
+      Ping.Settings = Preloader.get('settings');
       Ping.Locale = '#{I18n.locale}';
       Ping.start();

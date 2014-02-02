@@ -6,7 +6,8 @@ MVP
 
 * ~~Auth: Sessions~~
 * Auth: Registration
-* Settings system
+* ~~Settings system~~
+* Settings expiration
 
 Later
 ---

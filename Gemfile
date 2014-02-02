@@ -32,6 +32,7 @@ gem 'sinatra', require: nil
 gem 'sentry-raven', github: 'getsentry/raven-ruby'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby'
+gem 'oj'
 
 
 # DEV & TEST

@@ -8,16 +8,13 @@ Bundler.require(*Rails.groups)
 
 module Ping
   class Application < Rails::Application
-    require 'ping'
-    require 'rails_redis'
-    # Use redis for our cache
-    config.cache_store = RailsRedis.new_redis_store
+    require 'ping'    
 
-    config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
-                            engine: RailsRedis.new_faye_engine   
+    # Custom directories with classes and modules you want to be autoloadable.
+    config.autoload_paths += Dir["#{config.root}/app/serializers"]
+    config.autoload_paths += Dir["#{config.root}/lib/validators/"]
 
-    # http cache upstream
-    config.action_dispatch.rack_cache = nil
+    config.assets.precompile += ['vendor.js', 'preloader.js']    
 
     config.handlebars.templates_root = 'ping/templates'
     config.ember.variant = :development
@@ -25,6 +22,19 @@ module Ping
     # per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
     config.pbkdf2_iterations = 64000
     config.pbkdf2_algorithm = "sha256"
+
+    # route all exceptions via our router
+    config.exceptions_app = self.routes
+
+    require 'rails_redis'    
+    # Use redis for our cache
+    config.cache_store = RailsRedis.new_redis_store
+
+    # http cache upstream
+    config.action_dispatch.rack_cache = nil
+
+    config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
+                            engine: RailsRedis.new_faye_engine
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
