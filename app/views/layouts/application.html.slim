@@ -23,9 +23,4 @@ html
       Ping.Locale = '#{I18n.locale}';
       Ping.start();
 
-    noscript data-path="#{request.env['PATH_INFO']}"
-      | page stuff
-      #main-outlet class="container"
-        /! preload-content:
-        = yield
-        /! :preload-content
+    = render 'shared/js_warning'

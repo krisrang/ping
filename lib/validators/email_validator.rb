@@ -1,5 +1,4 @@
 class EmailValidator < ActiveModel::EachValidator
-
   def validate_each(record, attribute, value)
     if (setting = Settings.email_domains_whitelist).present?
       unless email_in_restriction_setting?(setting, value)
@@ -20,5 +19,4 @@ class EmailValidator < ActiveModel::EachValidator
     regexp = Regexp.new("@(#{domains})", true)
     value =~ regexp
   end
-
 end

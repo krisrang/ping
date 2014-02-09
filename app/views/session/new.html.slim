@@ -3,21 +3,14 @@
 
   = flashes
 
-  = form_tag session_index_path, role: 'form' do
+  = form_tag session_index_path, class: 'all-required', role: 'form' do
     .form-group
       = text_field_tag 'login', nil, required: true, class: 'form-control', placeholder: t('login.login')
     .form-group.password
       = link_to t('login.forgot'), 'forgot', class: 'forgot-link'
       = text_field_tag 'password', nil, required: true, class: 'form-control', placeholder: t('login.password'), type: :password
-    = submit_tag t('login.submit', app: Settings.title), class: 'btn btn-info submit-btn'
-    = link_to t('login.signup'), '/signup', class: 'btn btn-default form-link'
+    = submit_tag t('login.submit', app: Settings.title), class: 'btn btn-info login-btn', disabled: true
+    = link_to t('login.signup'), signup_path, class: 'btn btn-default form-link'
 
   h3 = t('login.external')
-
-  .external-options
-    button.btn-auth.btn-facebook title="facebook"
-      i.fa.fa-facebook
-    button.btn-auth.btn-twitter title="twitter"
-      i.fa.fa-twitter
-    button.btn-auth.btn-google title="google"
-      i.fa.fa-google-plus
+  = render 'session/external'

@@ -6,8 +6,6 @@
 @import 'bootswatch/variables';
 @import 'bootswatch/bootswatch';
 
-// body { padding-top: 70px; }
-
 // 
 // RADIUS
 // 
@@ -15,3 +13,12 @@
 @border-radius-base:  3px;
 @border-radius-large: 4px;
 @border-radius-small: 3px;
+
+.has-error .form-control-feedback {
+  color: @state-danger-border;
+  padding: 5px;
+
+  &:before {
+    padding-right: 5px;
+  }
+}

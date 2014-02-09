@@ -5,9 +5,12 @@ MVP
 ---
 
 * ~~Auth: Sessions~~
-* Auth: Registration
+* ~~Auth: Registration~~
 * ~~Settings system~~
-* Settings expiration
+* ~~Settings expiration~~
+* Admin user approval
+* Forgot password stuff
+* External auth
 
 Later
 ---

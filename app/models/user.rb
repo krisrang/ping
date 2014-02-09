@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password validations: false
 
   has_many :email_tokens, dependent: :destroy
   has_many :user_visits, dependent: :destroy
@@ -51,12 +51,25 @@ class User < ActiveRecord::Base
     16
   end
 
+  def password=(password)
+    # special case for passwordless accounts
+    @raw_password = password unless password.blank?
+  end
+
+  def password
+    '' # so that validator doesn't complain that a password attribute doesn't exist
+  end
+
   def password_required!
     @password_required = true
   end
 
   def password_required?
     !!@password_required
+  end
+
+  def has_password?
+    password_digest.present?
   end
 
   def username_validator
@@ -74,15 +87,17 @@ class User < ActiveRecord::Base
   end
 
   def password_validator
-    PasswordValidator.new(attributes: :password).validate_each(self, :password, @raw_password)
+    PasswordValidator.new(attributes: :password)
+      .validate_each(self, :password, @raw_password)
   end
 
   def email_confirmed?
-    email_tokens.where(email: email, confirmed: true).present? || email_tokens.empty?
+    email_tokens.where(email: email, confirmed: true).present? || 
+      email_tokens.empty?
   end
 
   def activate
-    email_token = self.email_tokens.active.first
+    email_token = email_tokens.active.first
     if email_token
       EmailToken.confirm(email_token.token)
     else
@@ -111,16 +126,16 @@ class User < ActiveRecord::Base
     stat.save!
   end
 
-  def create_visit_record!(date, posts_read=0)
+  def create_visit_record!(date, posts_read = 0)
     user_stat.update_column(:days_visited, user_stat.days_visited + 1)
     user_visits.create!(visited_at: date)
   end
 
-  def update_last_seen!(now=Time.zone.now)
+  def update_last_seen!(now = Time.zone.now)
     now_date = now.to_date
     # Only update last seen once every minute
     redis_key = "user:#{id}:#{now_date}"
-    return unless $redis.setnx(redis_key, "1")
+    return unless $redis.setnx(redis_key, '1')
 
     $redis.expire(redis_key, Settings.active_user_rate_limit_secs)
     update_previous_visit(now)

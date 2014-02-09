@@ -1,7 +1,6 @@
 module CurrentUser
-
-  def self.has_auth_cookie?(env)
-    Ping.current_user_provider.new(env).has_auth_cookie?
+  def self.auth_cookie?(env)
+    Ping.current_user_provider.new(env).auth_cookie?
   end
 
   def self.lookup_from_env(env)
@@ -14,15 +13,15 @@ module CurrentUser
   end
 
   def log_in_user(user)
-    current_user_provider.log_in_user(user,session,cookies)
+    current_user_provider.log_in_user(user, session, cookies)
   end
 
   def log_out_user
-    current_user_provider.log_out_user(session,cookies)
+    current_user_provider.log_out_user(session, cookies)
   end
 
-  def is_api?
-    current_user_provider.is_api?
+  def api?
+    current_user_provider.api?
   end
 
   def current_user
@@ -34,5 +33,4 @@ module CurrentUser
   def current_user_provider
     @current_user_provider ||= Ping.current_user_provider.new(request.env)
   end
-
 end

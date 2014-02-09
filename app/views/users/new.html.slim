@@ -1,0 +1,21 @@
+.form
+  h2 = t('signup.title')
+
+  = flashes
+
+  = simple_form_for @user, { wrapper: :no_label, html: { class: 'all-required', role: 'form' } } do |f|
+    = f.input :email, required: true, placeholder: t('signup.email')
+    = f.input :username, required: true, placeholder: t('signup.username')
+    = f.input :password, required: true, placeholder: t('signup.password')
+
+    = text_field_tag 'password_confirmation', @honeypot
+    = text_field_tag 'challenge', @challenge
+
+    = f.button :submit, t('signup.submit'), class: 'btn-info signup-btn', disabled: true
+
+  h3 = t('signup.external')
+  = render 'session/external'
+
+.form-footer
+  = t('signup.already')
+  = link_to t('signup.login'), login_path

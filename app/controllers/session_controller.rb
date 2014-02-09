@@ -1,15 +1,15 @@
 class SessionController < ApplicationController
   skip_before_filter :redirect_to_login_if_required
 
-  layout 'login'
+  layout 'static'
 
   def csrf
     render json: {csrf: form_authenticity_token }
   end
   
   def create
-    params.permit(:login)
-    params.permit(:password)
+    params.require(:login)
+    params.require(:password)
 
     login = params[:login].strip
     user = User.authenticate(login, params[:password])
@@ -20,10 +20,12 @@ class SessionController < ApplicationController
     end
 
     user.email_confirmed? ? log_in(user) : not_activated(user)
+  rescue ActionController::ParameterMissing
+    invalid_credentials
   end
 
   def forgot_password
-    params.permit(:login)
+    params.require(:login)
 
     user = User.find_by_username_or_email(params[:login])
     if user.present?
@@ -31,6 +33,8 @@ class SessionController < ApplicationController
       UserEmailer.perform_async(:forgot_password, {user_id: user.id, email_token: email_token.token})
     end
     # always render ok so we don't leak information
+    render json: {result: "ok"}
+  rescue ActionController::ParameterMissing
     render json: {result: "ok"}
   end
 
@@ -69,5 +73,3 @@ class SessionController < ApplicationController
     end
   end
 end
-
-

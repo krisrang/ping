@@ -23,4 +23,25 @@ module Ping
   def self.current_user_provider=(val)
     @current_user_provider = val
   end
+
+  def self.current_hostname
+    Settings.hostname
+  end
+
+  def self.base_url
+    default_port = 80
+    protocol = "http"
+
+    if Settings.use_https?
+      protocol = "https"
+      default_port = 443
+    end
+
+    result = "#{protocol}://#{current_hostname}"
+
+    port = Settings.port.present? && Settings.port.to_i > 0 ? Settings.port.to_i : default_port
+
+    result << ":#{Settings.port}" if port != default_port
+    result
+  end
 end

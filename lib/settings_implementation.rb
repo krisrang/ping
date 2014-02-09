@@ -38,8 +38,8 @@ module SettingsImplementation
   def setting(name_arg, default = nil, opts = {})
     name = name_arg.to_sym
     mutex.synchronize do
-      self.defaults[name] = default
-      current_value = current.has_key?(name) ? current[name] : default
+      defaults[name] = default
+      current_value = current.key?(name) ? current[name] : default
       if opts[:enum]
         enum = opts[:enum]
         enums[name] = enum.is_a?(String) ? enum.constantize : enum
@@ -73,7 +73,7 @@ module SettingsImplementation
   end
 
   def client_settings_json_uncached
-    MultiJson.dump(Hash[*@@client_settings.map{|n| [n, self.send(n)]}.flatten])
+    MultiJson.dump(Hash[*@@client_settings.map { |n| [n, send(n)] }.flatten])
   end
 
   # Retrieve all settings
@@ -82,11 +82,11 @@ module SettingsImplementation
       .map do |s, v|
         value = send(s)
         type = types[get_data_type(s, value)]
-        {setting: s,
-         description: description(s),
-         default: v,
-         type: type.to_s,
-         value: value.to_s}
+        { setting: s,
+          description: description(s),
+          default: v,
+          type: type.to_s,
+          value: value.to_s }
       end
   end
 
@@ -95,28 +95,28 @@ module SettingsImplementation
   end
 
   def self.client_settings_cache_key
-    "client_settings_json"
+    'client_settings_json'
   end
 
   # refresh all the site settings
   def refresh!
     mutex.synchronize do
-      # ensure_listen_for_changes
+      ensure_listen_for_changes
       old = current
 
       all_settings = provider.all
-      new_hash =  Hash[*(all_settings.map{|s| [s.name.intern, convert(s.value,s.data_type)]}.to_a.flatten)]
+      new_hash =  Hash[*(all_settings.map { |s| [s.name.intern, convert(s.value, s.data_type)] }.to_a.flatten)]
 
       # add defaults
       new_hash = defaults.merge(new_hash)
-      changes,deletions = diff_hash(new_hash, old)
+      changes, deletions = diff_hash(new_hash, old)
 
       if deletions.length > 0 || changes.length > 0
         @current = new_hash
         changes.each do |name, val|
           setup_methods name, val
         end
-        deletions.each do |name,val|
+        deletions.each do |name, val|
           setup_methods name, defaults[name]
         end
       end
@@ -125,28 +125,27 @@ module SettingsImplementation
     end
   end
 
+  def ensure_listen_for_changes
+    unless @subscribed
+      MessageBus.subscribe('/site_settings') do |message|
+        process_message(message)
+      end
+      @subscribed = true
+    end
+  end
 
-  # def ensure_listen_for_changes
-  #   unless @subscribed
-  #     MessageBus.subscribe("/site_settings") do |message|
-  #       process_message(message)
-  #     end
-  #     @subscribed = true
-  #   end
-  # end
-
-  # def process_message(message)
-  #   data = message.data
-  #   if data["process"] != process_id
-  #     begin
-  #       @last_message_processed = message.global_id
-  #       MessageBus.on_connect.call(message.site_id)
-  #       refresh!
-  #     ensure
-  #       MessageBus.on_disconnect.call(message.site_id)
-  #     end
-  #   end
-  # end
+  def process_message(message)
+    data = message.data
+    if data['process'] != process_id
+      begin
+        @last_message_processed = message.global_id
+        MessageBus.on_connect.call(message.site_id)
+        refresh!
+      ensure
+        MessageBus.on_disconnect.call(message.site_id)
+      end
+    end
+  end
 
   def process_id
     @@process_id ||= SecureRandom.uuid
@@ -157,38 +156,34 @@ module SettingsImplementation
     current[name] = defaults[name]
   end
 
-  def add_override!(name,val)
+  def add_override!(name, val)
     type = get_data_type(name, defaults[name])
 
     if type == types[:bool] && val != true && val != false
-      val = (val == "t" || val == "true") ? 't' : 'f'
+      val = (val == 't' || val == 'true') ? 't' : 'f'
     end
 
-    if type == types[:fixnum] && !(Fixnum === val)
-      val = val.to_i
-    end
+    val = val.to_i if type == types[:fixnum] && !(Fixnum === val)
 
-    if type == types[:null] && val != ''
-      type = get_data_type(name, val)
-    end
+    type = get_data_type(name, val) if type == types[:null] && val != ''
 
     if type == types[:enum]
-      raise Ping::InvalidParameters.new(:value) unless enum_class(name).valid_value?(val)
+      fail Ping::InvalidParameters, :value unless enum_class(name).valid_value?(val)
     end
 
     provider.save(name, val, type)
-    # @last_message_sent = MessageBus.publish('/site_settings', {process: process_id})
+    @last_message_sent = MessageBus.publish('/site_settings', {process: process_id})
   end
 
-  def has_setting?(name)
-    defaults.has_key?(name.to_sym) || defaults.has_key?("#{name}?".to_sym)
+  def setting?(name)
+    defaults.key?(name.to_sym) || defaults.key?("#{name}?".to_sym)
   end
 
   def set(name, value)
-    if has_setting?(name)
-      self.send("#{name}=", value)
+    if setting?(name)
+      send("#{name}=", value)
     else
-      raise ArgumentError.new("No setting named #{name} exists")
+      fail ArgumentError, "No setting named #{name} exists"
     end
   end
 
@@ -199,17 +194,17 @@ module SettingsImplementation
     deletions = []
 
     new_hash.each do |name, value|
-      changes << [name,value] if !old.has_key?(name) || old[name] != value
+      changes << [name, value] if !old.key?(name) || old[name] != value
     end
 
-    old.each do |name,value|
-      deletions << [name,value] unless new_hash.has_key?(name)
+    old.each do |name, value|
+      deletions << [name, value] unless new_hash.key?(name)
     end
 
-    [changes,deletions]
+    [changes, deletions]
   end
 
-  def get_data_type(name,val)
+  def get_data_type(name, val)
     return types[:null] if val.nil?
     return types[:enum] if enums[name]
 
@@ -221,7 +216,7 @@ module SettingsImplementation
     when TrueClass, FalseClass
       types[:bool]
     else
-      raise ArgumentError.new :val
+      fail ArgumentError :val
     end
   end
 
@@ -232,18 +227,16 @@ module SettingsImplementation
     when types[:string], types[:enum]
       value
     when types[:bool]
-      value == true || value == "t" || value == "true"
+      value == true || value == 't' || value == 'true'
     when types[:null]
       nil
     end
   end
 
-
   def setup_methods(name, current_value)
-
     # trivial multi db support, we can optimize this later
     current[name] = current_value
-    clean_name = name.to_s.sub("?", "")
+    clean_name = name.to_s.sub('?', '')
 
     eval "define_singleton_method :#{clean_name} do
       c = @@container

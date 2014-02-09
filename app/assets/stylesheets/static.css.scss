@@ -1,8 +1,10 @@
 @import 'variables';
 @import 'bourbon';
 
+#password_confirmation, #challenge { display: none; }
+
 .login {
-  background: #E4E7EF;
+  background: #e4e7ef;
 
   h1 {
     text-align: center;
@@ -13,7 +15,7 @@
     max-width: 428px;
     margin: 0 auto 30px;
     padding: 30px 40px;
-    @include box-shadow(0 0 0 1px rgba(0, 0, 0, 0.05), 0 0 0px 0 rgba(0, 0, 0, 0.1));
+    @include box-shadow(0 0 0 1px rgba(0, 0, 0, .05), 0 0 0 0 rgba(0, 0, 0, .1));
 
     h2, h3 {
       color: $mild;
@@ -36,7 +38,7 @@
       }
     }
 
-    .submit-btn {
+    .login-btn {
       width: 47.5%;
       margin-right: 5%;
       margin-bottom: 10px;
@@ -45,6 +47,11 @@
 
     .form-link {
       width: 47.5%;
+    }
+
+    .signup-btn {
+      width: 50%;
+      margin-left: 25%;
     }
 
     .btn-auth {
@@ -56,26 +63,35 @@
       i {
         padding: 20px;
         border-radius: 64px;
-        color: #FFF;
+        color: #fff;
         font-size: 30px;
         width: 70px;
         @include transform(scale(1));
-        @include transition(all 0.2s ease 0s);
+        @include transition(all .2s ease 0);
 
         &:hover {
           @include transform(scale(1.05));
         }
       }
 
-      &.btn-facebook i { background: #3B5998; }
-      &.btn-twitter i { background: #4099FF; }
-      &.btn-google i { background: #D34836; }
+      &.btn-facebook i { background: #3b5998; }
+      &.btn-twitter i { background: #4099ff; }
+      &.btn-google i { background: #d34836; }
     }
 
     .external-options:after {
       display: table;
       content: "";
     }
+  }
+
+  .form-footer {
+    width: 100%;
+    max-width: 428px;
+    margin: -10px auto 10px;
+    text-align: center;
+
+    a { padding-left: 5px; }
   }
 }
 

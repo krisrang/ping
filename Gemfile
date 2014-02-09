@@ -11,6 +11,7 @@ gem 'redis-rails'
 
 gem 'faye'
 gem 'faye-redis'
+gem 'message_bus'
 
 # FRONTEND
 gem 'jquery-rails'
@@ -22,7 +23,7 @@ gem 'therubyracer', require: 'v8'
 gem 'slim-rails'
 gem 'ember-rails'
 gem 'gemoji', github: 'github/gemoji'
-
+gem 'simple_form'
 
 # BACKEND
 gem 'sidekiq'
@@ -33,7 +34,7 @@ gem 'sentry-raven', github: 'getsentry/raven-ruby'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby'
 gem 'oj'
-
+gem 'redcarpet'
 
 # DEV & TEST
 group :test, :development do
@@ -66,12 +67,10 @@ group :test, :development do
   gem 'spring-commands-rspec'
 end
 
-
 # TEST
 group :test do
   gem 'fakeweb', require: false
 end
-
 
 # DEV
 group :development do
@@ -82,7 +81,6 @@ group :development do
   gem 'guard-rspec'
   gem 'terminal-notifier-guard'
 end
-
 
 # SERVERS
 gem 'thin', require: false

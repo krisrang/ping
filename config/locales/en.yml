@@ -1,7 +1,16 @@
 en:
+  user:
+    username:
+      unique: User with this username already exists!
+      blank: Username cannot be blank!
+      characters: Username can only contain alphanumeric characters!
+      must_begin_with_alphanumeric: Username must beging with an alphanumeric character!
+      short: Username should be at least %{min} characters long!
+      long: Username should not be longer than %{max} characters!
+      
   login:
     invalid: "Wrong login or password!"
-    not_activated: "Your account hasn't been activated yet. Please the following the link in your email."
+    not_activated: "Your account hasn't been activated yet. Please click the link in your verification email."
     title: "Sign in to continue"
     login: "Email or Username"
     password: "Password"
@@ -9,3 +18,54 @@ en:
     signup: "Create an Account"
     external: "Alternatively, you can log in using:"
     forgot: "(forgot ?)"
+    activate_email: "We've sent you a verification email to %{email}. Please click on the link contained within to activate your account."
+    wait_approval: 'This site required admin approval before account activation. You will be notified by email when your accounts has been activated.'
+
+  signup:
+    title: "Create an account"
+    username: "Username"
+    email: "Email"
+    password: "Password"
+    submit: "Create Account"
+    external: "..or create an account with"
+    already: "Already have an account?"
+    login: "Log in"
+
+  user_mailer:
+    signup:
+      subject: "[%{site_name}] Activate your new account"
+      text: |
+        Welcome to %{site_name}!
+
+        Click the following link to confirm and activate your new account:
+        %{base_url}/users/activate-account/%{email_token}
+
+        If the above link is not clickable, try copying and pasting it into the address bar of your web browser.
+
+    forgot_password:
+      subject: "[%{site_name}] Password reset"
+      text: |
+        Somebody asked to reset your password on [%{site_name}](%{base_url}).
+
+        If it was not you, you can safely ignore this email.
+
+        Click the following link to choose a new password:
+        %{base_url}/users/password-reset/%{email_token}
+
+    signup_after_approval:
+      subject: "You've been approved on %{site_name}!"
+      text: |
+        Welcome to %{site_name}!
+
+        You're approved to join %{site_name}, welcome to our discussion forum!
+
+        Click the following link to confirm and activate your new account:
+        %{base_url}/users/activate-account/%{email_token}
+
+        If the above link is not clickable, try copying and pasting it into the address bar of your web browser.
+
+        %{new_user_tips}
+
+        We believe in [civilized community behavior](%{base_url}/faq) at all times.
+
+        Enjoy your stay!

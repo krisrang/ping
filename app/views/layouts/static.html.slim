@@ -6,8 +6,11 @@ html
     meta content="width=device-width, initial-scale=1.0" name="viewport"
     = ping_csrf
     = stylesheet_link_tag     "application", media: "all"
-  body.login    
+  body.login
+    = render 'shared/js_warning'
+    
     h1 = link_to image_tag('logo.png', alt: Settings.title), root_path
     = yield
 
     = javascript_include_tag  "vendor"
+    = javascript_include_tag  "static"

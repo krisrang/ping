@@ -1,5 +1,4 @@
 class PasswordValidator < ActiveModel::EachValidator
-
   def validate_each(record, attribute, value)
     return unless record.password_required?
     if value.nil?
@@ -8,5 +7,4 @@ class PasswordValidator < ActiveModel::EachValidator
       record.errors.add(attribute, :too_short, count: Settings.min_password_length)
     end
   end
-
 end

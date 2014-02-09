@@ -1,9 +1,8 @@
 module Auth; end
 class Auth::CurrentUserProvider
-
-  CURRENT_USER_KEY ||= "_PING_CURRENT_USER"
-  API_KEY ||= "_PING_API"
-  TOKEN_COOKIE ||= "_t"
+  CURRENT_USER_KEY ||= '_PING_CURRENT_USER'
+  API_KEY ||= '_PING_API'
+  TOKEN_COOKIE ||= '_t'
 
   # do all current user initialization here
   def initialize(env)
@@ -32,14 +31,14 @@ class Auth::CurrentUserProvider
 
     # possible we have an api call, impersonate
     unless current_user
-      if api_key_value = request["api_key"]
+      if api_key_value = request['api_key']
         api_key = ApiKey.where(key: api_key_value).includes(:user).first
         if api_key.present?
           @env[API_KEY] = true
-          api_username = request["api_username"]
+          api_username = request['api_username']
 
           if api_key.user.present?
-            raise Ping::InvalidAccess.new if api_username && (api_key.user.username_lower != api_username.downcase)
+            fail Ping::InvalidAccess if api_username && (api_key.user.username_lower != api_username.downcase)
             current_user = api_key.user
           elsif api_username
             current_user = User.where(username_lower: api_username.downcase).first
@@ -65,14 +64,13 @@ class Auth::CurrentUserProvider
     cookies[TOKEN_COOKIE] = nil
   end
 
-
   # api has special rights return true if api was detected
-  def is_api?
+  def api?
     current_user
     @env[API_KEY]
   end
 
-  def has_auth_cookie?
+  def auth_cookie?
     request = Rack::Request.new(@env)
     cookie = request.cookies[TOKEN_COOKIE]
     !cookie.nil? && cookie.length == 32

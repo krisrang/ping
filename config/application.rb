@@ -13,8 +13,9 @@ module Ping
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += Dir["#{config.root}/app/serializers"]
     config.autoload_paths += Dir["#{config.root}/lib/validators/"]
+    config.autoload_paths += Dir["#{config.root}/app/"]
 
-    config.assets.precompile += ['vendor.js', 'preloader.js']    
+    config.assets.precompile += ['vendor.js', 'preloader.js', 'static.js']    
 
     config.handlebars.templates_root = 'ping/templates'
     config.ember.variant = :development
@@ -34,7 +35,7 @@ module Ping
     config.action_dispatch.rack_cache = nil
 
     config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
-                            engine: RailsRedis.new_faye_engine
+                                             engine: RailsRedis.new_faye_engine
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -47,5 +48,9 @@ module Ping
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end
