@@ -12,9 +12,20 @@ class SessionController < ApplicationController
     params.require(:password)
 
     login = params[:login].strip
-    user = User.authenticate(login, params[:password])
 
-    if !user
+    if user = User.find_by_username_or_email(login)
+      # If their password is correct
+      unless user.confirm_password?(params[:password])
+        invalid_credentials
+        return
+      end
+
+      # If the site requires user approval and the user is not approved yet
+      if login_not_approved_for?(user)
+        login_not_approved
+        return
+      end
+    else
       invalid_credentials
       return
     end
@@ -45,6 +56,19 @@ class SessionController < ApplicationController
   end
 
   private
+
+  def login_not_approved_for?(user)
+    Settings.must_approve_users? && !user.approved? && !user.admin?
+  end
+
+  def login_not_approved
+    error = t("login.not_approved")
+
+    respond_to do |format|
+      format.html { redirect_to :login, alert: error }
+      format.json { render json: {error: error} }
+    end
+  end
 
   def invalid_credentials
     error = t("login.invalid")

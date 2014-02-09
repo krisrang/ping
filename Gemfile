@@ -35,6 +35,7 @@ gem 'active_model_serializers'
 gem 'bcrypt-ruby'
 gem 'oj'
 gem 'redcarpet'
+gem 'fast_xor'
 
 # DEV & TEST
 group :test, :development do

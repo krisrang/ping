@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe UsersController do
-
   before do
     UsersController.any_instance.stubs(:honeypot_value).returns(nil)
     UsersController.any_instance.stubs(:challenge_value).returns(nil)
@@ -18,17 +17,12 @@ describe UsersController do
         username: @user.username,
         password: "strongpassword",
         email: @user.email
-      }
+      }, format: :json
     end
 
     context 'when creating a non active user (unconfirmed email)' do
       it 'enqueues a signup email' do
-        UserEmailer.expects(:perform).with(:user_email, has_entries(type: :signup))
-        post_user
-      end
-
-      it 'does not enqueue a welcome email' do
-        User.any_instance.expects(:enqueue_welcome_message).with('welcome_user').never
+        UserEmailer.expects(:perform_async).with(:signup, anything())
         post_user
       end
 
@@ -41,7 +35,7 @@ describe UsersController do
         before { Settings.expects(:must_approve_users).returns(true) }
 
         it 'does not enqueue an email' do
-          UserEmailer.expects(:perform).never
+          UserEmailer.expects(:perform_async).never
           post_user
         end
 
@@ -67,13 +61,7 @@ describe UsersController do
     context 'when creating an active user (confirmed email)' do
       before { User.any_instance.stubs(:active?).returns(true) }
 
-      it 'enqueues a welcome email' do
-        User.any_instance.expects(:enqueue_welcome_message).with('welcome_user')
-        post_user
-      end
-
       it "shows the 'active' message" do
-        User.any_instance.expects(:enqueue_welcome_message)
         post_user
         expect(JSON.parse(response.body)['message']).to eq(
           I18n.t 'login.active'
@@ -81,13 +69,11 @@ describe UsersController do
       end
 
       it "should be logged in" do
-        User.any_instance.expects(:enqueue_welcome_message)
         post_user
         session[:current_user_id].should be_present
       end
 
       it 'indicates the user is active in the response' do
-        User.any_instance.expects(:enqueue_welcome_message)
         post_user
         expect(JSON.parse(response.body)['active']).to be_true
       end
@@ -131,17 +117,17 @@ describe UsersController do
     shared_examples 'honeypot fails' do
       it 'should not create a new user' do
         expect {
-          xhr :post, :create, create_params
+          xhr :post, :create, create_params.merge({format: :json})
         }.to_not change { User.count }
       end
 
       it 'should not send an email' do
-        User.any_instance.expects(:enqueue_welcome_message).never
-        xhr :post, :create, create_params
+        UserEmailer.any_instance.expects(:perform_async).never
+        xhr :post, :create, create_params.merge({format: :json})
       end
 
       it 'should say it was successful' do
-        xhr :post, :create, create_params
+        xhr :post, :create, create_params.merge({format: :json})
         json = JSON::parse(response.body)
         json["success"].should be_true
       end
@@ -163,25 +149,13 @@ describe UsersController do
       include_examples 'honeypot fails'
     end
 
-    context "when 'invite only' setting is enabled" do
-      before { Settings.expects(:invite_only?).returns(true) }
-
-      let(:create_params) {{
-        username: @user.username,
-        password: 'strongpassword',
-        email: @user.email
-      }}
-
-      include_examples 'honeypot fails'
-    end
-
     shared_examples 'failed signup' do
       it 'should not create a new User' do
-        expect { xhr :post, :create, create_params }.to_not change { User.count }
+        expect { xhr :post, :create, create_params.merge({format: :json}) }.to_not change { User.count }
       end
 
       it 'should report failed' do
-        xhr :post, :create, create_params
+        xhr :post, :create, create_params.merge({format: :json})
         json = JSON::parse(response.body)
         json["success"].should_not be_true
       end
@@ -198,5 +172,4 @@ describe UsersController do
     end
 
   end
-
 end

@@ -1,13 +1,13 @@
-class User < ActiveRecord::Base
-  has_secure_password validations: false
+require_dependency 'pbkdf2'
 
+class User < ActiveRecord::Base
   has_many :email_tokens, dependent: :destroy
   has_many :user_visits, dependent: :destroy
 
   has_one :user_stat, dependent: :destroy
 
   before_save :update_username_lower
-
+  before_save :ensure_password_is_hashed
   after_create :create_email_token
   after_create :create_user_stat
 
@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def has_password?
-    password_digest.present?
+    password_hash.present?
   end
 
   def username_validator
@@ -89,6 +89,11 @@ class User < ActiveRecord::Base
   def password_validator
     PasswordValidator.new(attributes: :password)
       .validate_each(self, :password, @raw_password)
+  end
+
+  def confirm_password?(password)
+    return false unless password_hash && salt
+    self.password_hash == hash_password(password, salt)
   end
 
   def email_confirmed?
@@ -156,6 +161,17 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def ensure_password_is_hashed
+    if @raw_password
+      self.salt = SecureRandom.hex(16)
+      self.password_hash = hash_password(@raw_password, salt)
+    end
+  end
+
+  def hash_password(password, salt)
+    Pbkdf2.hash_password(password, salt, Rails.configuration.pbkdf2_iterations, Rails.configuration.pbkdf2_algorithm)
+  end
 
   def previous_visit_at_update_required?(timestamp)
     seen_before? && (last_seen < (timestamp - Settings.previous_visit_timeout_hours.hours))
