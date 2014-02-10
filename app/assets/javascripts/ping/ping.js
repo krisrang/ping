@@ -13,6 +13,7 @@
 //= require_tree ./templates
 //= require ./router
 //= require_tree ./routes
+//= require_tree ./initializers
 
 window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
   // Helps with integration tests
@@ -22,12 +23,14 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
     // If it's a non relative URL, return it.
     if (url.indexOf('http') === 0) return url;
 
-    var u = (Ping.BaseUri === undefined ? "/" : Ping.BaseUri);
-    if (u[u.length-1] === '/') {
-      u = u.substring(0, u.length-1);
-    }
-    if (url.indexOf(u) !== -1) return url;
-    return u + url;
+    return url;
+  },
+
+  logout: function() {
+    Ping.User.logout().then(function() {
+      Ping.KeyValueStore.abandonLocal();
+      window.location.pathname = Ping.getURL('/');
+    });
   },
 
   start: function() {
