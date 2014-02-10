@@ -1,12 +1,12 @@
 en:
   user:
     username:
-      unique: User with this username already exists!
-      blank: Username cannot be blank!
-      characters: Username can only contain alphanumeric characters!
-      must_begin_with_alphanumeric: Username must beging with an alphanumeric character!
-      short: Username should be at least %{min} characters long!
-      long: Username should not be longer than %{max} characters!
+      unique: "User with this username already exists!"
+      blank: "Username cannot be blank!"
+      characters: "Username can only contain alphanumeric characters!"
+      must_begin_with_alphanumeric: "Username must beging with an alphanumeric character!"
+      short: "Username should be at least %{min} characters long!"
+      long: "Username should not be longer than %{max} characters!"
       
   login:
     invalid: "Wrong login or password!"
@@ -30,6 +30,22 @@ en:
     external: "..or create an account with"
     already: "Already have an account?"
     login: "Log in"
+
+  forgot:
+    title: Forgot Password
+    help: "Enter your username or email address, and we'll send you a password reset email."
+    submit: Reset password
+
+  password_reset:
+    title: "Reset Password"
+    choose_new: "Please choose a new password"
+    choose: "Please choose a password"
+    update: 'Update Password'
+    save: 'Set Password'
+    success: "If an account matches that username or email address, you should receive an email with instructions on how to reset your password shortly."
+    no_token: "Sorry, your token has expired. Please try resetting your password again."
+    success: "You successfully changed your password and are now logged in."
+    success_unapproved: "You successfully changed your password."
 
   user_mailer:
     signup:

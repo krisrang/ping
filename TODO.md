@@ -8,7 +8,7 @@ MVP
 * ~~Auth: Registration~~
 * ~~Settings system~~
 * ~~Settings expiration~~
-* Forgot password stuff
+* ~~Forgot password stuff~~
 * External auth
 
 Later

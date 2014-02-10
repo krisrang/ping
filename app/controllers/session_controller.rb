@@ -44,9 +44,9 @@ class SessionController < ApplicationController
       UserEmailer.perform_async(:forgot_password, {user_id: user.id, email_token: email_token.token})
     end
     # always render ok so we don't leak information
-    render json: {result: "ok"}
+    forgot_success
   rescue ActionController::ParameterMissing
-    render json: {result: "ok"}
+    forgot_success
   end
 
   def destroy
@@ -94,6 +94,13 @@ class SessionController < ApplicationController
     respond_to do |format|
       format.html { redirect_back_or_default(root_path) }
       format.json { render json: user }
+    end
+  end
+
+  def forgot_success
+    respond_to do |format|
+      format.html { redirect_to :login, notice: t('password_reset.success') }
+      format.json { render json: {result: "ok"} }
     end
   end
 end

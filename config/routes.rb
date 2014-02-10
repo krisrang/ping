@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users
 
   get "users/activate-account/:token" => "users#activate_account"
+  get "users/password-reset/:token" => "users#password_reset"
+  put "users/password-reset/:token" => "users#password_reset", as: 'submit_password_reset'
   
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:new, :create, :destroy] do
     collection do
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   get 'login' => 'session#new'
+  get 'forgot' => 'session#forgot'
 
   root 'home#index'
 end

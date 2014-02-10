@@ -47,6 +47,24 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def password_reset
+    expires_now
+
+    @user = EmailToken.confirm(params[:token])
+
+    if @user.blank?
+      flash.error = I18n.t('password_reset.no_token')
+    elsif request.put?
+      fail Ping::InvalidParameters, :password unless params[:user][:password].present?
+      @user.password = params[:user][:password]
+      @user.password_required!
+      if @user.save
+        logon_after_password_reset
+        redirect_to root_path
+      end      
+    end
+  end
+
   private
 
   def set_honeypots
@@ -119,4 +137,18 @@ class UsersController < ApplicationController
       end
     end    
   end
+
+  def logon_after_password_reset
+    # message = if Guardian.new(@user).can_access_forum?
+    #             # Log in the user
+    #             log_on_user(@user)
+    #             'password_reset.success'
+    #           else
+    #             @requires_approval = true
+    #             'password_reset.success_unapproved'
+    #           end
+
+    log_in_user(@user)
+    flash.notice = t('password_reset.success')
+   end
 end

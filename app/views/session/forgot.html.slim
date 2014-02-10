@@ -1,0 +1,11 @@
+.form
+  h2 = t('forgot.title')
+
+  = flashes
+
+  = form_tag forgot_password_session_index_path, class: 'all-required', role: 'form' do
+    .help-block = t('forgot.help')
+    .form-group
+      = text_field_tag 'login', nil, required: true, class: 'form-control', placeholder: t('login.login')
+
+    = submit_tag t('forgot.submit'), class: 'btn btn-info signup-btn', disabled: true
