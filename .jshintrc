@@ -6,6 +6,8 @@
     "Handlebars",
     "Ping",
     "Preloader",
+    "I18n",
+    "moment",
     "assetPath",
     "module",
     "integration",

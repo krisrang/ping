@@ -1,4 +1,4 @@
-Ember.ENV.FORCE_JQUERY = true;
+// Ember.ENV.FORCE_JQUERY = true;
 
 window.Ping = {};
 Ping.Settings = {};

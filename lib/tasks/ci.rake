@@ -1,1 +1,1 @@
-task "ci:test" => ['qunit:test', 'spec']
+task "ci:test" => ['spec', 'qunit:test']

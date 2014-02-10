@@ -1,7 +1,7 @@
 Ember.Application.initializer({
   name: 'csrf',
 
-  initialize: function(container, application) {
+  initialize: function() {
     var session = Ping.Session;
 
     // Add a CSRF token to all AJAX requests

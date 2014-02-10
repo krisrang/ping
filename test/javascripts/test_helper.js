@@ -1,9 +1,17 @@
 /*jshint maxlen:250 */
 /*global count:true find:true document:true equal:true sinon:true */
 
+//= require handlebars
+//= require development/jquery.js
+//= require development/ember.js
+
+//= require ../../app/assets/javascripts/locales/i18n
+//= require ../../app/assets/javascripts/ping/helpers/i18n_helpers
+//= require ../../app/assets/javascripts/locales/en
+
 // Externals we need to load first
 //= require vendor
-
+//= require preloader
 //= require application
 
 //= require jshint
@@ -13,6 +21,17 @@
 //= require_self
 //= require jshint_all
 
+window.assetPath = function() { return null; };
+
+var oldAjax = $.ajax;
+$.ajax = function() {
+  try {
+    this.undef();
+  } catch(e) {
+    console.error("Ping.Ajax called in test environment (" + arguments[0] + ")\n caller: " + e.stack.split("\n").slice(2).join("\n"));
+  }
+  return oldAjax.apply(this, arguments);
+};
 
 // Trick JSHint into allow document.write
 var d = document;
@@ -27,7 +46,5 @@ Ping.runInitializers();
 
 QUnit.testStart(function() {
   // Allow our tests to change site settings and have them reset before the next test
-  // Discourse.SiteSettings = jQuery.extend(true, {}, Discourse.SiteSettingsOriginal);
-  // Discourse.BaseUri = "/";
-  // Discourse.BaseUrl = "";
+  Ping.Settings = jQuery.extend(true, {}, Ping.SettingsOriginal);
 });

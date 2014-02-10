@@ -10,13 +10,21 @@ module Ping
   class Application < Rails::Application
     require 'ping'
     require 'auth'
+    require 'js_locale_helper'
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += Dir["#{config.root}/app/serializers"]
     config.autoload_paths += Dir["#{config.root}/lib/validators/"]
     config.autoload_paths += Dir["#{config.root}/app/"]
 
-    config.assets.precompile += ['vendor.js', 'preloader.js', 'static.js']    
+    config.assets.paths += %W(#{config.root}/config/locales)
+
+    config.assets.precompile += ['vendor.js', 'preloader.js', 'static.js']
+
+    # Precompile all available locales
+    Dir.glob("#{config.root}/app/assets/javascripts/locales/*.js.erb").each do |file|
+      config.assets.precompile << "locales/#{file.match(/([a-z_A-Z]+\.js)\.erb$/)[1]}"
+    end
 
     config.handlebars.templates_root = 'ping/templates'
     config.ember.variant = :development
@@ -37,6 +45,14 @@ module Ping
 
     config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
                                              engine: RailsRedis.new_faye_engine
+
+    config.filter_parameters += [
+        :password,
+        :s3_secret_access_key,
+        :twitter_consumer_secret,
+        :facebook_app_secret,
+        :github_client_secret
+    ]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -5,8 +5,9 @@ html
     title = Settings.title
     meta content="width=device-width, initial-scale=1.0" name="viewport"
     = ping_csrf
-    = stylesheet_link_tag     "application", media: "all"    
+    = stylesheet_link_tag     "application", media: "all"
     = javascript_include_tag  "preloader"
+    = javascript_include_tag "locales/#{I18n.locale}"
   body
     - if @preloaded.present?
       - @preloaded.each do |key, json|

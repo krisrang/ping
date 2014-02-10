@@ -10,6 +10,7 @@ MVP
 * ~~Settings expiration~~
 * ~~Forgot password stuff~~
 * ~~External auth~~
+* Client side i18n
 * Userbar
 * Room list & lobby
 
