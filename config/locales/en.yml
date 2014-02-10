@@ -20,6 +20,8 @@ en:
     forgot: "(forgot ?)"
     activate_email: "We've sent you a verification email to %{email}. Please click on the link contained within to activate your account."
     wait_approval: 'This site required admin approval before account activation. You will be notified by email when your accounts has been activated.'
+    omniauth_error: "Sorry, there was an error authorizing your %{strategy} account. Perhaps you did not approve authorization?"
+    omniauth_error_unknown: "Something went wrong processing your log in, please try again."
 
   signup:
     title: "Create an account"
@@ -30,6 +32,8 @@ en:
     external: "..or create an account with"
     already: "Already have an account?"
     login: "Log in"
+    title_finish: "Finish creating an account using %{provider}"
+    email_valid: "Your email has been verified by %{provider}"
 
   forgot:
     title: Forgot Password

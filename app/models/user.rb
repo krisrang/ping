@@ -1,9 +1,16 @@
 require_dependency 'pbkdf2'
+require_dependency 'email'
+require_dependency 'user_name_suggester'
 
 class User < ActiveRecord::Base
   has_many :email_tokens, dependent: :destroy
   has_many :user_visits, dependent: :destroy
 
+  has_one :facebook_user_info, dependent: :destroy
+  has_one :twitter_user_info, dependent: :destroy
+  has_one :github_user_info, dependent: :destroy
+  has_one :google_user_info, dependent: :destroy
+  has_one :oauth2_user_info, dependent: :destroy
   has_one :user_stat, dependent: :destroy
 
   before_save :update_username_lower
@@ -17,6 +24,8 @@ class User < ActiveRecord::Base
   validates :email, email: true, if: :email_changed?
   validate :password_validator
 
+  EMAIL = %r{([^@]+)@([^\.]+)}
+
   def self.find_by_username_or_email(username_or_email)
     if username_or_email.include?('@')
       find_by_email(username_or_email)
@@ -27,7 +36,7 @@ class User < ActiveRecord::Base
 
   def self.find_by_email(email)
     # TODO: proper email downcasing
-    where(email: email.downcase).first
+    where(email: Email.downcase(email)).first
   end
 
   def self.find_by_username(username)
@@ -49,6 +58,18 @@ class User < ActiveRecord::Base
 
   def self.token_length
     16
+  end
+
+  def self.suggest_name(email)
+    return "" unless email
+    name = email.split(/[@\+]/)[0]
+    name = name.gsub(".", " ")
+    name.titleize
+  end
+
+  def self.username_available?(username)
+    lower = username.downcase
+    User.where(username_lower: lower).blank?
   end
 
   def password=(password)

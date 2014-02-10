@@ -9,11 +9,14 @@ MVP
 * ~~Settings system~~
 * ~~Settings expiration~~
 * ~~Forgot password stuff~~
-* External auth
+* ~~External auth~~
+* Userbar
+* Room list & lobby
 
 Later
 ---
 
+* Signup JS enhancement
 * Admin user approval
 * Room permissions
 * Guest access to rooms

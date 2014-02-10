@@ -1,15 +1,21 @@
 .form
-  h2 = t('signup.title')
+  h2 = @provider ? t('signup.title_finish', provider: @provider) : t('signup.title')
 
   = flashes
 
-  = simple_form_for @user, { wrapper: :no_label, html: { class: 'all-required', role: 'form' } } do |f|
-    = f.input :email, required: true, placeholder: t('signup.email')
+  = simple_form_for @user, { wrapper: :no_label, html: { class: 'all-required has-feedback', role: 'form' } } do |f|
+    = f.input :email, required: true, placeholder: t('signup.email'), disabled: @email_valid
+    - if @email_valid
+      .help-block = t('signup.email_valid', provider: @provider)
+
     = f.input :username, required: true, placeholder: t('signup.username')
-    = f.input :password, required: true, placeholder: t('signup.password')
+
+    - if !@provider || !@email_valid
+      = f.input :password, required: false, placeholder: t('signup.password')
 
     = text_field_tag 'password_confirmation', @honeypot
     = text_field_tag 'challenge', @challenge
+    = hidden_field_tag 'provider', @provider
 
     = f.button :submit, t('signup.submit'), class: 'btn-info signup-btn', disabled: true
 

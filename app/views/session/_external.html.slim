@@ -1,7 +1,4 @@
 .external-options
-  button.btn-auth.btn-facebook title="facebook"
-    i.fa.fa-facebook
-  button.btn-auth.btn-twitter title="twitter"
-    i.fa.fa-twitter
-  button.btn-auth.btn-google title="google"
-    i.fa.fa-google-plus
+  = link_to raw('<i class="fa fa-facebook"></i>'), '/auth/facebook', class: "btn-auth btn-facebook", title: "Facebook"
+  = link_to raw('<i class="fa fa-twitter"></i>'), '/auth/twitter', class: "btn-auth btn-twitter", title: "Twitter"
+  = link_to raw('<i class="fa fa-google-plus"></i>'), '/auth/google', class: "btn-auth btn-google", title: "Google"

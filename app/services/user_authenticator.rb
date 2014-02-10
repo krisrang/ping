@@ -1,5 +1,5 @@
 class UserAuthenticator
-  def initialize(user, session, authenticator_finder = nil)#Users::OmniauthCallbacksController)
+  def initialize(user, session, authenticator_finder = Users::OmniauthCallbacksController)
     @user = user
     @session = session[:authentication]
     @authenticator_finder = authenticator_finder

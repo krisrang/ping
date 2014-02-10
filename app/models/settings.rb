@@ -12,6 +12,31 @@ class Settings < ActiveRecord::Base
   client_setting(:use_https, false)
 
   client_setting(:login_required, true)
+
+  client_setting(:enable_local_logins, true)
+  client_setting(:enable_local_account_create, true)
+
+  client_setting(:enable_google_logins, true)
+  client_setting(:enable_persona_logins, false)
+  client_setting(:enable_twitter_logins, true)
+  client_setting(:enable_facebook_logins, true)
+  client_setting(:enable_github_logins, false)
+
+  # https://developers.facebook.com/
+  setting(:facebook_app_id,     Rails.env.development? ? ENV['FACEBOOK_ID'] : '')
+  setting(:facebook_app_secret, Rails.env.development? ? ENV['FACEBOOK_SECRET'] : '')
+
+  # https://github.com/settings/applications/
+  setting(:github_client_id,      Rails.env.development? ? ENV['GITHUB_ID'] : '')
+  setting(:github_client_secret,  Rails.env.development? ? ENV['GITHUB_SECRET'] : '')
+
+  # https://apps.twitter.com/
+  setting(:twitter_consumer_key,    Rails.env.development? ? ENV['TWITTER_ID'] : '')
+  setting(:twitter_consumer_secret, Rails.env.development? ? ENV['TWITTER_SECRET'] : '')
+
+  # https://code.google.com/apis/console/
+  setting(:google_key,    Rails.env.development? ? ENV['GOOGLE_ID'] : '')
+  setting(:google_secret, Rails.env.development? ? ENV['GOOGLE_SECRET'] : '')
   
   setting(:active_user_rate_limit_secs, 60)
   setting(:previous_visit_timeout_hours, 1)

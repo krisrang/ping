@@ -26,5 +26,8 @@ Rails.application.routes.draw do
   get 'login' => 'session#new'
   get 'forgot' => 'session#forgot'
 
+  match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
+  match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
+
   root 'home#index'
 end

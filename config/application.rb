@@ -8,7 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Ping
   class Application < Rails::Application
-    require 'ping'    
+    require 'ping'
+    require 'auth'
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += Dir["#{config.root}/app/serializers"]

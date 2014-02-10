@@ -7,10 +7,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    prepopulate_user
   end
   
   def create
     @user = User.new(user_params)
+    prepopulate_user
 
     authentication = UserAuthenticator.new(@user, session)
     authentication.start
@@ -108,6 +110,17 @@ class UsersController < ApplicationController
       params[:challenge] != @challenge
   end
 
+  def prepopulate_user
+    data = (!!flash[:external] || params[:provider]) && session[:authentication]
+    return unless data
+
+    @provider = data[:authenticator_name].titleize
+    @email_valid = !!data[:email_valid]
+    @user.email ||= data[:email] if @email_valid
+    @user.username ||= data[:suggested][:username]
+    @user.name ||= data[:suggested][:name]
+  end
+
   def user_params
     params.require(:user).permit(:email, :password, :username)
   end
@@ -150,5 +163,5 @@ class UsersController < ApplicationController
 
     log_in_user(@user)
     flash.notice = t('password_reset.success')
-   end
+  end
 end

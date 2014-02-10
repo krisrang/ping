@@ -36,6 +36,19 @@ gem 'bcrypt-ruby'
 gem 'oj'
 gem 'redcarpet'
 gem 'fast_xor'
+gem 'lru_redux'
+gem 'omniauth'
+gem 'omniauth-openid'
+gem 'openid-redis-store'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-oauth2', require: false
+# abandoned gem hard to tell what is going on, multiple PRs upstream being ignored:
+# https://twitter.com/samsaffron/status/412372111710109696
+# we use: gem 'omniauth-browserid', git: 'https://github.com/samsaffron/omniauth-browserid.git', branch: 'observer_api'
+gem 'omniauth-browserid-discourse', require: 'omniauth-browserid'
 
 # DEV & TEST
 group :test, :development do

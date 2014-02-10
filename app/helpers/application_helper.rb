@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def flashes
     alerts = flash.keys.map do |key|
-      type = key
+      return nil unless %w(alert notice).include?(key.to_s)
       type = 'success' if key == :notice
       type = 'warning' if key == :alert
 
