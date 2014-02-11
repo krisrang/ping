@@ -72,6 +72,23 @@ class User < ActiveRecord::Base
     User.where(username_lower: lower).blank?
   end
 
+  def self.gravatar_template(email)
+    email_hash = self.email_hash(email)
+    "//www.gravatar.com/avatar/#{email_hash}.png?s={size}&r=pg&d=identicon"
+  end
+
+  def self.email_hash(email)
+    Digest::MD5.hexdigest(email.strip.downcase)
+  end
+
+  def email_hash
+    User.email_hash(email)
+  end
+
+  def avatar_template
+    User.gravatar_template(email)
+  end
+
   def password=(password)
     # special case for passwordless accounts
     @raw_password = password unless password.blank?

@@ -1,3 +1,3 @@
 class UserSerializer < ApplicationSerializer
-  attributes :id, :username
+  attributes :id, :username, :avatar_template
 end

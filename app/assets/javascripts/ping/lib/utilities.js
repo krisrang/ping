@@ -22,9 +22,27 @@ Ping.Utilities = {
     }
   },
 
+  avatarUrl: function(template, size) {
+    if (!template) { return ""; }
+    var rawSize = Ping.Utilities.getRawSize(Ping.Utilities.translateSize(size));
+    return template.replace(/\{size\}/g, rawSize);
+  },
+
   getRawSize: function(size) {
     var pixelRatio = window.devicePixelRatio || 1;
     return pixelRatio >= 1.5 ? size * 2 : size;
+  },
+
+  avatarImg: function(options) {
+    var size = Ping.Utilities.translateSize(options.size);
+    var url = Ping.Utilities.avatarUrl(options.avatarTemplate, size);
+
+    // We won't render an invalid url
+    if (!url || url.length === 0) { return ""; }
+
+    var classes = "avatar" + (options.extraClasses ? " " + options.extraClasses : "");
+    var title = (options.title) ? " title='" + Handlebars.Utils.escapeExpression(options.title || "") + "'" : "";
+    return "<img width='" + size + "' height='" + size + "' src='" + url + "' class='" + classes + "'" + title + ">";
   },
 
   emailValid: function(email) {
