@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
   resources :rooms
-  resources :users
+  resources :users do
+    collection do
+      get "check_username"
+    end
+  end
 
   get "users/activate-account/:token" => "users#activate_account"
   get "users/password-reset/:token" => "users#password_reset"

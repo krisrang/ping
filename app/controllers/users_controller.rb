@@ -67,7 +67,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def check_username
+    params.require(:username)
+    username = params[:username]
+
+    target_user = user_from_params_or_current_user
+
+    # The special case where someone is changing the case of their own username
+    if changing_case_of_own_username(target_user, username)
+      render(json: { available: true })
+      return
+    end
+
+    checker = UsernameCheckerService.new
+    render json: checker.check_username(username)
+  end
+
   private
+
+  def user_from_params_or_current_user
+    params[:for_user_id] ? User.find(params[:for_user_id]) : current_user
+  end
+
+  def changing_case_of_own_username(target_user, username)
+    target_user and username.downcase == target_user.username.downcase
+  end
 
   def set_honeypots
     @honeypot = honeypot_value
@@ -112,13 +136,16 @@ class UsersController < ApplicationController
 
   def prepopulate_user
     data = (!!flash[:external] || params[:provider]) && session[:authentication]
-    return unless data
-
-    @provider = data[:authenticator_name].titleize
-    @email_valid = !!data[:email_valid]
-    @user.email ||= data[:email] if @email_valid
-    @user.username ||= data[:suggested][:username]
-    @user.name ||= data[:suggested][:name]
+    
+    if data
+      @provider = data[:authenticator_name].titleize
+      @email_valid = !!data[:email_valid]
+      @user.email ||= data[:email] if @email_valid
+      @user.username ||= data[:suggested][:username]
+      @user.name ||= data[:suggested][:name]
+    else
+      session[:authentication] = nil
+    end
   end
 
   def user_params

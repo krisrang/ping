@@ -1,8 +1,6 @@
-//= require ./env
 //= require ./mixins/ajax
 //= require_self
 
-//= require ./store
 //= require_tree ./mixins
 //= require ./lib/computed
 //= require ./views/view

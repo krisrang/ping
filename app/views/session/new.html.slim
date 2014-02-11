@@ -3,7 +3,7 @@
 
   = flashes
 
-  = form_tag session_index_path, class: 'all-required', role: 'form' do
+  = form_tag session_index_path, role: 'form' do
     .form-group
       = text_field_tag 'login', nil, required: true, class: 'form-control', placeholder: t('login.login')
     .form-group.password

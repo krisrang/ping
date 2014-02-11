@@ -7,7 +7,7 @@ html
     = ping_csrf
     = stylesheet_link_tag     "application", media: "all"
     = javascript_include_tag  "preloader"
-    = javascript_include_tag "locales/#{I18n.locale}"
+    = javascript_include_tag  "locales/#{I18n.locale}"
   body
     - if @preloaded.present?
       - @preloaded.each do |key, json|

@@ -3,7 +3,7 @@
 
   = flashes
 
-  = form_tag forgot_password_session_index_path, class: 'all-required', role: 'form' do
+  = form_tag forgot_password_session_index_path, role: 'form' do
     .help-block = t('forgot.help')
     .form-group
       = text_field_tag 'login', nil, required: true, class: 'form-control', placeholder: t('login.login')

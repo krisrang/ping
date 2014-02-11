@@ -62,6 +62,14 @@ class ApplicationController < ActionController::Base
     redirect_to :login if Settings.login_required?
   end
 
+  def success_json
+    {success: 'OK'}
+  end
+
+  def failed_json
+    {failed: 'FAILED'}
+  end
+
   protected
 
   # TODO: implement

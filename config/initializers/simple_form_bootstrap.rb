@@ -17,10 +17,11 @@ SimpleForm.setup do |config|
   end
 
   config.input_class = 'form-control'
+  config.form_class = 'has-feedback'
 
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
   # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.default_wrapper = :bootstrap
+  config.default_wrapper = :no_label
 end

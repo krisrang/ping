@@ -1,3 +1,4 @@
+//= require env
 //= require handlebars
 //= require jquery_include
 //= require ember_include

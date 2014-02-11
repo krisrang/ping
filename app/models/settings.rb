@@ -18,9 +18,9 @@ class Settings < ActiveRecord::Base
 
   client_setting(:enable_google_logins, true)
   client_setting(:enable_persona_logins, false)
-  client_setting(:enable_twitter_logins, true)
+  client_setting(:enable_twitter_logins, false)
   client_setting(:enable_facebook_logins, true)
-  client_setting(:enable_github_logins, false)
+  client_setting(:enable_github_logins, true)
 
   # https://developers.facebook.com/
   setting(:facebook_app_id,     Rails.env.development? ? ENV['FACEBOOK_ID'] : '')

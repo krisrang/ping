@@ -3,7 +3,7 @@
 
   = flashes
 
-  = simple_form_for @user, { wrapper: :no_label, html: { class: 'all-required has-feedback', role: 'form' } } do |f|
+  = simple_form_for @user do |f|
     = f.input :email, required: true, placeholder: t('signup.email'), disabled: @email_valid
     - if @email_valid
       .help-block = t('signup.email_valid', provider: @provider)

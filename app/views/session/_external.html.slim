@@ -1,4 +1,7 @@
 .external-options
-  = link_to raw('<i class="fa fa-facebook"></i>'), '/auth/facebook', class: "btn-auth btn-facebook", title: "Facebook"
-  = link_to raw('<i class="fa fa-twitter"></i>'), '/auth/twitter', class: "btn-auth btn-twitter", title: "Twitter"
-  = link_to raw('<i class="fa fa-google-plus"></i>'), '/auth/google', class: "btn-auth btn-google", title: "Google"
+  - if Settings.enable_facebook_logins
+    = link_to raw('<i class="fa fa-facebook"></i>'), '/auth/facebook', class: "btn-auth btn-facebook", title: "Facebook"
+  - if Settings.enable_google_logins
+    = link_to raw('<i class="fa fa-google-plus"></i>'), '/auth/google', class: "btn-auth btn-google", title: "Google"
+  - if Settings.enable_github_logins
+    = link_to raw('<i class="fa fa-github-alt"></i>'), '/auth/github', class: "btn-auth btn-github", title: "Github"
