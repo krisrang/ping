@@ -56,6 +56,12 @@ class ApplicationController < ActionController::Base
     redirect_to default
   end
 
+  def check_xhr
+    # bypass xhr check on PUT / POST / DELETE provided api key is there, otherwise calling api is annoying
+    return if !request.get? && api_key_valid?
+    raise RenderEmpty.new unless ((request.format && request.format.json?) || request.xhr?)
+  end
+
   def redirect_to_login_if_required
     return if current_user || (request.format.json? && api_key_valid?)
 

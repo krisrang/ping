@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
   resources :rooms
+
+  get 'preferences' => 'default#empty'
+
+  # AUTH
+
   resources :users do
     collection do
       get "check_username"
@@ -33,5 +38,5 @@ Rails.application.routes.draw do
   match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
   match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
 
-  root 'home#index'
+  root 'default#index'
 end

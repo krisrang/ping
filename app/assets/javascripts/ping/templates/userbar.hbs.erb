@@ -1,17 +1,13 @@
-<div id="userbar">
-  {{boundAvatar model imageSize="medium"}}
-  <a {{action toggleUserbar}} class="userbar-toggle">
-    <img {{bind-attr src="model.statusImage"}}>
-    {{model.statusText}}
-  </a>
-  <button {{action logout}} class="btn-settings"><i class="fa fa-cog"></i></button>
-</div>
+<div id="userbar" {{bind-attr class="userbarClass"}}>
+  <div id="userbar-details">
+    {{boundAvatar model imageSize="medium"}}
+    <span>{{model.username}}</span>
+  </div>
 
-<div id="userbar-select" {{bind-attr class="userbarClass"}}>
-  <ul>
-    <li><a {{action setStatus "available"}}><img src="<%= asset_path('icon_available.png') %>"> Available</a></li>
-    <li><a {{action setStatus "away"}}><img src="<%= asset_path('icon_away.png') %>"> Away</a></li>
-    <li><a {{action setStatus "dnd"}}><img src="<%= asset_path('icon_dnd.png') %>"> Do Not Disturb</a></li>
-    <li><a {{action logout}}><i class="fa fa-sign-out"></i> Log out</a></li>
-  </ul>
+  <div id="userbar-select">
+    <ul>
+      <li>{{#link-to "preferences"}}<i class="fa fa-cog"></i> Preferences{{/link-to}}</li>
+      <li><a {{action logout}}><i class="fa fa-sign-out"></i> Log out</a></li>
+    </ul>
+  </div>
 </div>
