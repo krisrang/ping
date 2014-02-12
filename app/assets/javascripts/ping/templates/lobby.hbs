@@ -1,6 +1,20 @@
-Lobby!
+<div class="content">
+  <button {{action newRoom}} class="actionbtn btn btn-info">{{i18n lobby.newroom}}</button>
+  <h2>{{i18n lobby.title}} <span>{{i18n lobby.available}}</span></h2>
 
-<div id="users">
-  <div class="header">People</div>
-  Users and data
+  <div id="roomlist">
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+      </thead>
+      
+      <tbody>
+      {{#each room in rooms}}
+        <tr><td {{action joinRoom room}}>{{room.name}}</td></tr>
+      {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>

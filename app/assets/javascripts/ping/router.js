@@ -1,9 +1,8 @@
 Ping.Router.map(function() {
-  this.resource('lobby', { path: '/' });
-  this.resource('preferences');
+  this.route('lobby', { path: '/' });
+  this.route('preferences');
     
-  this.resource('room1');
-  this.resource('room2');
+  this.resource('room', { path: '/rooms/:room_id' });
 });
 
 Ping.Router.reopen({location: 'history'});

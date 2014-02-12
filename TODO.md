@@ -13,6 +13,9 @@ MVP
 * ~~Client side i18n~~
 * ~~Userbar~~
 * Room list & lobby
+  * ~~Room listing~~
+  * Remember room
+  * New room
 * User settings
 
 Later

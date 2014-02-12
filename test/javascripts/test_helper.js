@@ -38,6 +38,14 @@ var d = document;
 d.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
 d.write('<style>#ember-testing-container { position: absolute; background: white; bottom: 0; right: 0; width: 640px; height: 384px; overflow: auto; z-index: 9999; border: 1px solid #ccc; } #ember-testing-container:hover { opacity: 0.5; } #ember-testing { zoom: 50%; } </style>');
 
+Preloader.store("currentUser", {
+  "id":21,
+  "username":"Kristjan_Rang",
+  "avatar_template":"//www.gravatar.com/avatar/e098eb3cb1e7024bd7eb619196af6f7d.png?s={size}&r=pg&d=identicon",
+  "admin":false,
+  "no_password":true
+});
+
 Ping.rootElement = '#ember-testing';
 Ping.setupForTesting();
 Ping.injectTestHelpers();

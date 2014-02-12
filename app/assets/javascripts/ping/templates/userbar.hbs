@@ -1,0 +1,13 @@
+<div id="userbar" {{bind-attr class="userbarClass"}}>
+  <div id="userbar-details">
+    {{boundAvatar currentUser imageSize="medium"}}
+    <span>{{currentUser.username}}</span>
+  </div>
+
+  <div id="userbar-select">
+    <ul>
+      <li>{{#link-to "preferences"}}<i class="fa fa-cog"></i> {{i18n userbar.preferences}}{{/link-to}}</li>
+      <li><a {{action logout}}><i class="fa fa-sign-out"></i> {{i18n userbar.logout}}</a></li>
+    </ul>
+  </div>
+</div>

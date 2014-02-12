@@ -66,6 +66,16 @@ en:
           one: "1 day ago"
           other: "%{count} days ago"
 
-    stuff:
-      key: 'aye'
+    userbar:
+      preferences: "Preferences"
+      logout: "Log Out"
+
+    rooms:
+      lobby: "Lobby"
+      open: "Open Rooms"
+
+    lobby:
+      title: "Lobby"
+      available: "Available Rooms"
+      newroom: "New Room"
       

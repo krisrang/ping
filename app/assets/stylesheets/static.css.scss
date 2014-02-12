@@ -82,10 +82,14 @@
       &.btn-google i { background: #d34836; }
       &.btn-github i { background: #38b0db; }
     }
-
-    .external-options:after {
-      display: table;
-      content: "";
+    
+    .external-options {
+      height: 100px;
+      
+      &:after {
+        display: table;
+        content: "";
+      }
     }
   }
 

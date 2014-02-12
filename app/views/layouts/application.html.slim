@@ -17,6 +17,22 @@ html
     = javascript_include_tag  "/faye/faye"
     = javascript_include_tag  "vendor"
     = javascript_include_tag  "application"
+
+    - if Rails.env.development?
+      javascript:
+        // Don't swallow promises in development mode. Let's fix those.
+        Ember.RSVP.configure('onerror', function(e) {
+          if (e) {
+            if (e.message || e.stack) {
+              console.log(e.message);
+              console.log(e.stack);
+            } else {
+              console.log("Uncaught promise: " + e.toString());
+            }
+          } else {
+            console.log("A promise failed but was not caught.");
+          }
+        });
     
     javascript:
       Ping.Environment = '#{Rails.env}';

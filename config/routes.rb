@@ -8,7 +8,11 @@ USERNAME_ROUTE_FORMAT = /[A-Za-z0-9\_]+/ unless defined? USERNAME_ROUTE_FORMAT
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
-  resources :rooms
+  resources :rooms do
+    collection do
+      get :open
+    end
+  end
 
   get 'preferences' => 'default#empty'
 

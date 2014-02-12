@@ -1,0 +1,1 @@
+Ping.Model = Ember.Object.extend(Ping.Presence, {});

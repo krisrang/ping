@@ -4,6 +4,7 @@
 //= require_tree ./mixins
 //= require ./lib/computed
 //= require ./views/view
+//= require ./models/model
 //= require ./router
 
 //= require_tree ./lib

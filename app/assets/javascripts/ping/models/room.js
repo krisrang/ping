@@ -1,0 +1,1 @@
+Ping.Room = Ping.Model.extend({});

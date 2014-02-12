@@ -1,13 +1,15 @@
 <div id="rooms">
-  {{#link-to "lobby" class="lobby-link"}}<i class="fa fa-list"></i> Lobby{{/link-to}}
+  {{#link-to "lobby" class="lobby-link"}}<i class="fa fa-list"></i> {{i18n rooms.lobby}}{{/link-to}}
 
-  <div class="header">Open Rooms</div>
+  <div class="header">{{i18n rooms.open}}</div>
   <ul>
-    {{#link-to "room1" tagName="li" href=false}}
-      <a {{bind-attr href="view.href"}}><i class="fa fa-users"></i> Room!</a>
-    {{/link-to}}
-    {{#link-to "room2" tagName="li" href=false}}
-      <a {{bind-attr href="view.href"}}><i class="fa fa-users"></i> Room2!</a>
-    {{/link-to}}
+    {{#each room in rooms}}
+      {{#if room.open}}
+        {{#link-to "room" room tagName="li" href=false}}
+          <a {{action leaveRoom room}} class="leave"><i class="fa fa-times-circle"></i></a>
+          <a {{bind-attr href="view.href"}} class="room"><i class="fa fa-users"></i> {{room.name}} </a>
+        {{/link-to}}
+      {{/if}}
+    {{/each}}
   </ul>
 </div>
