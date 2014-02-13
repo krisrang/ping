@@ -11,7 +11,7 @@
       </thead>
       
       <tbody>
-      {{#each room in rooms}}
+      {{#each room in model}}
         <tr><td {{action joinRoom room}}>{{room.name}}</td></tr>
       {{/each}}
       </tbody>

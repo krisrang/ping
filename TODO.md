@@ -14,7 +14,7 @@ MVP
 * ~~Userbar~~
 * Room list & lobby
   * ~~Room listing~~
-  * Remember room
+  * ~~Remember room~~
   * New room
 * User settings
 

@@ -51,25 +51,6 @@ a {
 }
 
 #rooms {
-  .lobby-link {
-    margin: 0 -15px 10px 0;
-
-    &:hover {
-      color: #fff;
-      background: $sidebarHover;
-      text-decoration: none;
-    }
-  }
-
-  li {
-    margin-right: -15px;
-
-    &:hover {
-      background: $sidebarHover;
-      border-radius: $radius;
-    }
-  }
-
   a {
     display: block;
     color: $dulltext;
@@ -85,6 +66,31 @@ a {
     i { margin-right: 5px; }
   }
 
+  a.active, li.active a { color: #fff; }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-right: -15px;
+
+    &:hover {
+      background: $sidebarHover;
+      border-radius: $radius;
+    }
+  }
+
+  li:hover a.room { color: #fff; }
+
+  a.lobby-link {
+    margin: 0 -15px 10px 0;
+
+    &:hover { background: $sidebarHover; }
+  }
+
   a.leave {
     margin-right: 15px;
     float: right;
@@ -93,14 +99,6 @@ a {
 
   li:hover a.leave {
     display: inline;
-  }
-
-  a.active, li.active a { color: #fff; }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 }
 

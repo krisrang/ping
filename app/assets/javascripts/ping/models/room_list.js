@@ -1,11 +1,12 @@
 Ping.RoomList = Ember.ArrayProxy.extend({
   load: function() {
     var self = this;
-
+    
     return Preloader.getAndRemove("roomList", function() {
       return Ping.ajax("/rooms.json");
     }).then(function(result) {
-      return self.set('content', self.roomsFrom(result));
+      self.set('content', self.roomsFrom(result));
+      return self;
     });
   },
 
@@ -25,7 +26,11 @@ Ping.RoomList = Ember.ArrayProxy.extend({
 Ping.RoomList.reopenClass(Ping.Singleton, {
   createCurrent: function() {
     var list = Ping.RoomList.create({content: []});
-    list.load();
-    return list;
+
+    return Ember.Deferred.promise(function(promise) {
+      list.load().then(function() {
+        promise.resolve(list);
+      })
+    });
   }
 });

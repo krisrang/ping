@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
   resources :rooms do
-    collection do
-      get :open
+    member do
+      post :join
+      post :leave
     end
   end
 

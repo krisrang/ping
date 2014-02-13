@@ -1,14 +1,12 @@
 Ping.RoomRoute = Ember.Route.extend({
   model: function(params) {
-    var rooms = Ping.RoomList.current();
-    var room = rooms.findBy('id', params.room_id);
-    return room;
+    return Ping.Room.findById(params.room_id);
   },
 
   afterModel: function(room, transition) {
-    if (!room) return transition.abort();
+    if (!room) return this.transitionTo('lobby');
 
-    room.set('open', true);
+    room.join();
     this.controllerFor('application').set('room', room.get('id'));
   }
 });

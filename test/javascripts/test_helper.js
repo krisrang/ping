@@ -1,6 +1,7 @@
 /*jshint maxlen:250 */
 /*global count:true find:true document:true equal:true sinon:true */
 
+//= require faye-test
 //= require handlebars
 //= require development/jquery.js
 //= require development/ember.js
