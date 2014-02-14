@@ -1,18 +1,20 @@
 <div class="content">
-  <button {{action newRoom}} class="actionbtn btn btn-info">{{i18n lobby.newroom}}</button>
+  <button {{action "newRoom"}} class="actionbtn btn btn-info">{{i18n lobby.newroom}}</button>
   <h2>{{i18n lobby.title}} <span>{{i18n lobby.available}}</span></h2>
 
   <div id="roomlist">
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th>Name</th>
+        <th>{{i18n lobby.name}}</th>
       </tr>
       </thead>
       
       <tbody>
       {{#each room in model}}
-        <tr><td {{action joinRoom room}}>{{room.name}}</td></tr>
+        {{#unless room.isNew}}
+          <tr {{bind-attr class="room.className"}}><td {{action "joinRoom" room}}>{{room.name}}</td></tr>
+        {{/unless}}
       {{/each}}
       </tbody>
     </table>

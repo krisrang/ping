@@ -1,7 +1,9 @@
 <%
 if Rails.env.development? || Rails.env.test?
   require_asset ("development/ember.js")
+  require_asset ("development/ember-data.js")
 else
   require_asset ("production/ember.js")
+  require_asset ("production/ember-data.js")
 end
 %>

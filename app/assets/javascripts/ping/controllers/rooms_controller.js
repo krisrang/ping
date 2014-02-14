@@ -1,2 +1,1 @@
-Ping.RoomsController = Em.Controller.extend({
-});
+Ping.RoomsController = Ping.Controller.extend({});

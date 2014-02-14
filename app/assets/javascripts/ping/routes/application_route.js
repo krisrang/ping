@@ -1,5 +1,25 @@
 Ping.ApplicationRoute = Ember.Route.extend({
   actions: {
+    newRoom: function() {
+      Ping.Route.showModal(this, 'newRoom');
+    },
+
+    showKeyboardShortcutsHelp: function() {
+      Ping.Route.showModal(this, 'keyboardShortcutsHelp');
+    },
+
+    closeModal: function() {
+      this.render('hide_modal', {into: 'modal', outlet: 'modalBody'});
+    },
+
+    hideModal: function() {
+      $('#ping-modal').modal('hide');
+    },
+
+    showModal: function() {
+      $('#ping-modal').modal('show');
+    },
+
     joinRoom: function(room) {
       this.transitionTo('room', room);
     },
@@ -7,7 +27,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
     leaveRoom: function(room) {
       room.leave();
 
-      if (this.get('controller.room') == room.get('id')) {
+      if (this.get('controller.room') === room.get('id')) {
         this.transitionTo('lobby');
       }
     }
@@ -20,11 +40,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
     faye.on('transport:down', function(){ controller.set('connected', false); });
     faye.on('transport:up', function(){ controller.set('connected', true); });
 
-    var currentUser = Ping.User.current();
-    this.controllerFor('userbar').set('currentUser', currentUser);
-
-    Ping.RoomList.current().then(function(list) {
-      self.controllerFor('rooms').set('rooms', list);
-    });
+    var list = this.store.find('room');
+    self.controllerFor('rooms').set('rooms', list);
   }
 });

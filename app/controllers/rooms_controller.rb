@@ -3,12 +3,20 @@ class RoomsController < ApplicationController
   
   def index
     rooms = Room.all
+    open = current_user.rooms.select(:id).map(&:id)
+    rooms.each { |r| r.open = open.include?(r.id) }
+
     render json: rooms
   end
 
   def create
-    room = Room.create(params[:room])
-    render json: room
+    room = Room.new(room_params)
+
+    if room.save
+      render json: room
+    else
+      render json: { errors: { messages: room.errors, values: room_params } }, status: 422
+    end
   end
 
   def join
@@ -24,5 +32,11 @@ class RoomsController < ApplicationController
   end
 
   def show
+  end
+
+  private
+
+  def room_params
+    params.require(:room).permit(:name)
   end
 end

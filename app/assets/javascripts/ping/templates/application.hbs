@@ -1,8 +1,10 @@
 <div id="sidebar">
-  {{render userbar}}
-  {{render rooms}}
+  {{render "userbar"}}
+  {{render "rooms"}}
 </div>
 
 <div id="main">
   {{outlet}}
 </div>
+
+{{render "modal"}}

@@ -15,15 +15,17 @@ MVP
 * Room list & lobby
   * ~~Room listing~~
   * ~~Remember room~~
-  * New room
+  * ~~New room~~
 * User settings
 
 Later
 ---
 
 * User idling
-* User status messages
+* ~~User status messages~~
 * Signup JS enhancement
-* Admin user approval
+* Admin
+  * Admin user approval
 * Room permissions
-* Guest access to rooms
+  * Guest access to rooms
+* Search!

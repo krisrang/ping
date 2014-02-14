@@ -1,2 +1,1 @@
-Ping.PreferencesController = Em.ObjectController.extend({
-});
+Ping.PreferencesController = Ping.ObjectController.extend({});

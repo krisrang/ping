@@ -3,6 +3,7 @@
     "jQuery",
     "$",
     "Em",
+    "DS",
     "Handlebars",
     "Ping",
     "Preloader",

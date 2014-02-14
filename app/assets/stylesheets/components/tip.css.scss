@@ -1,0 +1,13 @@
+@import "variables";
+
+.tip {
+  padding: 5px;
+
+  &.good {
+    color: $green;
+  }
+
+  &.bad {
+    color: $red;
+  }
+}

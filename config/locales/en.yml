@@ -7,6 +7,10 @@ en:
       must_begin_with_alphanumeric: "Username must beging with an alphanumeric character!"
       short: "Username should be at least %{min} characters long!"
       long: "Username should not be longer than %{max} characters!"
+
+  room:
+    name:
+      unique: "Room name has been taken!"
       
   login:
     invalid: "Wrong login or password!"

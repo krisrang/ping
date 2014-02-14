@@ -1,5 +1,5 @@
-Ping.LobbyRoute = Ember.Route.extend({
+Ping.LobbyRoute = Ping.Route.extend({
   model: function() {
-    return Ping.RoomList.current();
+    return this.store.find('room');
   }
 });

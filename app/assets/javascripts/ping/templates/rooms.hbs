@@ -6,7 +6,7 @@
     {{#each room in rooms}}
       {{#if room.open}}
         {{#link-to "room" room tagName="li" href=false}}
-          <a {{action leaveRoom room}} class="leave"><i class="fa fa-times-circle"></i></a>
+          <a {{action "leaveRoom" room}} class="leave"><i class="fa fa-times-circle"></i></a>
           <a {{bind-attr href="view.href"}} class="room"><i class="fa fa-users"></i> {{room.name}} </a>
         {{/link-to}}
       {{/if}}

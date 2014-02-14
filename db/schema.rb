@@ -87,10 +87,15 @@ ActiveRecord::Schema.define(version: 20140212120149) do
     t.datetime "updated_at"
   end
 
+  add_index "rooms", ["name"], name: "index_rooms_on_name", unique: true, using: :btree
+
   create_table "rooms_users", id: false, force: true do |t|
     t.integer "room_id", null: false
     t.integer "user_id", null: false
   end
+
+  add_index "rooms_users", ["room_id"], name: "index_rooms_users_on_room_id", using: :btree
+  add_index "rooms_users", ["user_id"], name: "index_rooms_users_on_user_id", using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "name",       null: false

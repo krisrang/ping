@@ -1,0 +1,1 @@
+Ping.RoomController = Ping.ObjectController.extend({});

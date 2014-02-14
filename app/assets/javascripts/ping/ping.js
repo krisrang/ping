@@ -1,10 +1,16 @@
+//= require ./helpers/i18n_helpers
 //= require ./mixins/ajax
 //= require_self
 
+//= require ./store
 //= require_tree ./mixins
 //= require ./lib/computed
 //= require ./views/view
 //= require ./models/model
+//= require ./routes/route
+//= require ./controllers/controller
+//= require ./controllers/object_controller
+//= require ./views/modal/modal_body_view
 //= require ./router
 
 //= require_tree ./lib

@@ -1,4 +1,4 @@
-Ping.UserbarController = Em.Controller.extend({
+Ping.UserbarController = Ping.Controller.extend({
   userbarClass: '',
   userbarVisible: false,
 

@@ -1,0 +1,16 @@
+<div class="modal-body">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="roomName" class="col-sm-3 control-label">{{i18n new_room.name}}</label>
+      <div class="col-sm-9" {{bind-attr class="nameClass"}}>
+        {{input type="text" value=model.name class="form-control" id="roomName"}}
+        {{inputTip validation=nameValidation}}
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" {{action "closeModal"}}>{{i18n close}}</button>
+  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "saveRoom"}}>{{i18n create}}</button>
+</div>

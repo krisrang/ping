@@ -66,6 +66,9 @@ en:
           one: "1 day ago"
           other: "%{count} days ago"
 
+    close: "Close"
+    create: "Create"
+
     userbar:
       preferences: "Preferences"
       logout: "Log Out"
@@ -77,5 +80,18 @@ en:
     lobby:
       title: "Lobby"
       available: "Available Rooms"
+      name: "Room Name"
       newroom: "New Room"
-      
+
+    new_room:
+      title: "Create New Room"
+      name: "Room Name"
+      failed: "Creating room failed!"
+
+    room:
+      name:
+        blank: "Room name cannot be empty"
+        too_long: "Room name too long!"
+        too_short: "Room name too short!"
+        ok: "Room name looks ok!"
+        unique: "Room name taken!"

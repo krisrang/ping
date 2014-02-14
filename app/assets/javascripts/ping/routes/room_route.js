@@ -1,4 +1,4 @@
-Ping.RoomRoute = Ember.Route.extend({
+Ping.RoomRoute = Ping.Route.extend({
   model: function(params) {
     return Ping.Room.findById(params.room_id);
   },

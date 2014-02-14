@@ -1,3 +1,3 @@
 class RoomSerializer < ApplicationSerializer
-  attributes :id, :name
+  attributes :id, :name, :open
 end
