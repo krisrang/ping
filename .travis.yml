@@ -9,4 +9,4 @@ before_script:
   - psql -c 'create database ping_test;' -U postgres
   - export RUBY_GC_MALLOC_LIMIT=50000000
   - rake db:migrate
-script: bundle exec rake ci:test
+script: bundle exec rspec
