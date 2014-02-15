@@ -5,10 +5,10 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
 
   actions: {
     saveRoom: function() {
-      var self = this,
-          room = this.get('model');
-
-      if (this.blank('model.name')) return;
+      var self = this;
+      var room = this.store.createRecord('room', {
+        name: this.get('name')
+      });
 
       return room.save().then(function() {
         self.send('closeModal');
@@ -27,14 +27,13 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
 
   onShow: function() {
     this.set('controllers.modal.modalClass', 'new-room-modal');
-    this.set('model', this.store.createRecord('room'));
   },
 
   nameValidation: function() {
     // If blank, fail without a reason
-    if (this.blank('model.name')) return Ping.InputValidation.create({ failed: true });
+    if (this.blank('name')) return Ping.InputValidation.create({ failed: true });
 
-    var name = this.get('model.name');
+    var name = this.get('name');
 
     if (this.get('rejectedNames').contains(name)) {
       return Ping.InputValidation.create({
@@ -52,7 +51,7 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
     }
 
     // If too long
-    if (name.length > 10) {
+    if (name.length > 18) {
       return Ping.InputValidation.create({
         failed: true,
         reason: I18n.t('room.name.too_long')
@@ -64,10 +63,10 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
       ok: true,
       reason: I18n.t('room.name.ok')
     });
-  }.property('model.name', 'rejectedNames.@each'),
+  }.property('name', 'rejectedNames.@each'),
 
   submitDisabled: function() {
     if (this.get('nameValidation.failed')) return true;
     return false;
-  }.property('model.name', 'nameValidation.failed')
+  }.property('name', 'nameValidation.failed')
 });

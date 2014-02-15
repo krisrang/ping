@@ -1,9 +1,9 @@
 Ping.RoomRoute = Ping.Route.extend({
   model: function(params) {
-    return Ping.Room.findById(params.room_id);
+    return this.store.find('room', params.room_id);
   },
 
-  afterModel: function(room, transition) {
+  afterModel: function(room) {
     if (!room) return this.transitionTo('lobby');
 
     room.join();

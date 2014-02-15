@@ -1,1 +1,4 @@
-Ping.LobbyController = Ping.Controller.extend({});
+Ping.LobbyController = Ping.ArrayController.extend({
+  sortProperties: ['name'],
+  sortAscending: true
+});

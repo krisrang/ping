@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   class RenderEmpty < Exception; end
   rescue_from RenderEmpty do
-    render 'default/empty'
+    render_empty
   end
 
   def store_preloaded(key, json)
@@ -62,7 +62,11 @@ class ApplicationController < ActionController::Base
   def check_xhr
     # bypass xhr check on PUT / POST / DELETE provided api key is there, otherwise calling api is annoying
     return if !request.get? && api_key_valid?
-    raise RenderEmpty.new unless ((request.format && request.format.json?) || request.xhr?)
+    render_empty unless ((request.format && request.format.json?) || request.xhr?)
+  end
+
+  def render_empty
+    render 'default/empty'
   end
 
   def redirect_to_login_if_required

@@ -19,6 +19,11 @@ class RoomsController < ApplicationController
     end
   end
 
+  def show
+    room = Room.find(params[:id])
+    render json: room
+  end
+
   def join
     room = Room.find(params[:id])
     current_user.rooms << room
@@ -29,9 +34,6 @@ class RoomsController < ApplicationController
     room = Room.find(params[:id])
     current_user.rooms.delete room
     render json: success_json
-  end
-
-  def show
   end
 
   private

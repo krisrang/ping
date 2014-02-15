@@ -1,1 +1,4 @@
-Ping.RoomsController = Ping.Controller.extend({});
+Ping.RoomsController = Ping.ArrayController.extend({
+  sortProperties: ['name'],
+  sortAscending: true
+});

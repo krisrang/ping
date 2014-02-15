@@ -10,6 +10,7 @@
 //= require ./routes/route
 //= require ./controllers/controller
 //= require ./controllers/object_controller
+//= require ./controllers/array_controller
 //= require ./views/modal/modal_body_view
 //= require ./router
 
