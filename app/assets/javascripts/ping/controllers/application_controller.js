@@ -1,3 +1,7 @@
 Ping.ApplicationController = Em.Controller.extend({
-  connected: false
+  connected: false,
+
+  logout: function() {
+    this.get('currentUser').logout();
+  }
 });

@@ -1,1 +1,1 @@
-Ping.ArrayController = Ember.ArrayController.extend(Ping.Presence, Ping.HasCurrentUser);
+Ping.ArrayController = Ember.ArrayController.extend(Ping.Presence);

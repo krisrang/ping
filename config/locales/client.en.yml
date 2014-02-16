@@ -82,10 +82,13 @@ en:
       available: "Available Rooms"
       name: "Room Name"
       newroom: "New Room"
+      topic: "Topic"
+      owner: "Owner"
 
     new_room:
       title: "Create New Room"
-      name: "Room Name"
+      name: "Name"
+      topic: "Topic"
       failed: "Creating room failed!"
 
     room:

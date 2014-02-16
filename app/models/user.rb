@@ -5,6 +5,7 @@ require_dependency 'user_name_suggester'
 class User < ActiveRecord::Base
   has_many :email_tokens, dependent: :destroy
   has_many :user_visits, dependent: :destroy
+  has_many :rooms, inverse_of: :owner
 
   has_and_belongs_to_many :rooms
 

@@ -35,13 +35,6 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
     return url;
   },
 
-  logout: function() {
-    Ping.User.logout().then(function() {
-      Ping.KeyValueStore.abandonLocal();
-      window.location.pathname = Ping.getURL('/');
-    });
-  },
-
   start: function() {
     
   }

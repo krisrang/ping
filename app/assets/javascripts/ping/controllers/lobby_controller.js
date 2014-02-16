@@ -1,4 +1,10 @@
-Ping.LobbyController = Ping.ArrayController.extend({
+Ping.LobbyController = Em.ArrayController.extend({
   sortProperties: ['name'],
-  sortAscending: true
+
+  actions: {
+    deleteRoom: function(room) {
+      room.destroyRecord();
+      // room.save();
+    }
+  }
 });

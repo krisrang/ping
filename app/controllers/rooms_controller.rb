@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
 
   def create
     room = Room.new(room_params)
+    room.owner = current_user
 
     if room.save
       render json: room
@@ -22,7 +23,7 @@ class RoomsController < ApplicationController
   def show
     room = Room.find(params[:id])
     render json: room
-  end
+  end  
 
   def join
     room = Room.find(params[:id])
@@ -36,9 +37,15 @@ class RoomsController < ApplicationController
     render json: success_json
   end
 
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+    render json: room
+  end
+
   private
 
   def room_params
-    params.require(:room).permit(:name)
+    params.require(:room).permit(:name, :topic)
   end
 end

@@ -1,7 +1,7 @@
 Ping.UserRoute = Ping.Route.extend({
   model: function(params) {
     // If we're viewing the currently logged in user, return that object instead
-    var currentUser = Ping.User.current();
+    var currentUser = this.get('currentUser');
     if (currentUser && (params.username.toLowerCase() === currentUser.get('username_lower'))) {
       return currentUser;
     }

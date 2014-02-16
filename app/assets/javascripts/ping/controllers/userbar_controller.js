@@ -10,11 +10,5 @@ Ping.UserbarController = Ping.Controller.extend({
     }
 
     this.set('userbarVisible', !this.get('userbarVisible'));
-  },
-
-  actions: {
-    logout: function() {
-      Ping.logout();
-    }
   }
 });

@@ -7,13 +7,23 @@
       <thead>
       <tr>
         <th>{{i18n lobby.name}}</th>
+        <th>{{i18n lobby.topic}}</th>
+        <th>{{i18n lobby.owner}}</th>
+        <th></th>
       </tr>
       </thead>
       
       <tbody>
-      {{#each}}
+      {{#each arrangedContent}}
         {{#unless isNew}}
-          <tr {{bind-attr class="className"}}><td {{action "joinRoom" this}}>{{name}}</td></tr>
+          <tr {{bind-attr class="className"}}>
+            <td {{action "joinRoom" this}}>{{name}}</td>
+            <td {{action "joinRoom" this}}>{{topic}}</td>
+            <td>{{owner.username}}</td>
+            <td>
+              <i class="fa fa-trash-o" {{action "deleteRoom" this}}></i>
+            </td>
+          </tr>
         {{/unless}}
       {{/each}}
       </tbody>

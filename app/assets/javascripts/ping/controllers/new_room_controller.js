@@ -7,10 +7,13 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
     saveRoom: function() {
       var self = this;
       var room = this.store.createRecord('room', {
-        name: this.get('name')
+        name: this.get('name'),
+        topic: this.get('topic')
       });
 
-      return room.save().then(function() {
+      return room.save().then(function(result) {
+        self.get('currentUser.rooms').pushObject(result);
+
         self.send('closeModal');
         Em.run.later(room, function(){
           $('#roomlist .room-' + this.get('id')).addClass('animated flash');

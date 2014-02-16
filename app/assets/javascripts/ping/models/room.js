@@ -2,7 +2,9 @@ var attr = DS.attr;
 
 Ping.Room = DS.Model.extend({
   name: attr(),
+  topic: attr(),
   open: attr('boolean'),
+  owner: DS.belongsTo('user'),
 
   join: function() {
     if (this.get('open')) return;
