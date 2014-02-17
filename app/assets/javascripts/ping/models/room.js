@@ -4,7 +4,8 @@ Ping.Room = DS.Model.extend({
   name: attr(),
   topic: attr(),
   open: attr('boolean'),
-  owner: DS.belongsTo('user'),
+  user: DS.belongsTo('user'),
+  messages: DS.hasMany('message'),
 
   join: function() {
     if (this.get('open')) return;

@@ -8,9 +8,9 @@
   <ul class="messagelist scroller">
     {{#each messages}}
     <li class="message">
-      <img width="32" height="32" src="//www.gravatar.com/avatar/72555f0f9d510bcd6eb2030507402655.png?s=32&amp;r=pg&amp;d=identicon" class="avatar">
-      <div class="details">krisrang   •  <time>1 minute ago</time></div>
-      <div class="body">{{message}}</div>
+      {{boundAvatar user imageSize="medium"}}
+      <div class="details">{{user.username}}   •  <time>1 minute ago</time></div>
+      <div class="body">{{cooked}}</div>
     </li>
     {{/each}}
   </ul>
