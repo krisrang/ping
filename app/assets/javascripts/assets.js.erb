@@ -1,5 +1,4 @@
 window.assetPath = (function(){
-  // TODO: automate this to grab from the manifest, Rails voodoo should be able to get it
   var map = {
     'logo.png': <%= asset_path('logo.png').inspect.html_safe %>,
     'logo_w.png': <%= asset_path('logo_w.png').inspect.html_safe %>,

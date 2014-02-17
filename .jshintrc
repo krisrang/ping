@@ -8,6 +8,7 @@
     "Ping",
     "Preloader",
     "I18n",
+    "bootbox",
     "moment",
     "assetPath",
     "module",

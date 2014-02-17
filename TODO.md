@@ -17,7 +17,7 @@ MVP
   * ~~Remember room~~
   * ~~New room~~
   * ~~Delete room~~
-  * Room renaming
+  * ~~Room renaming~~
 * Chatting
 * User settings
 

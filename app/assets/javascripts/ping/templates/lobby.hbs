@@ -6,14 +6,15 @@
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th>{{i18n lobby.name}}</th>
-        <th>{{i18n lobby.topic}}</th>
-        <th>{{i18n lobby.owner}}</th>
-        <th></th>
+        <th class="name">{{i18n lobby.name}}</th>
+        <th class="topic">{{i18n lobby.topic}}</th>
+        <th class="owner">{{i18n lobby.owner}}</th>
+        <th class="actions"></th>
       </tr>
       </thead>
       
       <tbody>
+      
       {{#each arrangedContent}}
         {{#unless isNew}}
           <tr {{bind-attr class="className"}}>
@@ -21,7 +22,12 @@
             <td {{action "joinRoom" this}}>{{topic}}</td>
             <td>{{owner.username}}</td>
             <td>
-              <i class="fa fa-trash-o" {{action "deleteRoom" this}}></i>
+              <button class="btn btn-sm btn-default" {{action "renameRoom" this}} title="{{i18n rename}}">
+                <i class="fa fa-pencil-square-o"></i>  
+              </button>
+              <button class="btn btn-sm btn-warning" {{action "deleteRoom" this}} title="{{i18n delete}}">
+                <i class="fa fa-trash-o"></i>
+              </button>
             </td>
           </tr>
         {{/unless}}

@@ -16,6 +16,8 @@ Ping.Room = DS.Model.extend({
   },
 
   leave: function() {
+    if (!this.get('open')) return;
+
     this.set('open', false);
     return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' });
   },

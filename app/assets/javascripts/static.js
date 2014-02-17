@@ -12,7 +12,7 @@ var PingLogin = {
     var filled = true;
 
     if (fields.length > 0) {
-      filled = fields.toArray().all(function(input) {
+      filled = _.all(fields, function(input) {
         return $(input).val().trim().length > 0;
       });
     }

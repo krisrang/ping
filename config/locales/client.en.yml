@@ -68,6 +68,8 @@ en:
 
     close: "Close"
     create: "Create"
+    rename: "Rename"
+    delete: "Delete"
 
     userbar:
       preferences: "Preferences"
@@ -84,6 +86,7 @@ en:
       newroom: "New Room"
       topic: "Topic"
       owner: "Owner"
+      rename: "Rename Room"
 
     new_room:
       title: "Create New Room"
