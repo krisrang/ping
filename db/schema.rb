@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215124952) do
+ActiveRecord::Schema.define(version: 20140217181054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 20140215124952) do
 
   add_index "google_user_infos", ["google_user_id"], name: "index_google_user_infos_on_google_user_id", unique: true, using: :btree
   add_index "google_user_infos", ["user_id"], name: "index_google_user_infos_on_user_id", unique: true, using: :btree
+
+  create_table "messages", force: true do |t|
+    t.text     "source",     null: false
+    t.text     "cooked",     null: false
+    t.integer  "user_id",    null: false
+    t.integer  "room_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["room_id"], name: "index_messages_on_room_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "oauth2_user_infos", force: true do |t|
     t.integer  "user_id",    null: false

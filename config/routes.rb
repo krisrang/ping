@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :messages
+
   get 'preferences' => 'default#empty'
 
   # AUTH

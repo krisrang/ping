@@ -3,6 +3,7 @@ class Room < ActiveRecord::Base
   validates_uniqueness_of :name
 
   belongs_to :owner, class_name: 'User'
+  has_many :messages
   has_and_belongs_to_many :users
 
   attr_accessor :open
