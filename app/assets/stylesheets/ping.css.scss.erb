@@ -73,116 +73,113 @@ a {
   @include transition(background-color .3s ease-in-out 0,left .5s ease-in-out .3s);
 
   &:hover { background-color: $liquorice; }
-}
 
-#logo {
-  margin: 10px 0;
-  text-align: center;
-}
 
-#rooms {
-  a {
-    display: block;
-    color: $dulltext;
-    padding: 5px;
-    font-size: 13px;
-    border-radius: $radius;
-
-    &:hover {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    i { margin-right: 5px; }
-  }
-
-  a.active, li.active a { color: #fff; }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    margin-right: -15px;
-
-    &:hover, &.active {
-      background: $sidebarHover;
+  .roomlist {
+    a {
+      display: block;
+      color: $dulltext;
+      padding: 5px;
+      font-size: 13px;
       border-radius: $radius;
-    }
-  }
 
-  li:hover a.room { color: #fff; }
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
 
-  a.lobby-link {
-    margin: 0 -15px 10px 0;
-
-    &:hover, &.active { background: $sidebarHover; }
-  }
-
-  a.leave {
-    margin-right: 15px;
-    float: right;
-    display: none;
-  }
-
-  li:hover a.leave {
-    display: inline;
-  }
-}
-
-#userbar {
-  color: #fff;
-  height: 42px;
-  overflow: hidden;
-  margin-bottom: 10px;
-  border-radius: $radius;
-  cursor: pointer;
-  @include transition(all 400ms ease-in-out);
-
-  &.open {
-    height: 110px;
-  }
-
-  &.open, &:hover {
-    background: $sidebarHover;
-  }
-
-  #userbar-details {
-    height: 42px;
-    padding: 4px;
-
-    .avatar {
-      padding: 1px;
-      width: 34px;
-      height: 34px;
-      float: left;
-      border-radius: $radius;
+      i { margin-right: 5px; }
     }
 
-    span {
-      line-height: 34px;
-      padding: 0 10px;
-    }
-  }
+    a.active, li.active a { color: #fff; }
 
-  #userbar-select {
     ul {
       list-style: none;
       margin: 0;
-      padding: 5px;
+      padding: 0;
+    }
 
-      li {
-        a {
-          display: block;
-          color: #fff;
-          padding: 4px 6px;
-          border-radius: $radius;
+    li {
+      margin-right: -15px;
 
-          &:hover { background-color: $sidebarHover; text-decoration: none; }
+      &:hover, &.active {
+        background: $sidebarHover;
+        border-radius: $radius;
+      }
+    }
 
-          i { padding: 0 0 0 2px; }
+    li:hover a.room { color: #fff; }
+
+    a.lobby-link {
+      margin: 0 -15px 10px 0;
+
+      &:hover, &.active { background: $sidebarHover; }
+    }
+
+    a.leave {
+      margin-right: 15px;
+      float: right;
+      display: none;
+    }
+
+    li:hover a.leave {
+      display: inline;
+    }
+  }
+
+
+  .userbar {
+    color: #fff;
+    height: 42px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: $radius;
+    cursor: pointer;
+    @include transition(all 400ms ease-in-out);
+
+    &.open {
+      height: 110px;
+    }
+
+    &.open, &:hover {
+      background: $sidebarHover;
+    }
+
+    .userbar-details {
+      height: 42px;
+      padding: 4px;
+
+      .avatar {
+        padding: 1px;
+        width: 34px;
+        height: 34px;
+        float: left;
+        border-radius: $radius;
+      }
+
+      span {
+        line-height: 34px;
+        padding: 0 10px;
+      }
+    }
+
+    .userbar-select {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+
+        li {
+          a {
+            display: block;
+            color: #fff;
+            padding: 4px 6px;
+            border-radius: $radius;
+
+            &:hover { background-color: $sidebarHover; text-decoration: none; }
+
+            i { padding: 0 0 0 2px; }
+          }
         }
       }
     }
@@ -216,10 +213,10 @@ a {
 }
 
 // 
-// ROOMLIST
+// LOBBY ROOMS
 // 
 
-#roomlist {
+.lobby .rooms {
   position: absolute;
   top: 60px;
   left: 0;

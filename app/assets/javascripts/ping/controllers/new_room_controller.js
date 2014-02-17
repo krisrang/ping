@@ -16,7 +16,7 @@ Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
 
         self.send('closeModal');
         Em.run.later(room, function(){
-          $('#roomlist .room-' + this.get('id')).addClass('animated flash');
+          $('.lobby .rooms .room-' + this.get('id')).addClass('animated flash');
         }, 200);
       }, function(result) {
         if (result.errors && result.errors.values.name) {

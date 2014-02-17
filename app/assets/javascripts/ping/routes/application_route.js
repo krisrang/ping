@@ -41,6 +41,6 @@ Ping.ApplicationRoute = Ember.Route.extend({
     faye.on('transport:up', function(){ controller.set('connected', true); });
 
     var list = this.store.findAll('room');
-    self.controllerFor('rooms').set('content', list);
+    self.controllerFor('roomlist').set('content', list);
   }
 });
