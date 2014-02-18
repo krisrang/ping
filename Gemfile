@@ -22,7 +22,7 @@ gem 'uglifier'
 gem 'therubyracer', require: 'v8'
 gem 'slim-rails'
 gem 'ember-rails'
-gem 'gemoji', github: 'github/gemoji'
+gem 'emoji'
 gem 'simple_form'
 
 # BACKEND
@@ -94,6 +94,10 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'terminal-notifier-guard'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 # SERVERS
