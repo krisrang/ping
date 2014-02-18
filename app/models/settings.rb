@@ -23,20 +23,20 @@ class Settings < ActiveRecord::Base
   client_setting(:enable_github_logins, true)
 
   # https://developers.facebook.com/
-  setting(:facebook_app_id,     Rails.env.development? ? ENV['FACEBOOK_ID'] : '')
-  setting(:facebook_app_secret, Rails.env.development? ? ENV['FACEBOOK_SECRET'] : '')
+  setting(:facebook_app_id,     ENV['FACEBOOK_ID'])
+  setting(:facebook_app_secret, ENV['FACEBOOK_SECRET'])
 
   # https://github.com/settings/applications/
-  setting(:github_client_id,      Rails.env.development? ? ENV['GITHUB_ID'] : '')
-  setting(:github_client_secret,  Rails.env.development? ? ENV['GITHUB_SECRET'] : '')
+  setting(:github_client_id,     ENV['GITHUB_ID'])
+  setting(:github_client_secret, ENV['GITHUB_SECRET'])
 
   # https://apps.twitter.com/
-  setting(:twitter_consumer_key,    Rails.env.development? ? ENV['TWITTER_ID'] : '')
-  setting(:twitter_consumer_secret, Rails.env.development? ? ENV['TWITTER_SECRET'] : '')
+  setting(:twitter_consumer_key,    ENV['TWITTER_ID'])
+  setting(:twitter_consumer_secret, ENV['TWITTER_SECRET'])
 
   # https://code.google.com/apis/console/
-  setting(:google_key,    Rails.env.development? ? ENV['GOOGLE_ID'] : '')
-  setting(:google_secret, Rails.env.development? ? ENV['GOOGLE_SECRET'] : '')
+  setting(:google_key,    ENV['GOOGLE_ID'])
+  setting(:google_secret, ENV['GOOGLE_SECRET'])
   
   setting(:active_user_rate_limit_secs, 60)
   setting(:previous_visit_timeout_hours, 1)
