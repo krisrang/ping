@@ -1,15 +1,12 @@
-Ping.NewRoomController = Ping.Controller.extend(Ping.ModalFunctionality, {
+Ping.EditRoomController = Ping.ObjectController.extend(Ping.ModalFunctionality, {
   needs: ['modal'],
 
   rejectedNames: Em.A([]),
 
   actions: {
     saveRoom: function() {
-      var self = this;
-      var room = this.store.createRecord('room', {
-        name: this.get('name'),
-        topic: this.get('topic')
-      });
+      var self = this,
+          room = this.get('model');
 
       return room.save().then(function(result) {
         self.get('currentUser.rooms').pushObject(result);

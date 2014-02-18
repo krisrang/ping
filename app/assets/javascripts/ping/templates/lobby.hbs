@@ -22,7 +22,7 @@
             <td {{action "joinRoom" this}}>{{topic}}</td>
             <td>{{user.username}}</td>
             <td>
-              <button class="btn btn-sm btn-default" {{action "renameRoom" this}} title="{{i18n rename}}">
+              <button class="btn btn-sm btn-default" {{action "editRoom" this}} title="{{i18n rename}}">
                 <i class="fa fa-pencil-square-o"></i>  
               </button>
               <button class="btn btn-sm btn-warning" {{action "deleteRoom" this}} title="{{i18n delete}}">

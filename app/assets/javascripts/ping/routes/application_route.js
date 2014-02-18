@@ -1,7 +1,11 @@
 Ping.ApplicationRoute = Ember.Route.extend({
   actions: {
     newRoom: function() {
-      Ping.Route.showModal(this, 'newRoom');
+      Ping.Route.showModal(this, 'editRoom', this.store.createRecord('room'));
+    },
+
+    editRoom: function(room) {
+      Ping.Route.showModal(this, 'editRoom', room);
     },
 
     showKeyboardShortcutsHelp: function() {

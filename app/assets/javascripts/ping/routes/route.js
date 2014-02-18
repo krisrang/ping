@@ -7,9 +7,9 @@ Ping.Route = Em.Route.extend({
 
     @method activate
   **/
-  activate: function() {
-    this._super();
-  }
+  // activate: function() {
+  //   this._super();
+  // }
 });
 
 

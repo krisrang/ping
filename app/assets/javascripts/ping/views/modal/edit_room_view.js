@@ -1,6 +1,12 @@
-Ping.NewRoomView = Ping.ModalBodyView.extend({
-  templateName: 'modal/new_room',
-  title: I18n.t('new_room.title'),
+Ping.EditRoomView = Ping.ModalBodyView.extend({
+  templateName: 'modal/edit_room',
+
+  title: function() {
+    var key = 'edit_room.title_edit';
+    if (this.get('controller.model.isNew')) return I18n.t('edit_room.title_new');
+
+    return I18n.t(key);
+  }.property('controller.model'),
 
   didInsertElement: function() {
     this._super();

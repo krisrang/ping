@@ -68,8 +68,10 @@ en:
 
     close: "Close"
     create: "Create"
+    save: "Save"
     rename: "Rename"
     delete: "Delete"
+    confirm: "Are you sure?"
 
     userbar:
       preferences: "Preferences"
@@ -88,11 +90,12 @@ en:
       owner: "Owner"
       rename: "Rename Room"
 
-    new_room:
-      title: "Create New Room"
+    edit_room:
+      title_new: "Create New Room"
+      title_edit: "Edit Room"
       name: "Name"
       topic: "Topic"
-      failed: "Creating room failed!"
+      failed: "Saving room failed!"
 
     room:
       name:

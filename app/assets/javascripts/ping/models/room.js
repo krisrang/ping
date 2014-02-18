@@ -8,7 +8,7 @@ Ping.Room = DS.Model.extend({
   messages: DS.hasMany('message'),
 
   join: function() {
-    if (this.get('open')) return;
+    if (this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
     return Ping.ajax('/rooms/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
@@ -17,7 +17,7 @@ Ping.Room = DS.Model.extend({
   },
 
   leave: function() {
-    if (!this.get('open')) return;
+    if (!this.get('open')) return Em.RSVP.resolve();
 
     this.set('open', false);
     return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' });
