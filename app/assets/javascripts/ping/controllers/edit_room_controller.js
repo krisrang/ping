@@ -8,13 +8,10 @@ Ping.EditRoomController = Ping.ObjectController.extend(Ping.ModalFunctionality, 
       var self = this,
           room = this.get('model');
 
-      return room.save().then(function(result) {
-        self.get('currentUser.rooms').pushObject(result);
+      room.set('user', this.get('currentUser.model'));
 
+      return room.save().then(function() {
         self.send('closeModal');
-        Em.run.later(room, function(){
-          $('.lobby .rooms .room-' + this.get('id')).addClass('animated flash');
-        }, 200);
       }, function(result) {
         if (result.errors && result.errors.values.name) {
           self.get('rejectedNames').pushObject(result.errors.values.name);
@@ -27,6 +24,10 @@ Ping.EditRoomController = Ping.ObjectController.extend(Ping.ModalFunctionality, 
 
   onShow: function() {
     this.set('controllers.modal.modalClass', 'new-room-modal');
+  },
+
+  onClose: function() {
+    this.get('model').rollback();
   },
 
   nameValidation: function() {

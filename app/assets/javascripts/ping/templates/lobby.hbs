@@ -17,19 +17,7 @@
       
       {{#each arrangedContent}}
         {{#unless isNew}}
-          <tr {{bind-attr class="className"}}>
-            <td {{action "joinRoom" this}}>{{name}}</td>
-            <td {{action "joinRoom" this}}>{{topic}}</td>
-            <td>{{user.username}}</td>
-            <td>
-              <button class="btn btn-sm btn-default" {{action "editRoom" this}} title="{{i18n rename}}">
-                <i class="fa fa-pencil-square-o"></i>  
-              </button>
-              <button class="btn btn-sm btn-warning" {{action "deleteRoom" this}} title="{{i18n delete}}">
-                <i class="fa fa-trash-o"></i>
-              </button>
-            </td>
-          </tr>
+          {{render "lobbyRoom" this}}
         {{/unless}}
       {{/each}}
       </tbody>

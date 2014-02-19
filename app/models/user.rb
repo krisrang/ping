@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates :email, email: true, if: :email_changed?
   validate :password_validator
 
-  EMAIL = %r{([^@]+)@([^\.]+)}
+  EMAIL = /([^@]+)@([^\.]+)/
 
   def self.find_by_username_or_email(username_or_email)
     if username_or_email.include?('@')
@@ -39,7 +39,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_email(email)
-    # TODO: proper email downcasing
     where(email: Email.downcase(email)).first
   end
 
@@ -65,9 +64,9 @@ class User < ActiveRecord::Base
   end
 
   def self.suggest_name(email)
-    return "" unless email
+    return '' unless email
     name = email.split(/[@\+]/)[0]
-    name = name.gsub(".", " ")
+    name = name.gsub('.', ' ')
     name.titleize
   end
 
@@ -99,7 +98,7 @@ class User < ActiveRecord::Base
   end
 
   def password
-    '' # so that validator doesn't complain that a password attribute doesn't exist
+    '' # so that validator doesn't complain
   end
 
   def password_required!
@@ -212,11 +211,14 @@ class User < ActiveRecord::Base
   end
 
   def hash_password(password, salt)
-    Pbkdf2.hash_password(password, salt, Rails.configuration.pbkdf2_iterations, Rails.configuration.pbkdf2_algorithm)
+    Pbkdf2.hash_password(password, salt,
+                         Rails.configuration.pbkdf2_iterations, 
+                         Rails.configuration.pbkdf2_algorithm)
   end
 
   def previous_visit_at_update_required?(timestamp)
-    seen_before? && (last_seen < (timestamp - Settings.previous_visit_timeout_hours.hours))
+    seen_before? && 
+      (last_seen < (timestamp - Settings.previous_visit_timeout_hours.hours))
   end
 
   def update_previous_visit(timestamp)

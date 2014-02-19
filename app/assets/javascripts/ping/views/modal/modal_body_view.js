@@ -24,6 +24,12 @@ Ping.ModalBodyView = Ping.View.extend({
     }
   },
 
+  willDestroy: function() {
+    var controller = this.get('controller');
+    if (controller.onClose) controller.onClose();
+    this._super();
+  },
+
   flashMessageChanged: function() {
     var flashMessage = this.get('controller.flashMessage');
     if (flashMessage) {
