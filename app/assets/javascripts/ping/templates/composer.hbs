@@ -1,0 +1,10 @@
+<div class="room-composer">
+  {{boundAvatar currentUser imageSize="medium"}}
+  
+  <div class="messagebox">
+    {{view Ember.TextArea valueBinding="message" class="form-control"}}
+  </div>
+
+  <button class="btn btn-success btn-send">Send</button>
+  <button class="btn btn-default btn-sm btn-file"><i class="fa fa-paperclip"></i></button>
+</div>

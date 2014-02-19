@@ -1,7 +1,16 @@
 <div class="room-header">
-  <a {{action "roomSettings"}} class="cog"><i class="fa fa-cog"></i></a>
+  <a data-toggle="dropdown" class="cog"><i class="fa fa-cog"></i></a>
   <h2>{{name}}</h2>
   <span>{{topic}}</span>
+
+  <ul class="room-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li><a {{action "leaveRoom" this}}>{{i18n leave}}</a></li>
+    {{#if owned}}
+    <li class="divider"></li>
+    <li><a {{action "editRoom" this}}>{{i18n edit}}</a></li>
+    <li><a {{action "deleteRoom" this}}>{{i18n delete}}</a></li>
+    {{/if}}
+  </ul>
 </div>
 
 <div class="room-messages">
@@ -16,12 +25,12 @@
   </ul>
 </div>
 
-<div class="room-composer">
-  {{boundAvatar currentUser imageSize="medium"}}
-</div>
+{{render "composer" this}}
 
-<div id="users">
+<div class="room-users">
   <div class="header">People</div>
 
-  {{boundAvatar currentUser imageSize="medium"}}
+  {{#each users}}
+    {{boundAvatar this imageSize="medium"}}
+  {{/each}}
 </div>

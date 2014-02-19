@@ -4,10 +4,11 @@ Ember.Application.initializer({
   initialize: function(container) {
     var store = container.lookup('store:main');
     var json = Preloader.get('currentUser');
-    var user = store.createRecord('user', json);
+    store.pushPayload('user', {users: [json]});
+    var user = store.findById('user', json.id);
 
     container.lookup('controller:currentUser').set('content', user);
     container.typeInjection('controller', 'currentUser', 'controller:currentUser');
-    container.typeInjection('router', 'currentUser', 'controller:currentUser');
+    container.typeInjection('route', 'currentUser', 'controller:currentUser');
   }
 });

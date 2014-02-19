@@ -5,7 +5,19 @@ Ping.ApplicationRoute = Ember.Route.extend({
     },
 
     editRoom: function(room) {
+      if (room.get('owner.id') !== this.get('currentUser.id')) return;
       Ping.Route.showModal(this, 'editRoom', room);
+    },
+
+    deleteRoom: function(room) {
+      if (room.get('owner.id') !== this.get('currentUser.id')) return;
+      bootbox.confirm(I18n.t('confirm'), function(result) {
+        if (!result) return;
+
+        room.leave().then(function(){
+          room.destroyRecord();
+        });
+      });
     },
 
     showKeyboardShortcutsHelp: function() {

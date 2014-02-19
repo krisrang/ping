@@ -12,11 +12,9 @@ Ping.ModalBodyView = Ping.View.extend({
 
     $('#modal-alert').hide();
 
-    // if (!Discourse.Mobile.mobileView) {
-      Em.run.schedule('afterRender', function() {
-        self.$('input:first').focus();
-      });
-    // }
+    Em.run.schedule('afterRender', function() {
+      self.$('input:first').focus();
+    });
 
     var title = this.get('title');
     if (title) {

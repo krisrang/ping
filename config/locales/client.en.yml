@@ -72,6 +72,8 @@ en:
     rename: "Rename"
     delete: "Delete"
     confirm: "Are you sure?"
+    edit: "Edit"
+    leave: "Leave"
 
     userbar:
       preferences: "Preferences"

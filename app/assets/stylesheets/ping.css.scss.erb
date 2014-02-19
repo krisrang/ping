@@ -264,6 +264,12 @@ a {
       &:hover { color: #444; }
     }
 
+    .room-settings {
+      right: 20px;
+      top: 50px;
+      left: auto;
+    }
+
     h2 {
       font-weight: 300;
     }
@@ -308,21 +314,50 @@ a {
         }
 
         .body {
-          padding: 0px 5px 5px 45px;
+          padding: 0 5px 5px 45px;
         }
       }
     }
   }
 
   .room-composer {
-    position: absolute;
-    height: 100px;
+    border-top: 1px solid rgba(0, 0, 0, .05);
     bottom: 0;
+    height: 100px;
     left: 0;
+    padding: 10px;
+    position: absolute;
     right: 240px;
     z-index: 500;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 10px;
+
+    .avatar {
+      position: absolute;
+    }
+
+    .messagebox {
+      position: absolute;
+      left: 50px;
+      right: 100px;
+
+      textarea {
+        height: 80px;
+        padding: 5px 10px;
+        resize: none;
+      }
+    }
+    
+    .btn-send {
+      position: absolute;
+      right: 15px;
+      width: 66px;
+    }
+
+    .btn-file {
+      position: absolute;
+      right: 15px;
+      top: 55px;
+      width: 66px;
+    }
   }
 }
 
@@ -330,12 +365,12 @@ a {
 // USERS
 // 
 
-#users {
-  position: absolute;
-  top: 0;
-  right: 0;
+.room-users {
+  background-color: #f4f5f6;
   bottom: 0;
-  width: 240px;
   padding: 10px;
-  background-color: #F4F5F6;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 240px;
 }
