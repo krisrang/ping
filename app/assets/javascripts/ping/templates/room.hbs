@@ -7,11 +7,11 @@
 <div class="room-messages">
   <ul class="messagelist scroller">
     {{#each messages}}
-    <li class="message">
-      {{boundAvatar user imageSize="medium"}}
-      <div class="details">{{user.username}}   •  <time>1 minute ago</time></div>
-      <div class="body">{{cooked}}</div>
-    </li>
+      <li class="message">
+        {{boundAvatar user imageSize="medium"}}
+        <div class="details">{{user.username}}   •  <time>1 minute ago</time></div>
+        <div class="body">{{cooked}}</div>
+      </li>
     {{/each}}
   </ul>
 </div>
@@ -23,5 +23,5 @@
 <div id="users">
   <div class="header">People</div>
 
-  PPllll
+  {{boundAvatar currentUser imageSize="medium"}}
 </div>
