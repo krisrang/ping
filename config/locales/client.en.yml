@@ -75,6 +75,8 @@ en:
     edit: "Edit"
     leave: "Leave"
 
+    assets_changed_confirm: "Ping has been updated, would you like to refresh to get the latest version?"
+
     connection:
       on: "Connected to server"
       off: "Reconnecting to server"

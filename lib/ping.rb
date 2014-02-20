@@ -48,4 +48,14 @@ module Ping
     result << ":#{Settings.port}" if port != default_port
     result
   end
+
+  def self.assets_digest
+    @assets_digest ||= begin
+      digest = Digest::MD5.hexdigest(ActionView::Base.assets_manifest.assets.values.sort.join)
+      channel = "/global/asset-version"
+
+      Realtime.publish channel, digest
+      digest
+    end
+  end
 end

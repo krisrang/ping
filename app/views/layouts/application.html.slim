@@ -40,5 +40,6 @@ html
       Ping.Settings = Preloader.get('settings');
       Ping.Locale = '#{I18n.locale}';
       Ping.start();
+      Ping.set('assetVersion','#{Ping.assets_digest}');
 
     = render 'shared/js_warning'

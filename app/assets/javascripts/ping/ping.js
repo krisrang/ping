@@ -43,5 +43,21 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
 
   start: function() {
     
-  }
+  },
+
+  requiresRefresh: function(){
+    var desired = Ping.get("desiredAssetVersion");
+    return desired && Ping.get("currentAssetVersion") !== desired;
+  }.property("currentAssetVersion", "desiredAssetVersion"),
+
+  assetVersion: function(prop, val) {
+    if(val) {
+      if(this.get("currentAssetVersion")){
+        this.set("desiredAssetVersion", val);
+      } else {
+        this.set("currentAssetVersion", val);
+      }
+    }
+    return this.get("currentAssetVersion");
+  }.property()
 });
