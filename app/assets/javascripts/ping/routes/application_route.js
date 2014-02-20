@@ -37,6 +37,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
     },
 
     joinRoom: function(room) {
+      room.reload();
       this.transitionTo('room', room);
     },
 
