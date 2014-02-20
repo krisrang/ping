@@ -16,11 +16,6 @@ module Ping
     end
   end
 
-  def self.faye
-    Faye.ensure_reactor_running!
-    @faye ||= Faye::Client.new("http://localhost:#{ENV['PORT']}/faye")
-  end
-
   def self.authenticators
     Users::OmniauthCallbacksController::BUILTIN_AUTH
   end

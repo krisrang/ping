@@ -30,13 +30,13 @@ class RoomsController < ApplicationController
 
   def join
     room = Room.find(params[:id])
-    publish_join(current_user) if room.join(current_user)
+    room.join(current_user)
     render json: success_json
   end
 
   def leave
     room = Room.find(params[:id])
-    publish_leave(current_user) if room.leave(current_user)
+    room.leave(current_user)
     render json: success_json
   end
 
@@ -50,13 +50,5 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :topic)
-  end
-
-  def publish_join(user)
-    Ping.faye.publish("/rooms/#{params[:id]}", {type: "join", user_id: user.id})
-  end
-
-  def publish_leave(user)
-    Ping.faye.publish("/rooms/#{params[:id]}", {type: "leave", user_id: user.id})
   end
 end

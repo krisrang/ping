@@ -11,18 +11,24 @@ class Room < ActiveRecord::Base
   def join(user)
     unless users.include?(user)
       users << user
-      return true
+      publish_join(user)
     end
-
-    false
   end
 
   def leave(user)
     if users.include?(user)
       users.delete(user)
-      return true
+      publish_leave(user) 
     end
-    
-    false
+  end
+
+  private
+
+  def publish_join(user)
+    Realtime.publish("/rooms/#{id}", {type: "join", user_id: user.id})
+  end
+
+  def publish_leave(user)
+    Realtime.publish("/rooms/#{id}", {type: "leave", user_id: user.id})
   end
 end

@@ -43,19 +43,9 @@ module Ping
     # http cache upstream
     config.action_dispatch.rack_cache = nil
 
-    config.middleware.use Rack::Static, root: 'public',
-       header_rules: [
-         # Cache all static files in public caches (e.g. Rack::Cache)
-         #  as well as in the browser
-         [:all, {'Cache-Control' => 'public, max-age=31536000'}],
-
-         # Provide web fonts with cross-origin access-control-headers
-         #  Firefox requires this when serving assets using a Content Delivery Network
-         [:fonts, {'Access-Control-Allow-Origin' => '*'}]
-       ]
-
-    config.middleware.use Faye::RackAdapter, mount: '/faye', timeout: 25, 
-                                             engine: RailsRedis.new_faye_engine
+    require 'realtime'
+    config.middleware.insert_after ActionDispatch::Session::CookieStore,
+                                   Faye::RackAdapter, Realtime.middleware_opts
 
     config.filter_parameters += [
         :password,
