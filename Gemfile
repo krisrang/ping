@@ -49,6 +49,9 @@ gem 'omniauth-oauth2', require: false
 # https://twitter.com/samsaffron/status/412372111710109696
 # we use: gem 'omniauth-browserid', git: 'https://github.com/samsaffron/omniauth-browserid.git', branch: 'observer_api'
 gem 'omniauth-browserid-discourse', require: 'omniauth-browserid'
+gem 'postmark-rails'
+gem 'rack-protection'
+gem 'rack-cors', require: false
 
 # DEV & TEST
 group :test, :development do
