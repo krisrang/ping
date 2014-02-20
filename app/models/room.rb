@@ -7,4 +7,22 @@ class Room < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   attr_accessor :open
+
+  def join(user)
+    unless users.include?(user)
+      users << user
+      return true
+    end
+
+    false
+  end
+
+  def leave(user)
+    if users.include?(user)
+      users.delete(user)
+      return true
+    end
+    
+    false
+  end
 end

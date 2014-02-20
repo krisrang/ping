@@ -6,6 +6,7 @@ Ember.Application.initializer({
     var json = Preloader.get('currentUser');
     store.pushPayload('user', {users: [json]});
     var user = store.findById('user', json.id);
+    Ping.set('currentUserId', json.id.toString());
 
     container.lookup('controller:currentUser').set('content', user);
     container.typeInjection('controller', 'currentUser', 'controller:currentUser');

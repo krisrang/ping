@@ -2,9 +2,9 @@ window.assetPath = (function(){
   var map = {
     'logo.png': <%= asset_path('logo.png').inspect.html_safe %>,
     'logo_w.png': <%= asset_path('logo_w.png').inspect.html_safe %>,
-    'icon_available.png': <%= asset_path('icon_available.png').inspect.html_safe %>,
-    'icon_away.png': <%= asset_path('icon_away.png').inspect.html_safe %>,
-    'icon_dnd.png': <%= asset_path('icon_dnd.png').inspect.html_safe %>
+    'icon_available.png': '<%= asset_data_uri('icon_available.png').html_safe %>',
+    'icon_away.png': '<%= asset_data_uri('icon_away.png').html_safe %>',
+    'icon_dnd.png': '<%= asset_data_uri('icon_dnd.png').html_safe %>'
   };
 
   return function(asset){ return map[asset]; };

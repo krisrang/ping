@@ -14,14 +14,67 @@ Ping.Room = DS.Model.extend({
     var self = this;
     return Ping.ajax('/rooms/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
       self.set('open', true);
+      self.subscribe();
+      self.userJoined(Ping.get('currentUserId'));
     });
   },
 
   leave: function() {
     if (!this.get('open')) return Em.RSVP.resolve();
 
-    this.set('open', false);
-    return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' });
+    var self = this;
+    return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' }).then(function() {
+      self.set('open', false);
+      self.unsubscribe();
+      self.userLeft(Ping.get('currentUserId'));
+    });
+  },
+
+  subscribe: function() {
+    var subscription = Ping.Faye.subscribe('/rooms/' + this.get('id'), 
+      $.proxy(this.receive, this));
+    this.set('subscription', subscription);
+  },
+
+  unsubscribe: function() {
+    var subscription = this.get('subscription');
+    if (subscription && subscription.cancel) subscription.cancel();
+  },
+
+  receive: function(message) {
+    if (message.type) {
+      switch(message.type) {
+        case 'join':
+          this.userJoined(message.user_id.toString());
+          break;
+        case 'leave':
+          this.userLeft(message.user_id.toString());
+          break;
+        case 'message':
+          this.newMessage(message.message);
+          break;
+      }
+    }
+  },
+
+  userJoined: function(id) {
+    var users = this.get('users');
+    if (users.getEach('id').contains(id)) return;
+
+    this.store.find('user', id).then(function(user) {
+      users.pushObject(user);
+    });
+  },
+
+  userLeft: function(id) {
+    var users = this.get('users');
+    this.store.find('user', id).then(function(user) {
+      users.removeObject(user);
+    });
+  },
+
+  newMessage: function(message) {
+    console.log(message);
   },
 
   className: function() {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217181054) do
+ActiveRecord::Schema.define(version: 20140220125830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,8 +109,7 @@ ActiveRecord::Schema.define(version: 20140217181054) do
     t.integer "user_id", null: false
   end
 
-  add_index "rooms_users", ["room_id"], name: "index_rooms_users_on_room_id", using: :btree
-  add_index "rooms_users", ["user_id"], name: "index_rooms_users_on_user_id", using: :btree
+  add_index "rooms_users", ["user_id", "room_id"], name: "index_rooms_users_on_user_id_and_room_id", unique: true, using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "name",       null: false
@@ -158,6 +157,8 @@ ActiveRecord::Schema.define(version: 20140217181054) do
     t.string   "username_lower", limit: 20,                 null: false
     t.string   "email",                                     null: false
     t.string   "auth_token",     limit: 32
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "active"
     t.datetime "last_seen"
     t.inet     "last_ip"

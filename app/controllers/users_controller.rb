@@ -5,6 +5,21 @@ class UsersController < ApplicationController
 
   layout 'static'
 
+  def show
+    @user = fetch_user_from_params
+    user_serializer = UserSerializer.new(@user, root: 'user')
+
+    respond_to do |format|
+      format.html do
+        store_preloaded("user_#{@user.username}", MultiJson.dump(user_serializer))
+      end
+
+      format.json do
+        render_json_dump(user_serializer)
+      end
+    end
+  end
+
   def new
     @user = User.new
     prepopulate_user

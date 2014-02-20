@@ -17,19 +17,18 @@ Rails.application.routes.draw do
 
   resources :messages
 
-  get 'preferences' => 'default#empty'
+  get 'preferences' => 'default#empty'  
 
-  # AUTH
+  get "users/:username" => "users#show", as: 'userpage', constraints: {username: USERNAME_ROUTE_FORMAT}
+  get "users/activate-account/:token" => "users#activate_account"
+  get "users/password-reset/:token" => "users#password_reset"
+  put "users/password-reset/:token" => "users#password_reset", as: 'submit_password_reset'
 
   resources :users do
     collection do
       get "check_username"
     end
   end
-
-  get "users/activate-account/:token" => "users#activate_account"
-  get "users/password-reset/:token" => "users#password_reset"
-  put "users/password-reset/:token" => "users#password_reset", as: 'submit_password_reset'
   
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:new, :create, :destroy] do
     collection do

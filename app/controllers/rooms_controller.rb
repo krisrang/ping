@@ -3,9 +3,6 @@ class RoomsController < ApplicationController
   
   def index
     rooms = Room.all
-    open = current_user.rooms.select(:id).map(&:id)
-    rooms.each { |r| r.open = open.include?(r.id) }
-
     render json: rooms
   end
 
@@ -33,13 +30,13 @@ class RoomsController < ApplicationController
 
   def join
     room = Room.find(params[:id])
-    current_user.rooms << room
+    publish_join(current_user) if room.join(current_user)
     render json: success_json
   end
 
   def leave
     room = Room.find(params[:id])
-    current_user.rooms.delete room
+    publish_leave(current_user) if room.leave(current_user)
     render json: success_json
   end
 
@@ -53,5 +50,13 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name, :topic)
+  end
+
+  def publish_join(user)
+    Ping.faye.publish("/rooms/#{params[:id]}", {type: "join", user_id: user.id})
+  end
+
+  def publish_leave(user)
+    Ping.faye.publish("/rooms/#{params[:id]}", {type: "leave", user_id: user.id})
   end
 end

@@ -81,17 +81,20 @@ a {
       color: $dulltext;
       padding: 5px;
       font-size: 13px;
-      border-radius: $radius;
-
-      &:hover {
-        color: #fff;
-        text-decoration: none;
-      }
 
       i { margin-right: 5px; }
     }
 
-    a.active, li.active a { color: #fff; }
+    li:hover a, a:hover, a.active {
+      color: #fff;
+      text-decoration: none;
+      background: $sidebarHover;
+      border-radius: $radius;
+    }
+
+    a.lobby-link {
+      margin: 0 -15px 10px 0;
+    }
 
     ul {
       list-style: none;
@@ -99,32 +102,24 @@ a {
       padding: 0;
     }
 
-    li {
-      margin-right: -15px;
-
-      &:hover, &.active {
-        background: $sidebarHover;
-        border-radius: $radius;
-      }
-    }
-
-    li:hover a.room { color: #fff; }
-
-    a.lobby-link {
-      margin: 0 -15px 10px 0;
-
-      &:hover, &.active { background: $sidebarHover; }
-    }
+    li { margin-right: -15px; }
 
     a.leave {
       margin-right: 15px;
       float: right;
       display: none;
+      background: none;
+
+      &:hover { background: none; }
     }
 
-    li:hover a.leave {
+    li:hover a.leave { 
+      color: $dulltext;
       display: inline;
+      background: none;
     }
+
+    li:hover a.leave:hover { color: #fff; }
   }
 
 
@@ -183,6 +178,19 @@ a {
         }
       }
     }
+  }
+
+  .connectbit {
+    position: absolute;
+    bottom: 5px;
+
+    .message { 
+      display: none;
+      font-size: 13px;
+      color: #DDD;
+    }
+
+    &:hover .message, &.offline .message { display: inline; }
   }
 }
 

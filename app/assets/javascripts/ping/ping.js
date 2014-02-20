@@ -25,6 +25,12 @@
 //= require_tree ./initializers
 
 window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
+  // LOG_TRANSITIONS: true,
+  // LOG_TRANSITIONS_INTERNAL: true,
+  // LOG_STACKTRACE_ON_DEPRECATION: true,
+  // LOG_VIEW_LOOKUPS: true,
+  // LOG_ACTIVE_GENERATION: true,
+
   // Helps with integration tests
   URL_FIXTURES: {},
 

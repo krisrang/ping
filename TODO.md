@@ -12,7 +12,7 @@ MVP
 * ~~External auth~~
 * ~~Client side i18n~~
 * ~~Userbar~~
-* Room list & lobby
+* ~~Room list & lobby~~
   * ~~Room listing~~
   * ~~Remember room~~
   * ~~New room~~

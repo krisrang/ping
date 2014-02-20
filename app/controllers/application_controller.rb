@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     user = MultiJson.dump(CurrentUserSerializer.new(current_user, root: false))
     store_preloaded('currentUser', user)
 
-    open_rooms = MultiJson.dump(current_user.rooms.map(&:id))
+    open_rooms = MultiJson.dump(current_user.rooms.select(:id).map(&:id).uniq.map(&:to_s))
     store_preloaded('openRooms', open_rooms)
   end
 
@@ -69,6 +69,10 @@ class ApplicationController < ActionController::Base
     render 'default/empty'
   end
 
+  def render_json_dump(obj)
+    render json: MultiJson.dump(obj)
+  end
+
   def redirect_to_login_if_required
     return if current_user || (request.format.json? && api_key_valid?)
 
@@ -81,6 +85,17 @@ class ApplicationController < ActionController::Base
 
   def failed_json
     {failed: 'FAILED'}
+  end
+
+  def fetch_user_from_params
+    param = params[:username].downcase
+    param.gsub!(/\.json$/, '')
+
+    user = User.where("username_lower = ? OR id = ?", param, param).first
+    raise Ping::NotFound.new if user.blank?
+
+    # guardian.ensure_can_see!(user)
+    user
   end
 
   protected

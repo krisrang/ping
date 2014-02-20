@@ -75,6 +75,10 @@ en:
     edit: "Edit"
     leave: "Leave"
 
+    connection:
+      on: "Connected to server"
+      off: "Reconnecting to server"
+
     userbar:
       preferences: "Preferences"
       logout: "Log Out"
