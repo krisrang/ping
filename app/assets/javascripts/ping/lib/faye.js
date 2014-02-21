@@ -4,13 +4,13 @@ Ping.Faye = (function(){
     retry: 5
   });
 
-  faye.addExtension({
-    outgoing: function(message, callback) {
-      message.ext = message.ext || {};
-      message.ext.csrfToken = $('meta[name=csrf-token]').attr('content');
-      callback(message);
-    }
-  });
+  // faye.addExtension({
+  //   outgoing: function(message, callback) {
+  //     message.ext = message.ext || {};
+  //     message.ext.csrfToken = $('meta[name=csrf-token]').attr('content');
+  //     callback(message);
+  //   }
+  // });
 
   return faye;
 })();
