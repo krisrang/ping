@@ -8,25 +8,37 @@ Ping.Room = DS.Model.extend({
   messages: DS.hasMany('message'),
   users: DS.hasMany('user'),
 
+  init: function() {
+    this._super();
+
+    this.on('didLoad', this, this.loaded);
+  },
+  
+  loaded: function() {
+    if (this.get('open') === true) this.join();
+  },
+
   join: function() {
+    this.subscribe();
+    this.userJoined(Ping.get('currentUserId'));
+
     if (this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
     return Ping.ajax('/rooms/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
       self.set('open', true);
-      self.subscribe();
-      self.userJoined(Ping.get('currentUserId'));
     });
   },
 
   leave: function() {
+    this.unsubscribe();
+    this.userLeft(Ping.get('currentUserId'));
+
     if (!this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
     return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' }).then(function() {
       self.set('open', false);
-      self.unsubscribe();
-      self.userLeft(Ping.get('currentUserId'));
     });
   },
 

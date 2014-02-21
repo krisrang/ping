@@ -50,20 +50,12 @@ Ping.ApplicationRoute = Ember.Route.extend({
     }
   },
 
-  setupController: function(controller) {
-    var self = this,
-        faye = Ping.Faye;
-        
-    faye.on('transport:down', function(){ controller.set('connected', false); });
-    faye.on('transport:up', function(){ controller.set('connected', true); });
+  model: function() {
+    return this.store.findAll('room');
+  },
 
-    var list = this.store.findAll('room');
-    self.controllerFor('roomlist').set('content', list);    
-    list.then(function(rooms){
-      var openRooms = Preloader.get('openRooms');
-      rooms.forEach(function(room) {
-        if (openRooms.contains(room.get('id'))) room.join();
-      });
-    });
+  setupController: function(controller, model) {
+    controller.set('model', model);
+    this.controllerFor('roomlist').set('content', model);    
   }
 });

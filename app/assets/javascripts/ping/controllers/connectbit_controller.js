@@ -1,6 +1,5 @@
 Ping.ConnectbitController = Em.Controller.extend({
   needs: ['application'],
-
   isConnected: Em.computed.bool('controllers.application.connected'),
 
   icon: function() {

@@ -6,8 +6,8 @@ module Realtime
         return callback.call(message)
       end
 
-      user = CurrentUser.lookup_from_env(request.env)
-      user.rooms.each { |r| r.leave(user) }
+      # user = CurrentUser.lookup_from_env(request.env)
+      # user.rooms.each { |r| r.leave(user) }
       callback.call(message)
     end
   end

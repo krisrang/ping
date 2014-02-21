@@ -45,8 +45,8 @@ class ApplicationController < ActionController::Base
     user = MultiJson.dump(CurrentUserSerializer.new(current_user, root: false))
     store_preloaded('currentUser', user)
 
-    open_rooms = MultiJson.dump(current_user.rooms.select(:id).map(&:id).uniq.map(&:to_s))
-    store_preloaded('openRooms', open_rooms)
+    # open_rooms = MultiJson.dump(current_user.rooms.select(:id).map(&:id).uniq.map(&:to_s))
+    # store_preloaded('openRooms', open_rooms)
   end
 
   def ensure_logged_in

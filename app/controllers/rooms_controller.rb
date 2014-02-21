@@ -3,6 +3,8 @@ class RoomsController < ApplicationController
   
   def index
     rooms = Room.all
+    open = current_user.rooms.select(:id).map(&:id)
+    rooms.each { |r| r.open = open.include?(r.id) }
     render json: rooms
   end
 
