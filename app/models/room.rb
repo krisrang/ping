@@ -9,20 +9,14 @@ class Room < ActiveRecord::Base
   attr_accessor :open
 
   def join(user)
-    unless users.include?(user)
-      users << user
-      publish_join(user)
-    end
+    users << user unless users.include?(user)
+    publish_join(user)
   end
 
   def leave(user)
-    if users.include?(user)
-      users.delete(user)
-      publish_leave(user) 
-    end
+    users.delete(user) if users.include?(user)
+    publish_leave(user) 
   end
-
-  private
 
   def publish_join(user)
     Realtime.publish("/rooms/#{id}", {type: "join", user_id: user.id})

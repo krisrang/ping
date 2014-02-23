@@ -3,7 +3,7 @@ var attr = DS.attr;
 Ping.Room = DS.Model.extend({
   name: attr(),
   topic: attr(),
-  open: attr('boolean'),
+  // open: attr('boolean'),
   owner: DS.belongsTo('user'),
   messages: DS.hasMany('message'),
   users: DS.hasMany('user'),
@@ -15,7 +15,9 @@ Ping.Room = DS.Model.extend({
   },
   
   loaded: function() {
-    if (this.get('open') === true) this.join();
+    if (Preloader.get('openRooms').contains(this.get('id'))) {
+      this.join();
+    }
   },
 
   join: function() {
@@ -43,6 +45,8 @@ Ping.Room = DS.Model.extend({
   },
 
   subscribe: function() {
+    if (this.get('subscription')) return;
+
     var subscription = Ping.Faye.subscribe('/rooms/' + this.get('id'), 
       $.proxy(this.receive, this));
     this.set('subscription', subscription);
@@ -50,7 +54,10 @@ Ping.Room = DS.Model.extend({
 
   unsubscribe: function() {
     var subscription = this.get('subscription');
-    if (subscription && subscription.cancel) subscription.cancel();
+    if (subscription && subscription.cancel) {
+      subscription.cancel();
+      this.set('subscription', null);
+    }
   },
 
   receive: function(message) {
