@@ -14,10 +14,6 @@ module ApplicationHelper
     end
   end
 
-  def ping_csrf
-    csrf_meta_tags if current_user
-  end
-
   def flashes
     alerts = flash.keys.map do |key|
       return nil unless %w(alert notice).include?(key.to_s)

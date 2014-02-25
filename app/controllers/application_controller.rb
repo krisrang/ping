@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
     param = params[:username].downcase
     param.gsub!(/\.json$/, '')
 
-    user = User.where("username_lower = ? OR id = ?", param, param).first
+    user = User.where("username_lower = ? OR id = ?", param, params[:username].to_i).first
     raise Ping::NotFound.new if user.blank?
 
     # guardian.ensure_can_see!(user)

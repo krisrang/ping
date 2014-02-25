@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
   skip_before_filter :redirect_to_login_if_required
-  before_filter :set_honeypots, only: [:new, :create]
   before_filter :respond_to_suspicious_request, only: [:create]
 
-  layout 'static'
+  # layout 'static'
 
   def show
     @user = fetch_user_from_params
@@ -19,15 +18,9 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  def new
-    @user = User.new
-    prepopulate_user
-  end
   
   def create
     @user = User.new(user_params)
-    prepopulate_user
 
     authentication = UserAuthenticator.new(@user, session)
     authentication.start
@@ -98,6 +91,10 @@ class UsersController < ApplicationController
     render json: checker.check_username(username)
   end
 
+  def get_honeypot_value
+    render json: {value: honeypot_value, challenge: challenge_value}
+  end
+
   private
 
   def user_from_params_or_current_user
@@ -106,11 +103,6 @@ class UsersController < ApplicationController
 
   def changing_case_of_own_username(target_user, username)
     target_user and username.downcase == target_user.username.downcase
-  end
-
-  def set_honeypots
-    @honeypot = honeypot_value
-    @challenge = challenge_value.try(:reverse)
   end
 
   def honeypot_value
@@ -130,13 +122,7 @@ class UsersController < ApplicationController
   def respond_to_suspicious_request
     if suspicious?(params)
       message = I18n.t('login.activate_email', email: params[:email])
-
-      respond_to do |format|
-        format.html { redirect_to :signup, notice: message }
-        format.json do
-          render json: { success: true, active: false, message:  message }
-        end
-      end
+      render json: { success: true, active: false, message:  message }
     end
   end
 
@@ -149,48 +135,16 @@ class UsersController < ApplicationController
       params[:challenge] != @challenge
   end
 
-  def prepopulate_user
-    data = (!!flash[:external] || params[:provider]) && session[:authentication]
-    
-    if data
-      @provider = data[:authenticator_name].titleize
-      @email_valid = !!data[:email_valid]
-      @user.email ||= data[:email] if @email_valid
-      @user.username ||= data[:suggested][:username]
-      @user.name ||= data[:suggested][:name]
-    else
-      session[:authentication] = nil
-    end
-  end
-
   def user_params
     params.require(:user).permit(:email, :password, :username)
   end
 
   def user_save_success(activation)
-    json_response = { success: true, active: @user.active?,
-                      message: activation.message }
-
-    if @user.active?
-      respond_to do |format|
-        format.html { redirect_to root_path, notice: t('signup.success') }
-        format.json { render json: json_response }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to :login, notice: activation.message }
-        format.json { render json: json_response }
-      end
-    end
+    render json: { success: true, active: @user.active?, message: activation.message }
   end
 
   def user_create_failed
-    respond_to do |format|
-      format.html { render :new }
-      format.json do
-        render json: { success: false, errors: @user.errors.to_hash }
-      end
-    end    
+    render json: { success: false, errors: @user.errors.to_hash }
   end
 
   def logon_after_password_reset

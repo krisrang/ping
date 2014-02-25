@@ -1,4 +1,4 @@
-Ping.LobbyRoute = Ping.Route.extend({
+Ping.LobbyRoute = Ping.RestrictedUserRoute.extend({
   model: function() {
     return this.store.findAll('room');
   }

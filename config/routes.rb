@@ -18,17 +18,6 @@ Rails.application.routes.draw do
   resources :messages
 
   get 'preferences' => 'default#empty'  
-
-  get "users/:username" => "users#show", as: 'userpage', constraints: {username: USERNAME_ROUTE_FORMAT}
-  get "users/activate-account/:token" => "users#activate_account"
-  get "users/password-reset/:token" => "users#password_reset"
-  put "users/password-reset/:token" => "users#password_reset", as: 'submit_password_reset'
-
-  resources :users do
-    collection do
-      get "check_username"
-    end
-  end
   
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:new, :create, :destroy] do
     collection do
@@ -37,12 +26,25 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'signup' => 'users#new'
-  get 'login' => 'session#new'
+  post 'login' => 'static#enter'
+  get 'login' => 'static#show', id: 'login'
+  get 'signup' => 'static#show'
   get 'forgot' => 'session#forgot'
+  get 'users/hp' => 'users#get_honeypot_value'
 
-  match "/auth/:provider/callback", to: "users/omniauth_callbacks#complete", via: [:get, :post]
-  match "/auth/failure", to: "users/omniauth_callbacks#failure", via: [:get, :post]
+  resources :users, except: [:show, :update, :destroy] do
+    collection do
+      get 'check_username'
+    end
+  end
+
+  get 'users/:username' => 'users#show', as: 'userpage', constraints: {username: USERNAME_ROUTE_FORMAT}
+  get 'users/activate-account/:token' => 'users#activate_account'
+  get 'users/password-reset/:token' => 'users#password_reset'
+  put 'users/password-reset/:token' => 'users#password_reset', as: 'submit_password_reset'
+
+  match '/auth/:provider/callback', to: 'users/omniauth_callbacks#complete', via: [:get, :post]
+  match '/auth/failure', to: 'users/omniauth_callbacks#failure', via: [:get, :post]
 
   root 'default#index'
 end

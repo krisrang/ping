@@ -12,13 +12,14 @@ class Settings < ActiveRecord::Base
   client_setting(:use_https, false)
 
   client_setting(:login_required, true)
+  client_setting(:min_password_length, 8)
 
   client_setting(:enable_local_logins, true)
   client_setting(:enable_local_account_create, true)
 
   client_setting(:enable_google_logins, true)
   client_setting(:enable_persona_logins, false)
-  client_setting(:enable_twitter_logins, false)
+  client_setting(:enable_twitter_logins, true)
   client_setting(:enable_facebook_logins, true)
   client_setting(:enable_github_logins, true)
 

@@ -1,4 +1,4 @@
-Ping.UserRoute = Ping.Route.extend({
+Ping.UserRoute = Ping.RestrictedUserRoute.extend({
   model: function(params) {
     // If we're viewing the currently logged in user, return that object instead
     var currentUser = this.get('currentUser');

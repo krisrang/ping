@@ -32,7 +32,7 @@ class Auth::Result
       {
         email: email,
         name:  User.suggest_name(name || username || email),
-        username: User.suggest_name(username || name || email),
+        username: UserNameSuggester.suggest(username || name || email),
         # this feels a tad wrong
         auth_provider: authenticator_name.capitalize,
         email_valid: !!email_valid

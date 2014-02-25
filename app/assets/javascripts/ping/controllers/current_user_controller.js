@@ -1,5 +1,5 @@
 Ping.CurrentUserController = Ping.ObjectController.extend({
-  isSignedIn: function() {
+  isLoggedIn: function() {
     return this.get('content') && this.get('content').get('isLoaded');
   }.property('content.isLoaded'),
 

@@ -1,10 +1,4 @@
 Ping.Ajax = Em.Mixin.create({
-
-  /**
-    Our own $.ajax method. Makes sure the .then method executes in an Ember runloop
-    for performance reasons. Also automatically adjusts the URL to support installs
-    in subfolders.
-  **/
   ajax: function() {
     var url, args;
 
@@ -23,10 +17,10 @@ Ping.Ajax = Em.Mixin.create({
     }
 
     if (args.success) {
-      console.warning("DEPRECATION: Ping.ajax should use promises, received 'success' callback");
+      Ember.Logger.error("DEPRECATION: Ping.ajax should use promises, received 'success' callback");
     }
     if (args.error) {
-      console.warning("DEPRECATION: Ping.ajax should use promises, received 'error' callback");
+      Ember.Logger.error("DEPRECATION: Ping.ajax should use promises, received 'error' callback");
     }
 
     // If we have URL_FIXTURES, load from there instead (testing)
@@ -61,14 +55,14 @@ Ping.Ajax = Em.Mixin.create({
       // We default to JSON on GET. If we don't, sometimes if the server doesn't return the proper header
       // it will not be parsed as an object.
       if (!args.type) args.type = 'GET';
-      if ((!args.dataType) && (args.type === 'GET')) args.dataType = 'json';
+      if (!args.dataType && args.type.toUpperCase() === 'GET') args.dataType = 'json';
 
       $.ajax(Ping.getURL(url), args);
     };
 
     // For cached pages we strip out CSRF tokens, need to round trip to server prior to sending the
     //  request (bypass for GET, not needed)
-    if(args.type && args.type !== 'GET' && !Ping.Session.currentProp('csrfToken')){
+    if(args.type && args.type.toUpperCase() !== 'GET' && !Ping.Session.currentProp('csrfToken')){
       return Ember.Deferred.promise(function(promise){
         $.ajax(Ping.getURL('/session/csrf'))
            .success(function(result){

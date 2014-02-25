@@ -1,6 +1,6 @@
 <div id="sidebar">
   {{render "userbar"}}
-  {{render "roomlist"}}
+  {{#if currentUser.isLoggedIn}}{{render "roomlist"}}{{/if}}
   {{render "connectbit"}}
 </div>
 

@@ -9,6 +9,7 @@
     "Preloader",
     "I18n",
     "bootbox",
+    "zxcvbn",
     "moment",
     "assetPath",
     "module",

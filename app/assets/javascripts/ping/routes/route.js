@@ -20,7 +20,8 @@ Ping.Route.reopenClass({
     @method showModal
   **/
   showModal: function(router, name, model) {
-    router.controllerFor('modal').set('modalClass', null);
+    var className = name.dasherize() + '-modal';
+    router.controllerFor('modal').set('modalClass', className);
     router.render(name, {into: 'modal', outlet: 'modalBody'});
     var controller = router.controllerFor(name);
     if (controller) {

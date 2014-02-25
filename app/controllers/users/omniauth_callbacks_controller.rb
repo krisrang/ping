@@ -43,7 +43,10 @@ class Users::OmniauthCallbacksController < ApplicationController
       session[:authentication] = @data.session_data
     end
 
-    success
+    respond_to do |format|
+      format.html
+      format.json { render json: @data.to_client_hash }
+    end
   # rescue StandardError
   #   failure
   end
@@ -52,21 +55,6 @@ class Users::OmniauthCallbacksController < ApplicationController
     alert = t("login.omniauth_error", strategy: params[:provider].titleize)
     redirect_to :login, alert: alert
   end
-
-  def success    
-    respond_to do |format|
-      format.html do
-        if @data.authenticated
-          redirect_to(root_path)
-        else
-          flash[:external] = true
-          redirect_to(:signup)
-        end
-      end
-      format.json { render json: @data.to_client_hash }
-    end
-  end
-
 
   def self.find_authenticator(name)
     BUILTIN_AUTH.each do |authenticator|

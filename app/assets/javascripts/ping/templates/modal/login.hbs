@@ -1,0 +1,54 @@
+<div class="modal-body">
+  {{#if Ping.Settings.enable_local_logins}}
+    <form id='login-form' method='post' class="form-horizontal" role="form">
+      <div class="form-group">
+        <div class="col-sm-12">
+          {{textField value=loginName placeholderKey="login.login_placeholder" id="login-account-name" autocorrect="off" autocapitalize="off" autofocus="autofocus" class="form-control"}}
+        </div>        
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <a class="forgot-password-link" {{action "showForgotPassword"}}>{{i18n login.forgot}}</a>
+          {{textField value=loginPassword placeholderKey="login.password" type="password" id="login-account-password" class="form-control"}}
+        </div>
+      </div>
+    </form>
+  {{/if}}
+
+  {{#if hasAtLeastOneLoginButton}}
+    <h3 style="text-align:center; margin-top:50px;">{{i18n login.external}}</h3>
+
+    <div class="external-options">
+      {{#each Ping.LoginMethod.all}}
+        <button class="btn btn-auth btn-{{unbound name}}" {{action "externalLogin" this}}><i class="fa fa-{{unbound icon}}"></i></button>
+      {{/each}}
+
+      <div>{{authMessage}}</div>
+    </div>
+  {{/if}}
+
+  {{#if Ping.Settings.enable_local_logins}}
+    <div class="modal-buttons">
+      <button class='btn btn-info'
+        {{bind-attr disabled="loginDisabled"}}
+        {{action "login"}}>
+          <i class="fa fa-unlock"></i>&nbsp;{{loginButtonText}}
+      </button>
+
+      {{#if showSignupLink}}
+        <button id="new-account-link" class='btn btn-default' {{action "createAccount"}}>
+          {{i18n create_account.title}}
+        </button>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{#if authenticate}}
+    &nbsp; {{i18n login.authenticating}}
+  {{/if}}
+
+  {{#if showSpinner}}
+    &nbsp; <i class='fa fa-spinner fa-spin'></i>
+  {{/if}}
+</div>

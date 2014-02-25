@@ -3,5 +3,4 @@
  *= require bootstrapper
  *= require ping
  *= require_tree ./components
- *= require static
  */

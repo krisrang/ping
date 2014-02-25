@@ -1,1 +1,1 @@
-Ping.PreferencesRoute = Ping.Route.extend({});
+Ping.PreferencesRoute = Ping.RestrictedUserRoute.extend({});

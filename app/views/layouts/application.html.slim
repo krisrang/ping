@@ -4,11 +4,18 @@ html
     meta charset="utf-8"
     title = Settings.title
     meta content="width=device-width, initial-scale=1.0" name="viewport"
-    = ping_csrf
+    = csrf_meta_tags
     = stylesheet_link_tag     "application", media: "all"    
     = stylesheet_link_tag     "//fonts.googleapis.com/css?family=Open+Sans:300,400,700,900,400italic"
     = javascript_include_tag  "preloader"
   body
+    - unless current_user
+      form#hidden-login-form method="post" action="#{login_path}" style="display: none;"
+        input name="username" type="text"     id="signin_username"
+        input name="password" type="password" id="signin_password"
+        input name="redirect" type="hidden"
+        input type="submit" id="signin-button" value="Log In"
+
     - if @preloaded.present?
       - @preloaded.each do |key, json|
         javascript:

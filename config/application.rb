@@ -19,7 +19,7 @@ module Ping
 
     config.assets.paths += %W(#{config.root}/config/locales)
 
-    config.assets.precompile += ['vendor.js', 'preloader.js', 'static.js']
+    config.assets.precompile += ['vendor.js', 'preloader.js', 'zxcvbn.js']
 
     # Precompile all available locales
     Dir.glob("#{config.root}/app/assets/javascripts/locales/*.js.erb").each do |file|

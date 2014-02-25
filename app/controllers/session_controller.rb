@@ -1,8 +1,6 @@
 class SessionController < ApplicationController
   skip_before_filter :redirect_to_login_if_required
-
-  layout 'static'
-
+  
   def csrf
     render json: {csrf: form_authenticity_token }
   end
@@ -62,45 +60,23 @@ class SessionController < ApplicationController
   end
 
   def login_not_approved
-    error = t("login.not_approved")
-
-    respond_to do |format|
-      format.html { redirect_to :login, alert: error }
-      format.json { render json: {error: error} }
-    end
+    render json: {error: t("login.not_approved")}
   end
 
   def invalid_credentials
-    error = t("login.invalid")
-
-    respond_to do |format|
-      format.html { redirect_to :login, alert: error }
-      format.json { render json: {error: error} }
-    end
+    render json: {error: t("login.invalid")}
   end
 
   def not_activated(user)
-    error = t("login.not_activated")
-
-    respond_to do |format|
-      format.html { redirect_to :login, alert: error }
-      format.json { render json: {error: error, reason: 'not_activated'} }
-    end
+    render json: {error: t("login.not_activated"), reason: 'not_activated'}
   end
 
   def log_in(user)
     log_in_user(user)
-
-    respond_to do |format|
-      format.html { redirect_back_or_default(root_path) }
-      format.json { render json: user }
-    end
+    render json: user
   end
 
   def forgot_success
-    respond_to do |format|
-      format.html { redirect_to :login, notice: t('password_reset.success') }
-      format.json { render json: {result: "ok"} }
-    end
+    render json: {result: "ok"}
   end
 end

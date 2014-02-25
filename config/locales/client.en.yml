@@ -67,6 +67,7 @@ en:
           other: "%{count} days ago"
 
     close: "Close"
+    cancel: "Cancel"
     create: "Create"
     save: "Save"
     rename: "Rename"
@@ -77,12 +78,55 @@ en:
 
     assets_changed_confirm: "Ping has been updated, would you like to refresh to get the latest version?"
 
+    login:
+      title: "Sign in"
+      login: "Login"
+      logging_in: "Signing in..."
+      login_placeholder: "Email or Username"
+      password: "Password"
+      submit: "Sign in to %{app}"
+      signup: "Create an Account"
+      external: "Alternatively, you can log in using:"
+      forgot: "(forgot ?)"
+      authenticating: "Authenticating..."
+
+      google:
+        title: "with Google"
+        message: "Authenticating with Google (make sure pop up blockers are not enabled)"
+      twitter:
+        title: "with Twitter"
+        message: "Authenticating with Twitter (make sure pop up blockers are not enabled)"
+      facebook:
+        title: "with Facebook"
+        message: "Authenticating with Facebook (make sure pop up blockers are not enabled)"
+      github:
+        title: "with GitHub"
+        message: "Authenticating with GitHub (make sure pop up blockers are not enabled)"
+
+    create_account:
+      title: "Create an account"
+      username: "Username"
+      email: "Email"
+      password: "Password"
+      submit: "Create Account"
+      external: "..or create an account with"
+      already: "Already have an account?"
+      login: "Log in"
+      title_finish: "Finish creating an account using %{provider}"
+      email_valid: "Your email has been verified by %{provider}"
+
+    forgot:
+      title: Forgot Password
+      help: "Enter your username or email address, and we'll send you a password reset email."
+      submit: Reset password
+
     connection:
       on: "Connected to server"
       off: "Reconnecting to server"
 
     userbar:
       preferences: "Preferences"
+      login: "Log In"
       logout: "Log Out"
 
     rooms:
@@ -112,3 +156,44 @@ en:
         too_short: "Room name too short!"
         ok: "Room name looks ok!"
         unique: "Room name taken!"
+
+    user:
+      email:
+        title: "Email"
+        instructions: "Your email will never be shown to the public."
+        ok: "Looks good. We will email you to confirm."
+        invalid: "Please enter a valid email address."
+        authenticated: "Your email has been authenticated by {{provider}}."
+        frequency: "We'll only email you if we haven't seen you recently and you haven't already seen the thing we're emailing you about."
+
+      name:
+        title: "Name"
+        instructions: "The long version of your name; publicly visible."
+        too_short: "Your name is too short."
+        ok: "Your name looks good."
+
+      username:
+        title: "Username"
+        instructions: "Must be unique, no spaces, short. People can mention you as @username."
+        short_instructions: "People can mention you as @{{username}}."
+        available: "Your username is available."
+        not_available: "Not available. Try {{suggestion}}?"
+        too_short: "Your username is too short."
+        too_long: "Your username is too long."
+        checking: "Checking username availability..."
+        prefilled: "Email matches this registered username."
+
+      password:
+        title: "Password"
+        too_short: "Your password is too short."
+        simple: "That password is too simple."
+        ok: "Your password looks good."
+        instructions: "Must be at least %{count} characters."
+        time: "Estimated time to crack this password: "
+        hint: "A good password is easy to remember but hard for a stranger to guess. Uncommon words work well, but only if you use several. Also helpful: non-standard uPPercasing, creative spelllling, personal neologisms, and non-obvious numbers and symbols (using $ for s or 0 for o is too obvious!)"
+        yours_is: "Your password is "
+        very_strong: "very strong"
+        strong: "strong"
+        medium: "medium strength"
+        weak: "weak"
+        very_weak: "very weak"

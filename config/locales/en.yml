@@ -11,38 +11,16 @@ en:
   room:
     name:
       unique: "Room name has been taken!"
-      
+
   login:
     invalid: "Wrong login or password!"
+    active: "Your account is activated and ready to use."
     not_activated: "Your account hasn't been activated yet. Please click the link in your verification email."
-    title: "Sign in to continue"
-    login: "Email or Username"
-    password: "Password"
-    submit: "Sign in to %{app}"
-    signup: "Create an Account"
-    external: "Alternatively, you can log in using:"
-    forgot: "(forgot ?)"
+    not_approved: "Your account hasn't been approved yet."
     activate_email: "We've sent you a verification email to %{email}. Please click on the link contained within to activate your account."
     wait_approval: 'This site required admin approval before account activation. You will be notified by email when your accounts has been activated.'
     omniauth_error: "Sorry, there was an error authorizing your %{strategy} account. Perhaps you did not approve authorization?"
     omniauth_error_unknown: "Something went wrong processing your log in, please try again."
-
-  signup:
-    title: "Create an account"
-    username: "Username"
-    email: "Email"
-    password: "Password"
-    submit: "Create Account"
-    external: "..or create an account with"
-    already: "Already have an account?"
-    login: "Log in"
-    title_finish: "Finish creating an account using %{provider}"
-    email_valid: "Your email has been verified by %{provider}"
-
-  forgot:
-    title: Forgot Password
-    help: "Enter your username or email address, and we'll send you a password reset email."
-    submit: Reset password
 
   password_reset:
     title: "Reset Password"

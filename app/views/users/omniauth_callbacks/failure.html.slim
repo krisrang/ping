@@ -1,0 +1,7 @@
+#simple-container
+  - if flash[:error]
+    .alert.alert-error
+      = flash[:error]
+  - else
+    .alert.alert-error
+      = t 'login.omniauth_error_unknown'

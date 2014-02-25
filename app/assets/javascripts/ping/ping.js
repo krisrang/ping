@@ -8,6 +8,7 @@
 //= require ./views/view
 //= require ./models/model
 //= require ./routes/route
+//= require ./routes/restricted_user_route
 //= require ./controllers/controller
 //= require ./controllers/object_controller
 //= require ./controllers/array_controller
@@ -43,6 +44,12 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
 
   start: function() {
     
+  },
+
+  authenticationComplete: function(options) {
+    // TODO, how to dispatch this to the controller without the container?
+    var loginController = Ping.__container__.lookup('controller:login');
+    return loginController.authenticationComplete(options);
   },
 
   requiresRefresh: function(){

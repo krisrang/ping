@@ -2,12 +2,13 @@ Ping.ModalBodyView = Ping.View.extend({
 
   // Focus on first element
   didInsertElement: function() {
-    var self = this;
+    var self = this,
+        controller = this.get('controller');
 
     $('#ping-modal').modal('show');
 
-    $('#ping-modal').one("hide", function () {
-      self.get("controller").send("closeModal");
+    $('#ping-modal').one('hidden.bs.modal', function () {
+      controller.send("closeModal");
     });
 
     $('#modal-alert').hide();
