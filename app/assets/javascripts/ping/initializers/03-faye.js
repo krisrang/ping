@@ -1,5 +1,5 @@
 Ember.Application.initializer({
-  name: 'assetVersion',
+  name: 'faye',
 
   initialize: function(container) {
     var faye = Ping.Faye,

@@ -2,8 +2,9 @@
 //= require ./mixins/ajax
 //= require_self
 
-//= require ./store
+//= require_tree ./initializers
 //= require_tree ./mixins
+//= require ./store
 //= require ./lib/computed
 //= require ./views/view
 //= require ./models/model
@@ -23,7 +24,6 @@
 //= require_tree ./components
 //= require_tree ./templates
 //= require_tree ./routes
-//= require_tree ./initializers
 
 window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
   // LOG_TRANSITIONS: true,
