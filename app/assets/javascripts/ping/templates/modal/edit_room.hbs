@@ -4,7 +4,7 @@
       <label for="roomName" class="col-sm-3 control-label">{{i18n edit_room.name}}</label>
       <div class="col-sm-9" {{bind-attr class="nameClass"}}>
         {{input type="text" value=name class="form-control" id="roomName"}}
-        {{inputTip validation=nameValidation}}
+        {{inputTip validation=nameValidation helpKey="room.name.instructions"}}
       </div>
     </div>
     <div class="form-group">

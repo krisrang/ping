@@ -156,6 +156,7 @@ en:
         too_short: "Room name too short!"
         ok: "Room name looks ok!"
         unique: "Room name taken!"
+        instructions: "Short name for the room."
 
     user:
       email:
