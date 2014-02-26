@@ -230,6 +230,10 @@ Ping.CreateAccountController = Ping.Controller.extend(Ping.ModalFunctionality, {
         name = this.get('accountName'),
         username = this.get('accountUsername'),
         email = this.get('accountEmail');
+        
+    if (this.blank('accountPassword')) {
+      return Ping.PasswordStrength.create({ score: 0 });
+    }
 
     var result = zxcvbn(password, [name, username, email]);
     return Ping.PasswordStrength.create({
