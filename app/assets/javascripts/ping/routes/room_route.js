@@ -5,7 +5,7 @@ Ping.RoomRoute = Ping.RestrictedUserRoute.extend({
 
   afterModel: function(room) {
     if (!room) return this.transitionTo('lobby');
-
+    
     room.join();
     this.controllerFor('application').set('room', room.get('id'));
   }

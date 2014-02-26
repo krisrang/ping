@@ -7,4 +7,12 @@ class RoomSerializer < ApplicationSerializer
   def user
     object.owner
   end
+  
+  def include_users?
+    !!options[:embed]
+  end
+  
+  def include_messages?
+    !!options[:embed]
+  end
 end

@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
 
   def show
     room = Room.find(params[:id])
-    render json: room
+    render json: room, embed: true
   end  
 
   def join
