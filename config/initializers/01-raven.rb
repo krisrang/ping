@@ -1,4 +1,4 @@
-if Rails.env.production?
+if Rails.env.production? && Rails.application.secrets.raven
   require 'raven'
 
   Raven.configure do |config|
