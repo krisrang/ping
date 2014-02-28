@@ -121,8 +121,8 @@ en:
       submit: Reset password
 
     connection:
-      on: "Connected to server"
-      off: "Reconnecting to server"
+      on: "Online"
+      off: "Reconnecting..."
 
     userbar:
       preferences: "Preferences"
@@ -198,3 +198,14 @@ en:
         medium: "medium strength"
         weak: "weak"
         very_weak: "very weak"
+        
+    login_required:
+      message: "%{title} requires logging in,"
+      please: "please log in"
+    
+    forgot_password:
+      title: "Forgot Password"
+      action: "I forgot my password"
+      invite: "Enter your username or email address, and we'll send you a password reset email."
+      reset: "Reset Password"
+      complete: "If an account matches that username or email address, you should receive an email with instructions on how to reset your password shortly."

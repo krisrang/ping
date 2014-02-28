@@ -1,5 +1,5 @@
 Ping.Router.map(function() {
-  this.route('lobby', { path: '/' });
+  this.route('welcome', { path: '/' });
   this.route('signup');
   this.route('login');
   this.route('forgot');

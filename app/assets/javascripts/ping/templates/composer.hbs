@@ -5,6 +5,6 @@
     {{view Ember.TextArea valueBinding="message" class="form-control"}}
   </div>
 
-  <button class="btn btn-success btn-send">Send</button>
-  <button class="btn btn-default btn-sm btn-file"><i class="fa fa-paperclip"></i></button>
+  <button class="btn btn-success btn-send" {{action "sendMessage"}}>Send</button>
+  <button class="btn btn-default btn-sm btn-file" {{action "sendFile"}}><i class="fa fa-paperclip"></i></button>
 </div>

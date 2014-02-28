@@ -1,0 +1,50 @@
+@import 'variables';
+@import 'bourbon';
+
+.login-modal .modal-dialog {
+  width: 400px;
+
+  .forgot-password-link {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+  }
+  
+  .btn-auth {
+    background: none;
+    border: none;
+    padding: 2px 6px 3px;
+
+    i {
+      padding: 18px;
+      border-radius: 64px;
+      color: #fff;
+      font-size: 24px;
+      width: 60px;
+      text-align: center;
+      margin: 0 2px;
+      @include transform(scale(1));
+      @include transition(all .2s ease 0);
+
+      &:hover {
+        @include transform(scale(1.05));
+      }
+    }
+
+    &.btn-facebook i { background: #3b5998; }
+    &.btn-twitter i { background: #4099ff; }
+    &.btn-google i { background: #d34836; }
+    &.btn-github i { background: #38b0db; }
+  }
+  
+  .external-options {
+    margin-top: 20px;
+    height: 80px;
+    text-align: center;
+    
+    &:after {
+      display: table;
+      content: "";
+    }
+  }
+}

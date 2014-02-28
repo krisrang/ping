@@ -1,21 +1,37 @@
 .modal {
-  .modal-content {
-    border-radius: 0;
+  .modal-dialog {
+    .modal-content {
+      border-radius: 0;
 
-    .modal-buttons {
-      margin-top: 20px;
+      .modal-buttons {
+        margin-top: 20px;
+        
+        & > .btn:first-child {
+          margin-left: 5px;
+        }
+
+        & > .btn {
+          width: 48%;
+        }
+      }
       
-      & > .btn:first-child {
-        margin-left: 5px;
+      .modal-footer {
+        padding: 10px 15px;
       }
+      
+      .help-block {
+        margin: 3px 0 0;
 
-      & > .btn {
-        width: 48%;
+        label {
+          font-weight: 400;
+          margin: 0;
+          font-size: 13px;
+        }
       }
-    }
-    
-    .modal-footer {
-      padding: 10px 15px;
     }
   }
+}
+
+#modal-alert {
+  border-radius: 0;
 }

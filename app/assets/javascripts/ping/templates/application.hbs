@@ -1,7 +1,12 @@
 <div id="sidebar">
-  {{render "userbar"}}
-  {{#if currentUser.isLoggedIn}}{{render "roomlist"}}{{/if}}
-  {{render "connectbit"}}
+  {{render "appbar"}}
+  
+  {{#if currentUser.isLoggedIn}}
+    {{render "channels"}}
+    {{render "userbar"}}
+  {{else}}
+    {{render "loginRequired"}}
+  {{/if}}  
 </div>
 
 <div id="main">

@@ -1,19 +1,20 @@
-<div class="userbar" {{bind-attr class="userbarClass"}}>
+<div class="appbar" {{bind-attr class="appbarClass"}}>
   {{#if currentUser.isLoggedIn}}
-    <div class="userbar-details" {{action "toggleUserbar"}}>
+    <div class="appbar-details" {{action "toggleAppbar"}}>
       <i class="fa fa-chevron-down down"></i>
       <i class="fa fa-chevron-up up"></i>
-      
-      {{boundAvatar currentUser imageSize="medium"}}
-      <span>{{currentUser.username}}</span>
-      {{render "connectbit"}}
+      <h1>{{unbound title}}</h1>    
     </div>
 
-    <div class="userbar-select">
+    <div class="appbar-select">
       <ul>
         <li>{{#link-to "preferences"}}<i class="fa fa-cog"></i> {{i18n userbar.preferences}}{{/link-to}}</li>
         <li><a {{action "logout"}}><i class="fa fa-sign-out"></i> {{i18n userbar.logout}}</a></li>
       </ul>
+    </div>
+  {{else}}
+    <div class="appbar-details">
+      <h1>{{unbound title}}</h1>    
     </div>
   {{/if}}
 </div>

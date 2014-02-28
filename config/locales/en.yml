@@ -71,3 +71,7 @@ en:
         We believe in [civilized community behavior](%{base_url}/faq) at all times.
 
         Enjoy your stay!
+        
+  js_required:
+    title: "Oops! %{title} requires javascript to work!"
+    tip: "Please enable javascript and reload the page"

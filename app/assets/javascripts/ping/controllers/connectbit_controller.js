@@ -1,4 +1,4 @@
-Ping.ConnectbitController = Em.Controller.extend({
+Ping.ConnectbitController = Ping.Controller.extend({
   needs: ['application'],
   isConnected: Em.computed.bool('controllers.application.connected'),
 

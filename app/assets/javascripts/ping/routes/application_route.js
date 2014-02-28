@@ -76,6 +76,6 @@ Ping.ApplicationRoute = Ember.Route.extend({
     
     var list = this.store.findAll('room');
     controller.set('model', list);
-    this.controllerFor('roomlist').set('content', list);    
+    this.controllerFor('channels').set('content', list);    
   }
 });

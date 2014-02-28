@@ -10,7 +10,7 @@ Ping.UserbarController = Ping.Controller.extend({
         this.set('userbarClass', 'open');
       }
 
-      this.set('userbarVisible', !this.get('userbarVisible'));
+      this.toggleProperty('userbarVisible');
     }
   }
 });

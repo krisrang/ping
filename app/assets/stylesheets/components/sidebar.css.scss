@@ -1,0 +1,192 @@
+@import 'variables';
+@import 'bourbon';
+
+#sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  padding: 0;
+  color: #fff;
+  background-color: $sidebar;
+  
+  .appbar {
+    color: #fff;
+    height: 42px;
+    overflow: hidden;
+    border-radius: $radius;
+    cursor: pointer;
+    background-color: $sidebarItem;
+    border-bottom: 2px solid $sidebarBorder;
+    @include transition(all 400ms ease-in-out);
+    
+    h1 {
+      font-size: 20px;
+      margin: 0;
+      padding: 10px 15px;
+    }
+    
+    .up, .down { float: right; margin: 13px; }    
+    .up { display: none; }
+
+    &.open {
+      height: 110px;
+      
+      .down { display: none; }
+      .up { display: inline; }
+    }
+
+    &:hover {
+      background: $sidebarItemHover;
+    }
+    
+    .appbar-select {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+
+        li {
+          a {
+            display: block;
+            color: #fff;
+            padding: 4px 6px;
+            border-radius: $radius;
+
+            &:hover { background-color: $sidebarHover; text-decoration: none; }
+
+            i { padding: 0 0 0 2px; }
+          }
+        }
+      }
+    }
+  }
+
+  .channels {
+    margin: 20px 0 10px;
+    overflow-y: scroll;
+    
+    .header {
+      padding: 0 10px;
+      color: $sidebarText;
+    }
+    
+    ul {
+      list-style: none;
+      margin: 0 5px 0 -15px;
+      padding: 0;
+      
+      a {
+        display: block;
+        color: $sidebarText;
+        padding: 5px 5px 5px 25px;
+        font-size: 13px;
+        
+        &.leave {
+          float: right;
+          display: none;
+          background: none;
+
+          &:hover { background: none; }
+        }
+
+        i { margin-right: 5px; }
+      }
+
+      li:hover a, a:hover, a.active {
+        color: #fff;
+        text-decoration: none;
+        background: $sidebarLinkHover;
+        border-radius: $radius;
+      }
+      
+      li:hover a.leave { 
+        color: $dulltext;
+        display: inline;
+        background: none;
+      }
+
+      li:hover a.leave:hover { color: #fff; }
+    }
+  }
+
+
+  .userbar {    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 240px;
+    color: #fff;
+    height: 50px;
+    overflow: hidden;
+    border-radius: $radius;
+    cursor: pointer;
+    background-color: $sidebarItem;
+    border-top: 2px solid $sidebarBorder;
+    @include transition(all 400ms ease-in-out);
+
+    .up, .down { float: right; margin: 13px; }    
+    .down { display: none; }
+
+    &.open {
+      height: 120px;
+      
+      .up { display: none; }
+      .down { display: inline; }
+    }
+
+    &:hover {
+      background: $sidebarItemHover;
+    }
+
+    .userbar-details {
+      height: 50px;
+      padding: 2px;
+
+      .avatar {
+        float: left;
+        margin: 5px 10px;
+        border-radius: $radius;
+      }
+
+      span {
+      
+      }
+    }
+
+    .userbar-select {      
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 5px;
+
+        li {
+          a {
+            display: block;
+            color: #fff;
+            padding: 4px 6px;
+            border-radius: $radius;
+
+            &:hover { background-color: $sidebarHover; text-decoration: none; }
+
+            i { padding: 0 0 0 2px; }
+          }
+        }
+      }
+    }
+  }
+
+  .connectbit {
+    .message { 
+      font-size: 13px;
+      color: #DDD;
+    }
+  }
+  
+  .login-required {
+    padding: 15px;
+    
+    h3 { font-size: 16px; }
+  }
+}

@@ -1,0 +1,129 @@
+@import 'variables';
+@import 'bourbon';
+
+.room {
+  .room-header {
+    position: absolute;
+    height: 75px;
+    background: rgba(255, 255, 255, 0.95);
+    left: 0;
+    right: 240px;
+    padding: 10px;
+    z-index: 500;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    .cog {
+      float: right;
+      color: #999;
+      font-size: 22px;
+      margin: 10px;
+
+      &:hover { color: #444; }
+    }
+
+    .room-settings {
+      right: 20px;
+      top: 50px;
+      left: auto;
+    }
+
+    h2 {
+      font-weight: 300;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+
+  .room-messages {
+    position: absolute;
+    top: 0;
+    bottom: 100px;
+    left: 0;
+    right: 240px;
+    z-index: 200;
+
+    .messagelist {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      overflow: auto;
+      height: 100%;
+
+      .message {
+        margin-bottom: 10px;
+
+        .avatar {
+          padding: 1px;
+          width: 34px;
+          height: 34px;
+          float: left;
+          border-radius: $radius;
+          margin-top: 2px;
+        }
+
+        .details {
+          color: #999;
+          font-size: 12px;
+          padding: 0 0 0 45px;
+        }
+
+        .body {
+          padding: 0 5px 5px 45px;
+        }
+      }
+    }
+  }
+
+  .room-composer {
+    border-top: 1px solid rgba(0, 0, 0, .05);
+    bottom: 0;
+    height: 100px;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    right: 240px;
+    z-index: 500;
+
+    .avatar {
+      position: absolute;
+    }
+
+    .messagebox {
+      position: absolute;
+      left: 50px;
+      right: 100px;
+
+      textarea {
+        height: 80px;
+        padding: 5px 10px;
+        resize: none;
+      }
+    }
+    
+    .btn-send {
+      position: absolute;
+      right: 15px;
+      width: 66px;
+    }
+
+    .btn-file {
+      position: absolute;
+      right: 15px;
+      top: 55px;
+      width: 66px;
+    }
+  }
+}
+
+.room-users {
+  background-color: #f4f5f6;
+  bottom: 0;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 240px;
+}

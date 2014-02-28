@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :messages
 
-  get 'preferences' => 'default#empty'  
+  get 'preferences' => 'default#empty'
   
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:new, :create, :destroy] do
     collection do

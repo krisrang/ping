@@ -1,0 +1,24 @@
+@import 'variables';
+@import 'bourbon';
+
+#main {
+  position: absolute;
+  top: 0;
+  left: 240px;
+  right: 0;
+  bottom: 0;
+  // background-color: $liquorice;
+
+  .content {
+    padding: 15px;
+
+    h2 {
+      font-weight: 300;
+
+      span {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+}
