@@ -14,7 +14,6 @@
   .appbar {
     color: #fff;
     height: 42px;
-    overflow: hidden;
     border-radius: $radius;
     cursor: pointer;
     background-color: $sidebarItem;
@@ -27,39 +26,15 @@
       padding: 10px 15px;
     }
     
-    .up, .down { float: right; margin: 13px; }    
-    .up { display: none; }
-
-    &.open {
-      height: 110px;
-      
-      .down { display: none; }
-      .up { display: inline; }
-    }
+    .down { float: right; margin: 13px; }    
 
     &:hover {
       background: $sidebarItemHover;
     }
     
-    .appbar-select {
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 5px;
-
-        li {
-          a {
-            display: block;
-            color: #fff;
-            padding: 4px 6px;
-            border-radius: $radius;
-
-            &:hover { background-color: $sidebarHover; text-decoration: none; }
-
-            i { padding: 0 0 0 2px; }
-          }
-        }
-      }
+    .appbar-settings {
+      top: 35px;
+      left: 200px;
     }
   }
 
@@ -119,29 +94,19 @@
     width: 240px;
     color: #fff;
     height: 50px;
-    overflow: hidden;
     border-radius: $radius;
     cursor: pointer;
     background-color: $sidebarItem;
     border-top: 2px solid $sidebarBorder;
     @include transition(all 400ms ease-in-out);
 
-    .up, .down { float: right; margin: 13px; }    
-    .down { display: none; }
-
-    &.open {
-      height: 120px;
-      
-      .up { display: none; }
-      .down { display: inline; }
-    }
+    .up { float: right; margin: 13px; }
 
     &:hover {
       background: $sidebarItemHover;
     }
 
     .userbar-details {
-      height: 50px;
       padding: 2px;
 
       .avatar {
@@ -149,31 +114,12 @@
         margin: 5px 10px;
         border-radius: $radius;
       }
-
-      span {
-      
-      }
     }
 
-    .userbar-select {      
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 5px;
-
-        li {
-          a {
-            display: block;
-            color: #fff;
-            padding: 4px 6px;
-            border-radius: $radius;
-
-            &:hover { background-color: $sidebarHover; text-decoration: none; }
-
-            i { padding: 0 0 0 2px; }
-          }
-        }
-      }
+    .userbar-settings {      
+      top: auto;
+      left: 200px;
+      bottom: 45px;
     }
   }
 
