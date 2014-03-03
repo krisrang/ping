@@ -11,13 +11,15 @@
   color: #fff;
   background-color: $sidebar;
   
+  .dropdown-menu a { color: $text; }
+  .dropdown-menu a:hover { color: #fff; }
+  
   .appbar {
     color: #fff;
     height: 42px;
-    border-radius: $radius;
     cursor: pointer;
-    background-color: $sidebarItem;
-    border-bottom: 2px solid $sidebarBorder;
+    background-color: $sidebaritem;
+    border-bottom: 2px solid $sidebarborder;
     @include transition(all 400ms ease-in-out);
     
     h1 {
@@ -26,10 +28,12 @@
       padding: 10px 15px;
     }
     
-    .down { float: right; margin: 13px; }    
+    .down { float: right; margin: 13px; color: $dulltext; }    
 
     &:hover {
-      background: $sidebarItemHover;
+      background: $sidebaritemhover;
+      
+      .down { color: #fff; }
     }
     
     .appbar-settings {
@@ -44,7 +48,7 @@
     
     .header {
       padding: 0 10px;
-      color: $sidebarText;
+      color: $dulltext;
     }
     
     ul {
@@ -54,7 +58,7 @@
       
       a {
         display: block;
-        color: $sidebarText;
+        color: $dulltext;
         padding: 5px 5px 5px 25px;
         font-size: 13px;
         
@@ -72,7 +76,7 @@
       li:hover a, a:hover, a.active {
         color: #fff;
         text-decoration: none;
-        background: $sidebarLinkHover;
+        background: $sidebarlinkhover;
         border-radius: $radius;
       }
       
@@ -94,16 +98,17 @@
     width: 240px;
     color: #fff;
     height: 50px;
-    border-radius: $radius;
     cursor: pointer;
-    background-color: $sidebarItem;
-    border-top: 2px solid $sidebarBorder;
+    background-color: $sidebaritem;
+    border-top: 2px solid $sidebarborder;
     @include transition(all 400ms ease-in-out);
 
-    .up { float: right; margin: 13px; }
+    .up { float: right; margin: 13px; color: $dulltext; }
 
     &:hover {
-      background: $sidebarItemHover;
+      background: $sidebaritemhover;
+      
+      .up { color: #fff; }
     }
 
     .userbar-details {
@@ -126,7 +131,7 @@
   .connectbit {
     .message { 
       font-size: 13px;
-      color: #DDD;
+      color: #ddd;
     }
   }
   

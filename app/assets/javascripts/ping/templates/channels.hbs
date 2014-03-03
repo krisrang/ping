@@ -5,7 +5,7 @@
       {{#if open}}
         <li>
           <a {{action "leaveRoom" this}} class="leave"><i class="fa fa-times-circle"></i></a>
-          {{#link-to "room" this class="room"}}<i class="fa fa-comment"></i> {{name}}{{/link-to}}
+          {{#link-to "room" this class="room"}}<span class="dull">#</span> {{name}}{{/link-to}}
         </li> 
       {{/if}}
     {{/each}}

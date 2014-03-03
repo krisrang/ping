@@ -103,6 +103,9 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'flamegraph', require: false
+gem 'rack-mini-profiler', require: false
+
 # SERVERS
 gem 'thin', require: false
 gem 'puma', require: false

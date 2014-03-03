@@ -80,4 +80,6 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = { :api_key => Rails.application.secrets.postmark }
+  
+  config.enable_mini_profiler = true
 end

@@ -3,6 +3,7 @@ require 'current_user'
 class ApplicationController < ActionController::Base
   include CurrentUser  
 
+  before_filter :authorize_miniprof
   before_filter :preload_json
   before_filter :redirect_to_login_if_required
 
@@ -96,6 +97,12 @@ class ApplicationController < ActionController::Base
 
     # guardian.ensure_can_see!(user)
     user
+  end
+  
+  def authorize_miniprof
+    if current_user && current_user.admin?
+      Rack::MiniProfiler.authorize_request
+    end
   end
 
   protected

@@ -1,22 +1,16 @@
+// $sidebar: #6b7397;
+// $sidebarItem: #4b5279;
+$sidebar: #4d394b;
+$sidebaritem: #3e313c;
+$sidebaritemhover: desaturate($sidebaritem, 5%);
+$sidebarborder: darken($sidebaritem, 5%);
+$sidebarlinkhover: #4c9689;
 
-$hoverTop: #4B9E8E;
-$hoverBottom: #4C6C6D;
-
-$sidebar: #4D394B;
-$sidebarItemHover: #5E4C5C;
-$sidebarItem: #3E313C;
-$sidebarBorder: #342A33;
-$sidebarLinkHover: #4C9689;
-$sidebarText: #AB9BA9;
-
-$lightLiquorice: #394357;
-$liquorice: #31394a;
-$mild: #546673;
-$mildblue: #7f919e;
-$dulltext: #a7b3b6;
+$text: #222;
+$dulltext: #c7d1d2;
 
 $green: #18bc9c;
 $red: #e74c3c;
 
 $radius: 3px;
-$sidebarHover: rgba(255, 255, 255, .1);
+$hovertransparent: rgba(255, 255, 255, .1);
