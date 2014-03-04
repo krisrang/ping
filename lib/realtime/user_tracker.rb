@@ -1,17 +1,17 @@
 module Realtime
   class UserTracker
-    # Leave user from all rooms on disconnect
-    def incoming(message, request, callback)
-      # puts message.inspect.to_s clientId
-      # if message['channel'] == '/meta/connect'
-      #   user = CurrentUser.lookup_from_env(request.env)
-        
-      # end
+    def incoming(message, request, callback)       
+      data = message['data']
       
-      # if message['channel'] == '/meta/disconnect'
-      #   user = CurrentUser.lookup_from_env(request.env)
-      #   user.rooms.each { |r| r.publish_leave(user) }
-      # end
+      if message['channel'] == '/meta/disconnect'
+        user = CurrentUser.lookup_from_env(request.env)
+        user.status = :offline
+      end
+      
+      if data && data['type'] == 'userstatus'
+        user = CurrentUser.lookup_from_env(request.env)
+        user.status = data['status'].to_sym
+      end
       
       callback.call(message)
     end

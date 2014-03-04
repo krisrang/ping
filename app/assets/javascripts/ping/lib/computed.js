@@ -27,6 +27,20 @@ Ping.computed = {
       return this.get(p1) !== this.get(p2);
     }).property(p1, p2);
   },
+  
+  /**
+    Returns whether a property does not equal a value.
+
+    @method isNot
+    @params {String} p the property
+    @params {String} value the second value
+    @return {Function} computedProperty function
+  **/
+  isNot: function(p, value) {
+    return Ember.computed(function() {
+      return this.get(p) !== value;
+    }).property(p);
+  },
 
   /**
     Returns i18n version of a string based on a property.

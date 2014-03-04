@@ -1,5 +1,6 @@
 require_dependency 'pbkdf2'
 require_dependency 'email'
+require_dependency 'enum'
 require_dependency 'user_name_suggester'
 
 class User < ActiveRecord::Base
@@ -27,7 +28,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :email, email: true, if: :email_changed?
   validate :password_validator
-
+  
   EMAIL = /([^@]+)@([^\.]+)/
 
   def self.find_by_username_or_email(username_or_email)
@@ -61,6 +62,10 @@ class User < ActiveRecord::Base
 
   def self.token_length
     16
+  end
+  
+  def self.statuses
+    @statuses ||= Enum.new(:offline, :away, :online)
   end
 
   def self.suggest_name(email)
@@ -199,6 +204,25 @@ class User < ActiveRecord::Base
 
   def seen_before?
     last_seen.present?
+  end
+  
+  def status
+    status = $redis.get("userstatus:#{id}")
+    status.nil? ? :offline : User.statuses[status.to_i]
+  end
+  
+  def status=(newstatus)
+    return if User.statuses[newstatus].nil?
+    current = status
+    
+    $redis.set("userstatus:#{id}", User.statuses[newstatus])
+    
+    expire = newstatus == :offline ? DateTime.now : 15.minutes.from_now
+    $redis.set("userstatusexpire:#{id}", expire)
+    
+    unless current == status
+      Realtime.publish("/users/#{id}", { type: "userstatus", status: newstatus })
+    end
   end
 
   private

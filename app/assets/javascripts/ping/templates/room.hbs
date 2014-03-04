@@ -5,11 +5,11 @@
 
   <ul class="room-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
     <li><a {{action "leaveRoom" this}}>{{i18n leave}}</a></li>
-    {{#if owned}}
+  {{#if owned}}
     <li class="divider"></li>
     <li><a {{action "editRoom" this}}>{{i18n edit}}</a></li>
     <li><a {{action "deleteRoom" this}}>{{i18n delete}}</a></li>
-    {{/if}}
+  {{/if}}
   </ul>
 </div>
 
@@ -31,6 +31,8 @@
   <div class="header">People</div>
 
   {{#each users}}
-    {{boundAvatar this imageSize="medium"}}
+    {{#if this.online}}
+      {{boundAvatar this imageSize="medium"}}
+    {{/if}}
   {{/each}}
 </div>

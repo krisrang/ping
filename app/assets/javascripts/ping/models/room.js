@@ -10,16 +10,15 @@ Ping.Room = DS.Model.extend({
 
   init: function() {
     this._super();
-
     this.on('didLoad', this, this.loaded);
   },
   
   loaded: function() {
+    this.subscribe();
+    
     if (Preloader.get('openRooms').contains(this.get('id'))) {
-      this.subscribe();
-      this.userJoined(Ping.get('currentUserId'));
       this.set('open', true);
-      // Ping.ajax('/rooms/' + this.get('id') + '/join', { type: 'POST' });
+      this.userJoined(Ping.get('currentUserId'));
     }
   },
 

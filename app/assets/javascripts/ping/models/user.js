@@ -8,6 +8,7 @@ Ping.User = DS.Model.extend({
   passwordConfirm: attr(),
   challenge: attr(),
   avatar_template: attr(),
+  status: attr(),
   previous_visit: attr('date'),
   last_seen: attr('date'),
   days_visited: attr('number'),
@@ -15,6 +16,66 @@ Ping.User = DS.Model.extend({
   messages: DS.hasMany('message'),
 
   path: Ping.computed.url('username_lower', "/users/%@"),
+  online: Ping.computed.isNot('status', 'offline'),
+  
+  init: function() {
+    this._super();
+    this.on('didLoad', this, this.loaded);
+  },
+  
+  loaded: function() {
+    this.subscribe();
+  },
+  
+  startPing: function() {
+    var self = this;
+        
+    setTimeout(function() {
+      self.ping();
+      self.startPing();
+    }, 1000*60);
+  },
+  
+  ping: function() {
+    Ping.Faye.publish('/users/' + this.get('id'), 
+        { type: 'userstatus', status: this.get('status') });
+  },
+  
+  subscribe: function() {
+    if (this.get('subscription')) return;
+
+    var subscription = Ping.Faye.subscribe('/users/' + this.get('id'), 
+      $.proxy(this.receive, this));
+    this.set('subscription', subscription);
+  },
+
+  unsubscribe: function() {
+    var subscription = this.get('subscription');
+    if (subscription && subscription.cancel) {
+      subscription.cancel();
+      this.set('subscription', null);
+    }
+  },
+
+  receive: function(message) {
+    if (message.type) {
+      switch(message.type) {
+        case 'userstatus':
+          this.statusReceived(message.status);
+          break;
+      }
+    }
+  },
+  
+  statusReceived: function(status) {
+    this.set('status', status);
+  },
+  
+  setStatus: function(status) {
+    this.set('status', status);
+    Ping.Faye.publish('/users/' + this.get('id'), 
+      { type: 'userstatus', status: this.get('status') });
+  },
 
   username_lower: function() {
     return this.get('username').toLowerCase();

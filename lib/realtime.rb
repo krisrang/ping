@@ -8,9 +8,9 @@ module Realtime
   
   def self.new_middleware(app)
     faye = Faye::RackAdapter.new(app, middleware_opts)    
-    faye.on(:disconnect) do |client|
-      puts "Disconnect #{client}"
-    end
+    # faye.on(:disconnect) do |client|
+    #   puts "Disconnect #{client}"
+    # end
     
     $bayeux = faye
   end
