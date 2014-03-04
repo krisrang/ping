@@ -7,13 +7,29 @@ Ping.Route = Em.Route.extend({
 
     @method activate
   **/
-  // activate: function() {
-  //   this._super();
-  // }
+  activate: function() {
+    this._super();
+    Em.run.scheduleOnce('afterRender', Ping.Route, 'cleanDOM');
+  }
 });
 
 
 Ping.Route.reopenClass({
+  cleanDOM: function() {
+    // Close mini profiler
+    $('.profiler-results .profiler-result').remove();
+
+    // Close some elements that may be open
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+    // close the lightbox
+    // if ($.magnificPopup && $.magnificPopup.instance) { $.magnificPopup.instance.close(); }
+
+    // Remove any link focus
+    $('a').blur();
+
+    // Ping.set('notifyCount',0);
+  },
+  
   /**
     Shows a modal
 

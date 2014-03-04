@@ -3,7 +3,16 @@ require_dependency 'realtime/user_tracker'
 
 module Realtime
   def self.publish(channel, data)
-    faye.publish(channel, data)
+    client.publish(channel, data)
+  end
+  
+  def self.new_middleware(app)
+    faye = Faye::RackAdapter.new(app, middleware_opts)    
+    faye.on(:disconnect) do |client|
+      puts "Disconnect #{client}"
+    end
+    
+    $bayeux = faye
   end
 
   def self.middleware_opts
@@ -13,8 +22,7 @@ module Realtime
 
   private
 
-  def self.faye
-    Faye.ensure_reactor_running!
-    @faye ||= Faye::Client.new("http://localhost:#{ENV['PORT']}/faye")
+  def self.client
+    $bayeux.get_client
   end
 end

@@ -3,10 +3,10 @@
   <ul>
     {{#each}}
       {{#if open}}
-        <li>
+        {{#link-to "room" this tagName="li" href=false}}
           <a {{action "leaveRoom" this}} class="leave"><i class="fa fa-times-circle"></i></a>
-          {{#link-to "room" this class="room"}}<span class="dull">#</span> {{name}}{{/link-to}}
-        </li> 
+          <a {{bind-attr href="view.href"}}><span class="dull">#</span> {{name}}</a>
+        {{/link-to}}
       {{/if}}
     {{/each}}
   </ul>

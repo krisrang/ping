@@ -9,6 +9,8 @@ html
     = stylesheet_link_tag     "//fonts.googleapis.com/css?family=Open+Sans:300,400,700,900,400italic"
     = javascript_include_tag  "preloader"
   body
+    = render 'shared/js_warning'
+    
     - unless current_user
       form#hidden-login-form method="post" action="#{login_path}" style="display: none;"
         input name="username" type="text"     id="signin_username"
@@ -25,28 +27,9 @@ html
     = javascript_include_tag  "/faye/faye"
     = javascript_include_tag  "vendor"
     = javascript_include_tag  "application"
-
-    - if Rails.env.development?
-      javascript:
-        // Don't swallow promises in development mode. Let's fix those.
-        Ember.RSVP.configure('onerror', function(e) {
-          if (e) {
-            if (e.message || e.stack) {
-              console.log(e.message);
-              console.log(e.stack);
-            } else {
-              console.log("Uncaught promise: " + e.toString());
-            }
-          } else {
-            console.log("A promise failed but was not caught.");
-          }
-        });
     
     javascript:
       Ping.Environment = '#{Rails.env}';
       Ping.Settings = Preloader.get('settings');
       Ping.Locale = '#{I18n.locale}';
-      Ping.start();
       Ping.set('assetVersion','#{Ping.assets_digest}');
-
-    = render 'shared/js_warning'

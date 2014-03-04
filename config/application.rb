@@ -43,9 +43,9 @@ module Ping
     # http cache upstream
     config.action_dispatch.rack_cache = nil
 
-    require 'realtime'
-    config.middleware.insert_after ActionDispatch::Session::CookieStore,
-                                   Faye::RackAdapter, Realtime.middleware_opts
+    # require 'realtime'
+    # config.middleware.insert_after ActionDispatch::Session::CookieStore,
+    #                                Faye::RackAdapter, Realtime.middleware_opts
 
     config.filter_parameters += [
         :password,
