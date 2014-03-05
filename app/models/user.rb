@@ -7,10 +7,10 @@ require_dependency 'realtime'
 class User < ActiveRecord::Base
   has_many :email_tokens, dependent: :destroy
   has_many :user_visits, dependent: :destroy
-  has_many :rooms, inverse_of: :owner
+  has_many :channels, inverse_of: :owner
   has_many :messages
 
-  has_and_belongs_to_many :rooms
+  has_and_belongs_to_many :channels
 
   has_one :facebook_user_info, dependent: :destroy
   has_one :twitter_user_info, dependent: :destroy

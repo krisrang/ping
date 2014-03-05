@@ -17,9 +17,13 @@ Ping.ApplicationRoute = Ember.Route.extend({
       Ping.Route.showModal(this, 'notActivated');
       this.controllerFor('notActivated').setProperties(props);
     },
+    
+    channelList: function() {
+      Ping.Route.showModal(this, 'channelList', this.store.find('channel'));
+    },
 
-    newRoom: function() {
-      Ping.Route.showModal(this, 'editRoom', this.store.createRecord('room'));
+    createChannel: function() {
+      Ping.Route.showModal(this, 'createChannel', this.store.createRecord('channel'));
     },
 
     editRoom: function(room) {
@@ -54,14 +58,14 @@ Ping.ApplicationRoute = Ember.Route.extend({
       $('#ping-modal').modal('show');
     },
 
-    joinRoom: function(room) {
-      this.transitionTo('room', room);
+    joinChannel: function(channel) {
+      this.transitionTo('channel', channel);
     },
 
-    leaveRoom: function(room) {
-      room.leave();
+    leaveChannel: function(channel) {
+      channel.leave();
 
-      if (this.get('controller.room') === room.get('id')) {
+      if (this.get('controller.channel') === channel.get('id')) {
         this.transitionTo('lobby');
       }
     },
@@ -74,7 +78,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
   setupController: function(controller) {
     if (!this.get('currentUser.isLoggedIn')) return;
     
-    var list = this.store.findAll('room');
+    var list = this.store.findAll('channel');
     controller.set('model', list);
     this.controllerFor('channels').set('content', list);    
   }

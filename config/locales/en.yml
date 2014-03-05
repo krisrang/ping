@@ -8,9 +8,10 @@ en:
       short: "Username should be at least %{min} characters long!"
       long: "Username should not be longer than %{max} characters!"
 
-  room:
+  channel:
     name:
-      unique: "Room name has been taken!"
+      unique: "Channel name has been taken!"
+      format: "Channel names must be lower case and cannot contain spaces."
 
   login:
     invalid: "Wrong login or password!"

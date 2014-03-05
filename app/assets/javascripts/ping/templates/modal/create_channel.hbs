@@ -1,0 +1,26 @@
+<div class="modal-body">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="channelName" class="col-sm-2 control-label">{{i18n channel.name.label}}</label>
+      <div class="col-sm-10">
+        {{input type="text" value=name class="form-control" id="channelName"}}
+        {{inputTip validation=nameValidation helpKey="channel.name.instructions"}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="channelPurpose" class="col-sm-2 control-label">
+        {{i18n channel.purpose.label}}
+        <p class="optional">{{i18n optional}}</p>
+      </label>
+      <div class="col-sm-10">
+        {{textarea value=purpose class="form-control" id="channelPurpose"}}
+        <div class="tip help-block input-tip">{{i18n channel.purpose.instructions}}</div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" {{action "closeModal"}}>{{i18n close}}</button>
+  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "createChannel"}}>{{i18n create}}</button>
+</div>

@@ -12,7 +12,7 @@ Ping.User = DS.Model.extend({
   previous_visit: attr('date'),
   last_seen: attr('date'),
   days_visited: attr('number'),
-  rooms: DS.hasMany('room'),
+  channels: DS.hasMany('channel'),
   messages: DS.hasMany('message'),
 
   path: Ping.computed.url('username_lower', "/users/%@"),

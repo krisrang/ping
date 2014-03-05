@@ -4,6 +4,6 @@ Ping.Message = DS.Model.extend({
   source: attr(),
   cooked: attr(),
   createdAt: attr('date'),
-  room: DS.belongsTo('room'),
+  channel: DS.belongsTo('channel'),
   user: DS.belongsTo('user')
 });

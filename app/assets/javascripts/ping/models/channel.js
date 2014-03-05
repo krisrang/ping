@@ -1,7 +1,8 @@
 var attr = DS.attr;
 
-Ping.Room = DS.Model.extend({
+Ping.Channel = DS.Model.extend({
   name: attr(),
+  paramName: attr(),
   topic: attr(),
   // open: attr('boolean'),
   owner: DS.belongsTo('user'),
@@ -16,7 +17,7 @@ Ping.Room = DS.Model.extend({
   loaded: function() {
     this.subscribe();
     
-    if (Preloader.get('openRooms').contains(this.get('id'))) {
+    if (Preloader.get('openChannels').contains(this.get('id'))) {
       this.set('open', true);
       this.userJoined(Ping.get('currentUserId'));
     }
@@ -29,7 +30,7 @@ Ping.Room = DS.Model.extend({
     if (this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
-    return Ping.ajax('/rooms/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
+    return Ping.ajax('/channels/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
       self.set('open', true);
     });
   },
@@ -41,7 +42,7 @@ Ping.Room = DS.Model.extend({
     if (!this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
-    return Ping.ajax('/rooms/' + this.get('id') + '/leave', { type: 'POST' }).then(function() {
+    return Ping.ajax('/channels/' + this.get('id') + '/leave', { type: 'POST' }).then(function() {
       self.set('open', false);
     });
   },
@@ -49,7 +50,7 @@ Ping.Room = DS.Model.extend({
   subscribe: function() {
     if (this.get('subscription')) return;
 
-    var subscription = Ping.Faye.subscribe('/rooms/' + this.get('id'), 
+    var subscription = Ping.Faye.subscribe('/channels/' + this.get('id'), 
       $.proxy(this.receive, this));
     this.set('subscription', subscription);
   },
@@ -96,9 +97,5 @@ Ping.Room = DS.Model.extend({
 
   newMessage: function(message) {
     console.log(message);
-  },
-
-  className: function() {
-    return 'room-' + this.get('id');
-  }.property('id')
+  }
 });

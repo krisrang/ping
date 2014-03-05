@@ -227,9 +227,9 @@ Ping.CreateAccountController = Ping.Controller.extend(Ping.ModalFunctionality, {
   // Check password strength
   passwordStrength: function() {
     var password = this.get("accountPassword"),
-        name = this.get('accountName'),
-        username = this.get('accountUsername'),
-        email = this.get('accountEmail');
+        name = this.get('accountName') || "",
+        username = this.get('accountUsername') || "",
+        email = this.get('accountEmail') || "";
         
     if (this.blank('accountPassword')) {
       return Ping.PasswordStrength.create({ score: 0 });

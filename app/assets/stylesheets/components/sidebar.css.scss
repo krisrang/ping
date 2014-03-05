@@ -49,18 +49,37 @@
     .header {
       padding: 0 10px;
       color: $dulltext;
+      font-size: 14px;
+      
+      &:hover {
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+    
+    .new-channel {
+      margin: 0 10px;
+      font-size: 13px;
+      color: $dulltext;
+      border-bottom: 1px dotted $dulltext;
+      
+      &:hover {
+        text-decoration: none;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+      }
     }
     
     ul {
       list-style: none;
-      margin: 0 5px 0 -15px;
+      margin: 5px 5px 0 -15px;
       padding: 0;
       
       a {
         display: block;
         color: $dulltext;
         padding: 5px 5px 5px 25px;
-        font-size: 13px;
+        font-size: 15px;
         
         &:hover {
           text-decoration: none;
@@ -92,12 +111,21 @@
       li.active, li.active:hover {
         background: $sidebarlinkhover;
         
+        .prefix { color: $sidebarlinkhoveractive; }  
         a { color: #fff; }
       }
       
-      li, li:hover, li.active, li.active:hover {
+      li, li:hover {
         a.leave { 
           color: $dulltext;
+          
+          &:hover { color: #fff; }
+        }
+      }
+      
+      li.active, li.active:hover {
+        a.leave { 
+          color: $sidebarlinkhoveractive;
           
           &:hover { color: #fff; }
         }

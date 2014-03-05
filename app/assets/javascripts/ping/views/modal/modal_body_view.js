@@ -18,9 +18,13 @@ Ping.ModalBodyView = Ping.View.extend({
     });
 
     var title = this.get('title');
-    if (title) {
-      this.set('controller.controllers.modal.title', title);
-    }
+    if (title) this.set('controller.controllers.modal.title', title);
+    
+    var createTitle = this.get('createTitle');
+    this.set('controller.controllers.modal.createTitle', createTitle);
+    
+    var createAction = this.get('createAction');
+    this.set('controller.controllers.modal.createAction', createAction);
   },
 
   willDestroy: function() {

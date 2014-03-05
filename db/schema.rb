@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220125830) do
+ActiveRecord::Schema.define(version: 20140305110658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: true do |t|
+    t.string   "name",       limit: 20, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "topic"
+    t.integer  "owner_id"
+    t.string   "purpose"
+  end
+
+  add_index "channels", ["name"], name: "index_channels_on_name", unique: true, using: :btree
+  add_index "channels", ["owner_id"], name: "index_channels_on_owner_id", using: :btree
+
+  create_table "channels_users", id: false, force: true do |t|
+    t.integer "channel_id", null: false
+    t.integer "user_id",    null: false
+  end
+
+  add_index "channels_users", ["user_id", "channel_id"], name: "index_channels_users_on_user_id_and_channel_id", unique: true, using: :btree
 
   create_table "email_tokens", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -73,12 +92,12 @@ ActiveRecord::Schema.define(version: 20140220125830) do
     t.text     "source",     null: false
     t.text     "cooked",     null: false
     t.integer  "user_id",    null: false
-    t.integer  "room_id",    null: false
+    t.integer  "channel_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["room_id"], name: "index_messages_on_room_id", using: :btree
+  add_index "messages", ["channel_id"], name: "index_messages_on_channel_id", using: :btree
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "oauth2_user_infos", force: true do |t|
@@ -92,24 +111,6 @@ ActiveRecord::Schema.define(version: 20140220125830) do
   end
 
   add_index "oauth2_user_infos", ["uid", "provider"], name: "index_oauth2_user_infos_on_uid_and_provider", unique: true, using: :btree
-
-  create_table "rooms", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "topic"
-    t.integer  "owner_id"
-  end
-
-  add_index "rooms", ["name"], name: "index_rooms_on_name", unique: true, using: :btree
-  add_index "rooms", ["owner_id"], name: "index_rooms_on_owner_id", using: :btree
-
-  create_table "rooms_users", id: false, force: true do |t|
-    t.integer "room_id", null: false
-    t.integer "user_id", null: false
-  end
-
-  add_index "rooms_users", ["user_id", "room_id"], name: "index_rooms_users_on_user_id_and_room_id", unique: true, using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "name",       null: false
@@ -167,6 +168,9 @@ ActiveRecord::Schema.define(version: 20140220125830) do
     t.string   "password_hash",  limit: 64
     t.string   "salt",           limit: 32
     t.string   "name"
+    t.boolean  "online",                    default: false, null: false
   end
+
+  add_index "users", ["online"], name: "index_users_on_online", using: :btree
 
 end

@@ -75,6 +75,7 @@ en:
     confirm: "Are you sure?"
     edit: "Edit"
     leave: "Leave"
+    optional: "(optional)"
 
     assets_changed_confirm: "Ping has been updated, would you like to refresh to get the latest version?"
 
@@ -129,34 +130,28 @@ en:
       login: "Log In"
       logout: "Log Out"
 
-    rooms:
-      lobby: "Lobby"
-      open: "Open Rooms"
+    channels:
+      header: "Channels"
+      new: "Create new channel..."
 
-    lobby:
-      title: "Lobby"
-      available: "Available Rooms"
-      name: "Room Name"
-      newroom: "New Room"
-      topic: "Topic"
-      owner: "Owner"
-      rename: "Rename Room"
-
-    edit_room:
-      title_new: "Create New Room"
-      title_edit: "Edit Room"
-      name: "Name"
-      topic: "Topic"
-      failed: "Saving room failed!"
-
-    room:
+    channel:
       name:
-        blank: "Room name cannot be empty"
-        too_long: "Room name too long!"
-        too_short: "Room name too short!"
-        ok: "Room name looks ok!"
-        unique: "Room name taken!"
-        instructions: "Short name for the room."
+        label: "Name"
+        blank: "Channel name cannot be empty"
+        too_long: "Channel name too long!"
+        too_short: "Channel name too short!"
+        ok: "Channel name looks ok!"
+        unique: "Channel name taken!"
+        instructions: "Channel names must be lower case and cannot contain spaces."
+      purpose:
+        label: "Purpose"
+        instructions: "Give your channel a purpose that describes what it will be used for."
+      create:
+        title: "Create a channel"
+        
+    channel_list:
+      title: "Browse Channels"
+      create: "New channel"
 
     user:
       email:

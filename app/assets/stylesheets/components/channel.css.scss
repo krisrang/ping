@@ -1,8 +1,8 @@
 @import 'variables';
 @import 'bourbon';
 
-.room {
-  .room-header {
+.channel {
+  .channel-header {
     position: absolute;
     height: 75px;
     background: rgba(255, 255, 255, 0.95);
@@ -21,7 +21,7 @@
       &:hover { color: #444; }
     }
 
-    .room-settings {
+    .channel-settings {
       right: 20px;
       top: 50px;
       left: auto;
@@ -37,7 +37,7 @@
     }
   }
 
-  .room-messages {
+  .channel-messages {
     position: absolute;
     top: 0;
     bottom: 100px;
@@ -77,7 +77,7 @@
     }
   }
 
-  .room-composer {
+  .channel-composer {
     border-top: 1px solid rgba(0, 0, 0, .05);
     bottom: 0;
     height: 100px;
@@ -118,7 +118,7 @@
   }
 }
 
-.room-users {
+.channel-users {
   background-color: #f4f5f6;
   bottom: 0;
   padding: 10px;

@@ -5,7 +5,7 @@ Ping.Router.map(function() {
   this.route('forgot');
   this.route('preferences');
   
-  this.resource('room', { path: '/rooms/:room_id' });
+  this.resource('channel', { path: '/channels/:channel_name' });
 });
 
 Ping.Router.reopen({location: 'history'});

@@ -1,10 +1,10 @@
-<div class="room-header">
+<div class="channel-header">
   <a data-toggle="dropdown" class="cog"><i class="fa fa-cog"></i></a>
   <h2>{{name}}</h2>
   <span>{{topic}}</span>
 
-  <ul class="room-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a {{action "leaveRoom" this}}>{{i18n leave}}</a></li>
+  <ul class="channel-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li><a {{action "leaveChannel" this}}>{{i18n leave}}</a></li>
   {{#if owned}}
     <li class="divider"></li>
     <li><a {{action "editRoom" this}}>{{i18n edit}}</a></li>
@@ -13,7 +13,7 @@
   </ul>
 </div>
 
-<div class="room-messages">
+<div class="channel-messages">
   <ul class="messagelist scroller">
     {{#each messages}}
       <li class="message">
@@ -27,7 +27,7 @@
 
 {{render "composer" this}}
 
-<div class="room-users">
+<div class="channel-users">
   <div class="header">People</div>
 
   {{#each users}}

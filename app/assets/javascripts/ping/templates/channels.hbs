@@ -1,13 +1,14 @@
 <div class="channels">
-  <div class="header">{{i18n rooms.open}}</div>
+  <a class="header" {{action "channelList"}}>{{i18n channels.header}}</a>
   <ul>
     {{#each}}
       {{#if open}}
-        {{#link-to "room" this tagName="li" href=false}}
-          <a {{action "leaveRoom" this}} class="leave"><i class="fa fa-times-circle"></i></a>
-          <a {{bind-attr href="view.href"}}><span class="dull">#</span> {{name}}</a>
+        {{#link-to "channel" this tagName="li" href=false}}
+          <a {{action "leaveChannel" this}} class="leave"><i class="fa fa-times-circle"></i></a>
+          <a {{bind-attr href="view.href"}}><span class="prefix">#</span> {{name}}</a>
         {{/link-to}}
       {{/if}}
     {{/each}}
   </ul>
+  <a class="new-channel" {{action "createChannel"}}>{{i18n channels.new}}</a>
 </div>
