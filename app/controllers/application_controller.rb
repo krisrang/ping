@@ -3,7 +3,7 @@ require 'current_user'
 class ApplicationController < ActionController::Base
   include CurrentUser  
 
-  before_filter :authorize_miniprof
+  # before_filter :authorize_miniprof
   before_filter :preload_json
   before_filter :redirect_to_login_if_required
 

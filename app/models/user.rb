@@ -2,6 +2,7 @@ require_dependency 'pbkdf2'
 require_dependency 'email'
 require_dependency 'enum'
 require_dependency 'user_name_suggester'
+require_dependency 'realtime'
 
 class User < ActiveRecord::Base
   has_many :email_tokens, dependent: :destroy
@@ -217,10 +218,11 @@ class User < ActiveRecord::Base
     
     $redis.set("userstatus:#{id}", User.statuses[newstatus])
     
-    expire = newstatus == :offline ? DateTime.now : 15.minutes.from_now
-    $redis.set("userstatusexpire:#{id}", expire)
+    newstatus == :offline ?
+      $redis.del("userstatusexpire:#{id}") :
+      $redis.set("userstatusexpire:#{id}", 3.minutes.from_now)
     
-    unless current == status
+    unless current === newstatus
       Realtime.publish("/users/#{id}", { type: "userstatus", status: newstatus })
     end
   end
