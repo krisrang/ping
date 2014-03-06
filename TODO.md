@@ -13,6 +13,7 @@ MVP
 * ~~Client side i18n~~
 * ~~Userbar~~
 * Channel list
+  * Channel name rules enforcement
 * Chatting
 * User settings
 

@@ -4,11 +4,12 @@ class ChannelsController < ApplicationController
   def index
     if params[:name]
       channels = Channel.where(name: params[:name])
-    else
-      channels = Channel.all
+      render json: channels
+      return
     end
     
-    render json: channels
+    channels = Channel.all.includes([:users, :owner, :messages])
+    render json: channels, each_serializer: ChannelListSerializer
   end
 
   def create
