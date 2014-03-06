@@ -12,7 +12,7 @@ Ping.CreateChannelController = Ping.ObjectController.extend(Ping.ModalFunctional
 
       return channel.save().then(function() {
         self.send('closeModal');
-        self.transitionTo('channel', channel);
+        self.transitionToRoute('channel', channel);
       }, function(result) {
         if (result.errors && result.errors.values.name) {
           self.get('rejectedNames').pushObject(result.errors.values.name);

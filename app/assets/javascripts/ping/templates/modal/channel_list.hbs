@@ -1,3 +1,48 @@
 <div class="modal-body">
-  Channels yo
+  <div class="list-controls">
+    <div class="list-search">
+      <i class="fa fa-search search-icon"></i>
+      {{#if isSearching}}
+      <a class="cancel-search" {{action "cancelSearch"}}><i class="fa fa-times-circle"></i></a>
+      {{/if}}
+      {{textField value=searchFilter placeholderKey="channel_list.search" class="form-control input-sm"}}
+    </div>
+    
+    <div class="list-sort">
+      {{i18n sort_by}} 
+      {{view Ember.Select viewName="select"
+                    contentBinding="Ping.ChannelSortOption.all"
+                    optionLabelPath="content.label"
+                    optionValuePath="content.value"
+                    selectionBinding="sortValue"}}
+    </div>
+  </div>
+  
+  {{#if showNoResults}}
+    <div class="list-search-empty">
+      {{i18n channel_list.no_matches}} <strong>{{searchFilter}}</strong>.
+    </div>
+  {{/if}}
+  
+  <div class="channel-lists">  
+    {{#if separateLists}}
+      {{#if closedChannels}}
+        <h4>{{i18n channel_list.join}}</h4>
+        <div class="channel-list">
+          {{#each closedChannels}}{{render "channelListItem" this}}{{/each}}
+        </div>
+      {{/if}}
+      
+      {{#if openChannels}}
+        <h4>{{i18n channel_list.joined}}</h4>
+        <div class="channel-list">
+          {{#each openChannels}}{{render "channelListItem" this}}{{/each}}
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="channel-list">
+        {{#each filteredContent}}{{render "channelListItem" this}}{{/each}}
+      </div>
+    {{/if}}
+  </div>
 </div>

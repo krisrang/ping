@@ -26,22 +26,6 @@ Ping.ApplicationRoute = Ember.Route.extend({
       Ping.Route.showModal(this, 'createChannel', this.store.createRecord('channel'));
     },
 
-    editRoom: function(room) {
-      if (room.get('owner.id') !== this.get('currentUser.id')) return;
-      Ping.Route.showModal(this, 'editRoom', room);
-    },
-
-    deleteRoom: function(room) {
-      if (room.get('owner.id') !== this.get('currentUser.id')) return;
-      bootbox.confirm(I18n.t('confirm'), function(result) {
-        if (!result) return;
-
-        room.leave().then(function(){
-          room.destroyRecord();
-        });
-      });
-    },
-
     showKeyboardShortcutsHelp: function() {
       Ping.Route.showModal(this, 'keyboardShortcutsHelp');
     },
@@ -66,7 +50,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
       channel.leave();
 
       if (this.get('controller.channel') === channel.get('id')) {
-        this.transitionTo('lobby');
+        this.transitionTo('welcome');
       }
     },
 

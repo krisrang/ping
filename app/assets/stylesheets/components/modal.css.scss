@@ -2,6 +2,10 @@
   .modal-dialog {
     .modal-content {
       border-radius: 0;
+      
+      .modal-body {
+        padding: 15px;
+      }
 
       .modal-buttons {
         margin-top: 20px;

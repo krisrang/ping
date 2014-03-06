@@ -75,59 +75,32 @@
       margin: 5px 5px 0 -15px;
       padding: 0;
       
-      a {
-        display: block;
-        color: $dulltext;
-        padding: 5px 5px 5px 25px;
-        font-size: 15px;
-        
-        &:hover {
-          text-decoration: none;
-          color: #fff;
-        }
-        
-        &.leave {
-          float: right;
-          display: none;
-          background: none;
-
-          &:hover { background: none; }
-        }
-
-        i { margin-right: 5px; }
-      }
-      
-      li, li:hover {
+      li {
         border-radius: $radius;
-      }
-
-      li:hover { 
-        background: $hovertransparent;
         
-        a { color: #fff; }
-        a.leave { display: inline; }
-      }
-      
-      li.active, li.active:hover {
-        background: $sidebarlinkhover;
-        
-        .prefix { color: $sidebarlinkhoveractive; }  
-        a { color: #fff; }
-      }
-      
-      li, li:hover {
-        a.leave { 
+        a {
+          display: block;
           color: $dulltext;
+          padding: 5px 5px 5px 25px;
+          font-size: 15px;
           
-          &:hover { color: #fff; }
+          &:hover {
+            text-decoration: none;
+            color: #fff;
+          }
         }
-      }
       
-      li.active, li.active:hover {
-        a.leave { 
-          color: $sidebarlinkhoveractive;
+        &:hover {
+          background: $hovertransparent;
+        }
+        
+        &.active, &.active:hover {
+          background: $sidebarlinkhover;
           
-          &:hover { color: #fff; }
+          a { 
+            color: #fff;            
+            .prefix { color: $sidebarlinkhoveractive; }
+          }
         }
       }
     }

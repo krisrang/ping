@@ -1,17 +1,20 @@
+$text: #222;
+$dulltext: #ab9ba9;
+$dulldark: #9e9ea6;
+
+$green: #18bc9c;
+$red: #e74c3c;
+$gray: #f2f2f5;
+$dullgreen : #4c9689;
+
+$radius: 3px;
+$hovertransparent: rgba(255, 255, 255, .1);
+
 // $sidebar: #6b7397;
 // $sidebarItem: #4b5279;
 $sidebar: #4d394b;
 $sidebaritem: #3e313c;
 $sidebaritemhover: desaturate($sidebaritem, 5%);
 $sidebarborder: darken($sidebaritem, 5%);
-$sidebarlinkhover: #4c9689;
+$sidebarlinkhover: $dullgreen;
 $sidebarlinkhoveractive: #b2d5c9;
-
-$text: #222;
-$dulltext: #ab9ba9;
-
-$green: #18bc9c;
-$red: #e74c3c;
-
-$radius: 3px;
-$hovertransparent: rgba(255, 255, 255, .1);

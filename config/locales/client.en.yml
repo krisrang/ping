@@ -75,7 +75,10 @@ en:
     confirm: "Are you sure?"
     edit: "Edit"
     leave: "Leave"
+    join: "Join"
     optional: "(optional)"
+    sort_by: "Sort by"
+    created_by_on: "Created by %{by} on %{on}"
 
     assets_changed_confirm: "Ping has been updated, would you like to refresh to get the latest version?"
 
@@ -152,6 +155,14 @@ en:
     channel_list:
       title: "Browse Channels"
       create: "New channel"
+      join: "Channels you can join"
+      joined: "Channels you belong to"
+      search: "Search channels by name"
+      sort_name: "Channel Name & Membership"
+      sort_createdat: "Creation Date (newest first)"
+      sort_membersdesc: "Members (most to fewest)"
+      sort_membersasc: "Members (fewest to most)"
+      no_matches: "No matches found for"
 
     user:
       email:

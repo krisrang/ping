@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'bourbon';
+
+.channel-lists {
+  max-height: 300px;
+  overflow-y: scroll;
+
+  .channel-list {
+    margin: 5px;
+    
+    .channel {
+      position: relative;
+      
+      i { color: $dullgreen; }
+      
+      .channel-membercount, .channel-join {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        font-weight: bold;
+      }
+      
+      .channel-join { display: none; }
+      &.joinable:hover .channel-join { display: block; }
+      
+      .channel-name {
+        font-weight: bold;
+      }
+      
+      .channel-details {
+        color: $dulldark;
+      }
+    }
+  }
+}

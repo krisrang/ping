@@ -4,10 +4,14 @@ Ping.Channel = DS.Model.extend({
   name: attr(),
   paramName: attr(),
   topic: attr(),
+  purpose: attr(),
   // open: attr('boolean'),
+  createdAt: attr('date'),
   owner: DS.belongsTo('user'),
   messages: DS.hasMany('message'),
   users: DS.hasMany('user'),
+  
+  closed: Em.computed.not('open'),
 
   init: function() {
     this._super();
@@ -97,5 +101,10 @@ Ping.Channel = DS.Model.extend({
 
   newMessage: function(message) {
     console.log(message);
-  }
+  },
+  
+  memberCount: function() {
+    var users = this.get('users');
+    return users.filterBy('online').length;
+  }.property('users.@each')
 });

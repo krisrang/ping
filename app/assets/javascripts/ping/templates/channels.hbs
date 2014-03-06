@@ -4,7 +4,6 @@
     {{#each}}
       {{#if open}}
         {{#link-to "channel" this tagName="li" href=false}}
-          <a {{action "leaveChannel" this}} class="leave"><i class="fa fa-times-circle"></i></a>
           <a {{bind-attr href="view.href"}}><span class="prefix">#</span> {{name}}</a>
         {{/link-to}}
       {{/if}}

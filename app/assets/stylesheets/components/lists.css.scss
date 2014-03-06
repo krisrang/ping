@@ -1,0 +1,49 @@
+@import 'variables';
+@import 'bourbon';
+
+.list-controls {
+  color: $dulldark;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid $gray;
+  position: relative;
+  
+  .list-search {
+    position: relative;
+    width: 45%;
+    
+    .search-icon {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      color: $dulldark;
+    }
+    
+    .cancel-search {
+      position: absolute;
+      top: 7px;
+      right: 9px;
+      color: #babbbf;
+    }
+    
+    input {
+      padding-left: 30px;
+    }
+  }
+  
+  .list-sort {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    
+    select {
+      margin-left: 10px;
+    }
+  }
+}
+
+.list-search-empty {
+  margin: 30px;
+  text-align: center;
+  color: $dulldark;
+}

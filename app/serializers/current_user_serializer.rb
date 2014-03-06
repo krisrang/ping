@@ -1,5 +1,4 @@
 class CurrentUserSerializer < UserSerializer
-
   attributes :admin?, :no_password
 
   def no_password

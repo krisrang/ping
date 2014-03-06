@@ -1,0 +1,14 @@
+<div class="channel-membercount">
+  {{#if open}}
+    <i class="fa fa-check"></i>
+  {{else}}
+    <i class="fa fa-user"></i>
+  {{/if}}
+  {{memberCount}}
+</div>
+
+<a class="btn btn-success btn-sm channel-join" {{action "joinChannel" this}}>{{i18n join}}</a>
+
+{{#link-to "channel" this class="channel-name"}}# {{name}}{{/link-to}}
+<p class="channel-details">{{channelDetail}}</p>
+<p class="channel-purpose">{{purpose}}</p>
