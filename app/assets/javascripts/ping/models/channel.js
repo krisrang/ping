@@ -2,7 +2,6 @@ var attr = DS.attr;
 
 Ping.Channel = DS.Model.extend({
   name: attr(),
-  paramName: attr(),
   topic: attr(),
   purpose: attr(),
   // open: attr('boolean'),

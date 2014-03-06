@@ -15,6 +15,11 @@ Ping.ChannelListController = Ping.ArrayController.extend(Ping.ModalFunctionality
   }.property('filteredContent', 'isSearching'),
   
   onShow: function() {
+    var self = this;
+    this.store.find('channel').then(function(channels) {
+      self.set('model', channels);
+    });
+    
     this.set('controllers.modal.modalClass', 'channel-list-modal');
   },
   
