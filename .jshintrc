@@ -1,6 +1,7 @@
 {
   "predef":["Ember",
     "jQuery",
+    "Modernizr",
     "$",
     "Em",
     "DS",

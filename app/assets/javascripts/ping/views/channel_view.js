@@ -6,10 +6,17 @@ Ping.ChannelView = Ping.View.extend({
     var self = this;
     
     Em.run.schedule('afterRender', function() {
+      self.fixScrollbar();
       self.messagesResized();
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));
       self.$('.messagelist').on('scroll', Ember.run.bind(self, self.messagesScrolled));
     });
+  },
+  
+  fixScrollbar: function() {
+    if (!Modernizr.cssscrollbar) {
+      this.$('.messagelist').perfectScrollbar({ suppressScrollX: true });
+    }
   },
   
   composerResized: function() {
@@ -30,6 +37,9 @@ Ping.ChannelView = Ping.View.extend({
     if (!messages) return;
     
     Em.run.schedule('afterRender', function() {
+      self.$('.messagelist').perfectScrollbar('destroy');
+      self.fixScrollbar();
+      
       // scroll messages to bottom if user was at the bottom
       if (newchannel || self.get('atBottom')) {
         var toScroll = messages.prop("scrollHeight") - messages.outerHeight();

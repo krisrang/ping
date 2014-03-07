@@ -9,6 +9,7 @@ Ping.User = DS.Model.extend({
   challenge: attr(),
   avatar_template: attr(),
   status: attr(),
+  admin: attr('boolean'),
   previous_visit: attr('date'),
   last_seen: attr('date'),
   days_visited: attr('number'),

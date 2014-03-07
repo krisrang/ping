@@ -1,5 +1,5 @@
 Ping.ChannelsController = Ping.ArrayController.extend({
-  needs: ['appbar', 'userbar'],
+  needs: ['application', 'appbar', 'userbar'],
   sortProperties: ['name'],
   sortAscending: true
 });

@@ -1,13 +1,11 @@
-<div class="channels">
-  <a class="header" {{action "channelList"}}>{{i18n channels.header}}</a>
-  <ul>
-    {{#each}}
-      {{#if open}}
-        {{#link-to "channel" this tagName="li" href=false}}
-          <a {{bind-attr href="view.href"}}><span class="prefix">#</span> {{name}}</a>
-        {{/link-to}}
-      {{/if}}
-    {{/each}}
-  </ul>
-  <a class="new-channel" {{action "createChannel"}}>{{i18n channels.new}}</a>
-</div>
+<a class="header" {{action "channelList"}}>{{i18n channels.header}}</a>
+<ul class="channelslist">
+  {{#each}}
+    {{#if open}}
+      {{#link-to "channel" this tagName="li" href=false}}
+        <a {{bind-attr href="view.href"}}><span class="prefix">#</span> {{name}}</a>
+      {{/link-to}}
+    {{/if}}
+  {{/each}}
+</ul>
+<a class="new-channel" {{action "createChannel"}}>{{i18n channels.new}}</a>

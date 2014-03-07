@@ -1,6 +1,7 @@
 /*
  *= require animate
  *= require bootstrapper
+ *= require perfect-scrollbar
  *= require ping
  *= require_tree ./components
  */

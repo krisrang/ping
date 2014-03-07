@@ -13,5 +13,7 @@
 //= require bootstrap/popover
 
 //= require jquery.autosize
+//= require jquery.mousewheel
+//= require perfect-scrollbar
 
 //= require bootbox

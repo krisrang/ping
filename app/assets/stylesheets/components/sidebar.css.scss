@@ -17,23 +17,27 @@
   .appbar {
     color: #fff;
     height: 42px;
-    cursor: pointer;
     background-color: $sidebaritem;
     border-bottom: 2px solid $sidebarborder;
     @include transition(all 400ms ease-in-out);
     
-    h1 {
-      font-size: 20px;
-      margin: 0;
-      padding: 10px 15px;
-    }
+    &:hover { background: $sidebaritemhover; }
     
-    .down { float: right; margin: 13px; color: $dulltext; }    
-
-    &:hover {
-      background: $sidebaritemhover;
+    .appbar-details {
+      &.admin {
+        cursor: pointer;
+      }
       
-      .down { color: #fff; }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+        padding: 10px 15px;
+      }
+    
+      .down { float: right; margin: 13px; color: $dulltext; }
+      &:hover {
+        .down { color: #fff; }
+      }
     }
     
     .appbar-settings {
@@ -43,15 +47,18 @@
   }
 
   .channels {
-    padding: 20px 0 10px;
-    overflow-y: hidden;
-    
-    &:hover { overflow-y: scroll; }
+    // padding: 20px 0 10px;
+    position: absolute;
+    top: 45px;
+    bottom: 50px;
+    width: 220px;
+    overflow: hidden;
     
     .header {
-      padding: 0 10px;
+      padding: 10px 10px 0;
       color: $dulltext;
       font-size: 14px;
+      display: block;
       
       &:hover {
         text-decoration: none;
@@ -60,10 +67,11 @@
     }
     
     .new-channel {
-      margin: 0 10px;
+      margin: 0 10px 10px;
       font-size: 13px;
       color: $dulltext;
       border-bottom: 1px dotted $dulltext;
+      display: inline-block;
       
       &:hover {
         text-decoration: none;
@@ -158,3 +166,5 @@
     h3 { font-size: 16px; }
   }
 }
+
+.cssscrollbar #sidebar .channels:hover { overflow-y: scroll; }

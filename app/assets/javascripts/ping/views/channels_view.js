@@ -1,11 +1,25 @@
 Ping.ChannelsView = Ping.View.extend({  
+  classNames: ['channels'],
+  
   didInsertElement: function() {
-    $(window).on('resize', Ember.run.bind(this, this.setMaxHeight));
-    this.setMaxHeight();
+    var self = this;
+    
+    Em.run.schedule('afterRender', function() {
+      self.fixScrollbar();
+    });
   },
   
-  setMaxHeight: function() {
-    var windowHeight = $(window).height();
-    this.$('.channels').css('max-height', windowHeight - 95);
-  }
+  fixScrollbar: function() {
+    if (!Modernizr.cssscrollbar) {
+      this.$().perfectScrollbar({ suppressScrollX: true });
+    }
+  },
+  
+  updateScrollbar: function() {
+    var self = this;
+    
+    Em.run.schedule('afterRender', function() {
+      if (!Modernizr.cssscrollbar) self.$().perfectScrollbar('update');
+    });    
+  }.observes('controller.model.@each')
 });
