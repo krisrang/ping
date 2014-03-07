@@ -11,6 +11,7 @@
 //= require bootstrap/modal
 //= require bootstrap/tooltip
 //= require bootstrap/popover
+//= require bootstrap/transition
 
 //= require jquery.autosize
 //= require jquery.mousewheel

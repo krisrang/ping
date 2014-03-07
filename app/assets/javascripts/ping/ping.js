@@ -42,10 +42,6 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
     return url;
   },
 
-  start: function() {
-    
-  },
-
   authenticationComplete: function(options) {
     // TODO, how to dispatch this to the controller without the container?
     var loginController = Ping.__container__.lookup('controller:login');
@@ -58,7 +54,7 @@ window.Ping = Ember.Application.createWithMixins(Ping.Ajax, {
   }.property("currentAssetVersion", "desiredAssetVersion"),
 
   assetVersion: function(prop, val) {
-    if(val) {
+    if (val) {
       if(this.get("currentAssetVersion")){
         this.set("desiredAssetVersion", val);
       } else {
