@@ -10,6 +10,7 @@ Ping.ChannelView = Ping.View.extend({
       self.messagesResized();
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));
       self.$('.messagelist').on('scroll', Ember.run.bind(self, self.messagesScrolled));
+      $('.menu-footer').on('click', function(e) { e.preventDefault(); e.stopPropagation();});
     });
   },
   

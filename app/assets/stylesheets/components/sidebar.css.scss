@@ -11,9 +11,6 @@
   color: #fff;
   background-color: $sidebar;
   
-  .dropdown-menu a { color: $text; }
-  .dropdown-menu a:hover { color: #fff; }
-  
   .appbar {
     color: #fff;
     height: 42px;
@@ -42,7 +39,7 @@
     
     .appbar-settings {
       top: 35px;
-      left: 200px;
+      left: 180px;
     }
   }
 
@@ -148,7 +145,7 @@
 
     .userbar-settings {      
       top: auto;
-      left: 200px;
+      left: 180px;
       bottom: 45px;
     }
   }

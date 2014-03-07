@@ -139,6 +139,12 @@ en:
 
     channel:
       leave: "Leave channel"
+      archive: "Archive this channel..."
+      archives: "Open message archives"
+      links: "Links from this channel"
+      rename: "Rename this channel..."
+      edit_purpose: "Edit purpose..."
+      set_topic: "Set channel topic"
       name:
         label: "Name"
         blank: "Channel name cannot be empty"

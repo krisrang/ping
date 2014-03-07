@@ -43,6 +43,11 @@
       color: $dulldark;
       margin: 0 10px;
     }
+    
+    .channel-settings {
+      top: 40px;
+      left: 15px;
+    }
   }
 
   .channel-messages {
@@ -57,7 +62,7 @@
     .messagelist {
       list-style: none;
       margin: 0;
-      padding: 0 10px;
+      padding: 0 20px;
       height: 100%;
       overflow: hidden;
       position: relative;
@@ -119,7 +124,7 @@
     width: 220px;
     
     .header {
-      background-color: #f4f5f6;
+      background-color: $graybackground;
     }
   }
 }

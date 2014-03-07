@@ -1,0 +1,36 @@
+@import 'variables';
+@import 'bourbon';
+
+.dropdown-menu {
+  padding: 0;
+  
+  .divider { margin: 0; }
+  
+  & > li {
+    &:first-child a { border-radius: $radius $radius 0 0;  }
+    &:last-child a { border-radius: 0 0 $radius $radius; }
+      
+    > a {
+      color: $dropdownlink;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 6px 20px 6px 15px;
+      border-bottom: 1px solid #fff;
+
+      &:hover {
+        background: $dropdownlinkhover;
+        border-bottom: 1px solid $dropdownlinkhoverborder;
+      }
+      
+      i { margin-right: 10px; }
+    }
+    
+    &.menu-footer {
+      background: $graybackground;
+      padding: 10px;
+      border-top: 1px solid $gray;
+      margin-top: 5px;
+      border-radius: 0 0 $radius $radius;
+    }
+  }
+}

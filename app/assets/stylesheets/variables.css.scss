@@ -11,6 +11,8 @@ $dullgreen : #4c9689;
 $radius: 3px;
 $hovertransparent: rgba(0, 0, 0, .15);
 
+$graybackground: #f4f5f6;
+
 // $sidebar: #6b7397;
 // $sidebarItem: #4b5279;
 $sidebar: #4d394b;
@@ -19,3 +21,7 @@ $sidebaritemhover: desaturate($sidebaritem, 5%);
 $sidebarborder: darken($sidebaritem, 5%);
 $sidebarlinkhover: $dullgreen;
 $sidebarlinkhoveractive: #b2d5c9;
+
+$dropdownlink: #645563;
+$dropdownlinkhover: #439fe0;
+$dropdownlinkhoverborder: darken($dropdownlinkhover, 5%);

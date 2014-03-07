@@ -12,9 +12,9 @@ MVP
 * ~~External auth~~
 * ~~Client side i18n~~
 * ~~Userbar~~
-* Channel list
-  * Channel name rules enforcement
-* Chatting
+* ~~Channel list~~
+  * ~~Channel name rules enforcement~~
+* Channel view
 * User settings
 
 Later

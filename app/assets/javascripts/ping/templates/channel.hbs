@@ -5,12 +5,20 @@
   <span class="channel-topic">{{topic}}</span>
 
   <ul class="channel-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <li><a {{action "leaveChannel" this}}>{{i18n leave}}</a></li>
-  {{#if owned}}
+    <li><a {{action "openArchives" this}}><i class="fa fa-list"></i> {{i18n channel.archives}}</a></li>
+    <li><a {{action "openLinks" this}}><i class="fa fa-link"></i> {{i18n channel.links}}</a></li>
     <li class="divider"></li>
-    <li><a {{action "editRoom" this}}>{{i18n edit}}</a></li>
-    <li><a {{action "deleteRoom" this}}>{{i18n delete}}</a></li>
-  {{/if}}
+    <li><a {{action "leaveChannel" this}}><i class="fa fa-sign-out"></i> {{i18n channel.leave}}</a></li>
+    {{#if currentUser.isAdmin}}
+    <li><a {{action "archiveChannel" this}}><i class="fa fa-archive"></i> {{i18n channel.archive}}</a></li>
+    <li class="divider"></li>
+    <li><a {{action "renameChannel" this}}><i class="fa fa-font"></i> {{i18n channel.rename}}</a></li>
+    <li><a {{action "editPurpose" this}}><i class="fa fa-pencil"></i> {{i18n channel.edit_purpose}}</a></li>
+    <li class="menu-footer">
+      <p>{{i18n channel.set_topic}}</p>
+      {{textField value=channelTopic class="form-control input-sm"}}
+    </li>
+    {{/if}}
   </ul>
 </div>
 
