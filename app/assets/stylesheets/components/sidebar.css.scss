@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 240px;
+  width: 220px;
   padding: 0;
   color: #fff;
   background-color: $sidebar;
@@ -43,8 +43,10 @@
   }
 
   .channels {
-    margin: 20px 0 10px;
-    overflow-y: scroll;
+    padding: 20px 0 10px;
+    overflow-y: hidden;
+    
+    &:hover { overflow-y: scroll; }
     
     .header {
       padding: 0 10px;
@@ -81,8 +83,8 @@
         a {
           display: block;
           color: $dulltext;
-          padding: 5px 5px 5px 25px;
-          font-size: 15px;
+          padding: 2px 5px 2px 25px;
+          font-size: 14px;
           
           &:hover {
             text-decoration: none;
@@ -110,7 +112,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 240px;
+    width: 220px;
     color: #fff;
     height: 50px;
     cursor: pointer;

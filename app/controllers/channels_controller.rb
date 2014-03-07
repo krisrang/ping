@@ -9,7 +9,7 @@ class ChannelsController < ApplicationController
     end
     
     channels = Channel.all.includes([:users, :owner, :messages])
-    render json: channels, each_serializer: ChannelListSerializer
+    render json: channels
   end
 
   def create

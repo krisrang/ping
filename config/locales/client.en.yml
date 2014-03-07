@@ -138,6 +138,7 @@ en:
       new: "Create new channel..."
 
     channel:
+      leave: "Leave channel"
       name:
         label: "Name"
         blank: "Channel name cannot be empty"

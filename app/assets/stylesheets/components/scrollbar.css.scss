@@ -2,40 +2,46 @@
 @import 'bourbon';
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 50px;
-    border: 5px solid #fff;
+    border-radius: 5px;
+    border: 1px solid #fff;
 }
 
 ::-webkit-scrollbar-thumb:vertical {
-    background-color: #8c8d8e;
+    background-color: #d9d9de;
     height: 100px;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-    background-color: #8c8d8e;
-    height: 16px !important;
-}
-
-.scroller:hover::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-thumb:hover {
-    background-color: #1f282d;
+    background-color: #d9d9de;
+    height: 8px !important;
 }
 
 ::-webkit-scrollbar {
-    height: 16px;
-    width: 16px;
-    background-color: #fff;
+    height: 8px;
+    width: 8px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-corner {
     background-color: #fff;
 }
 
-.channels::-webkit-scrollbar,
-.channels::-webkit-scrollbar-corner {
-    background-color: transparent;
+.scroller:hover {
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-thumb:hover {
+      background-color: #1f282d;
+  }
 }
 
-.channels::-webkit-scrollbar-thumb {
-    border: 5px solid $sidebar;
+.channels {
+  &::-webkit-scrollbar, &::-webkit-scrollbar-corner {
+    border-radius: 0;
+    background-color: $hovertransparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border: 1px solid $sidebaritem;
+    background-color: $dulltext;
+  }
 }

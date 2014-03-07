@@ -12,4 +12,6 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 
+//= require jquery.autosize
+
 //= require bootbox

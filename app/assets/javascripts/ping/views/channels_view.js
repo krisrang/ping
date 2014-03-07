@@ -6,6 +6,6 @@ Ping.ChannelsView = Ping.View.extend({
   
   setMaxHeight: function() {
     var windowHeight = $(window).height();
-    this.$('.channels').css('max-height', windowHeight - 20);
+    this.$('.channels').css('max-height', windowHeight - 95);
   }
 });

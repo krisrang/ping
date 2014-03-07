@@ -1,7 +1,8 @@
 <div class="channel-header">
-  <a data-toggle="dropdown" class="cog"><i class="fa fa-cog"></i></a>
-  <h2>{{name}}</h2>
-  <span>{{topic}}</span>
+  <div class="channel-name" data-toggle="dropdown">
+    <h2><span class="prefix">#</span>{{name}}</h2> <i class="fa fa-chevron-down channelmenu"></i>
+  </div>  
+  <span class="channel-topic">{{topic}}</span>
 
   <ul class="channel-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
     <li><a {{action "leaveChannel" this}}>{{i18n leave}}</a></li>

@@ -4,46 +4,55 @@
 .channel {
   .channel-header {
     position: absolute;
-    height: 75px;
-    background: rgba(255, 255, 255, 0.95);
+    height: 45px;
     left: 0;
-    right: 240px;
+    right: 0;
     padding: 10px;
     z-index: 500;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-
-    .cog {
-      float: right;
-      color: #999;
-      font-size: 22px;
-      margin: 10px;
-
-      &:hover { color: #444; }
+    
+    .channel-name {
+      display: inline-block;
+      
+      &:hover { cursor: pointer; }
+      
+      h2 {
+        display: inline;
+        color: $title;
+        font-weight: 700;
+      }
+      
+      .prefix {
+        font-size: 20px;
+        font-weight: 500;
+      }
+      
+      .channelmenu {
+        font-size: 14px;
+        vertical-align: top;
+        margin: 8px 0 0 5px;
+      }
+      
+      .prefix, .channelmenu { color: $dulldark; }
+      
+      &:hover {
+        .prefix, .channelmenu { color: $title; }
+      }
     }
-
-    .channel-settings {
-      right: 20px;
-      top: 50px;
-      left: auto;
-    }
-
-    h2 {
-      font-weight: 300;
-    }
-
-    span {
-      font-size: 16px;
-      font-weight: 400;
+    
+    .channel-topic {
+      color: $dulldark;
+      margin: 0 10px;
     }
   }
 
   .channel-messages {
     position: absolute;
-    top: 0;
-    bottom: 100px;
+    top: 45px;
+    bottom: 45px;
     left: 0;
-    right: 240px;
+    right: 220px;
     z-index: 200;
+    margin-bottom: 10px;
 
     .messagelist {
       list-style: none;
@@ -54,6 +63,10 @@
 
       .message {
         margin-bottom: 10px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
 
         .avatar {
           padding: 1px;
@@ -78,52 +91,34 @@
   }
 
   .channel-composer {
-    border-top: 1px solid rgba(0, 0, 0, .05);
-    bottom: 0;
+    bottom: 10px;
     height: 100px;
     left: 0;
-    padding: 10px;
     position: absolute;
-    right: 240px;
+    right: 220px;
     z-index: 500;
 
-    .avatar {
-      position: absolute;
-    }
-
     .messagebox {
-      position: absolute;
-      left: 50px;
-      right: 100px;
+      margin: 0 20px;
 
       textarea {
-        height: 80px;
-        padding: 5px 10px;
+        padding: 10px;
+        height: 45px;
         resize: none;
       }
     }
-    
-    .btn-send {
-      position: absolute;
-      right: 15px;
-      width: 66px;
-    }
+  }
 
-    .btn-file {
-      position: absolute;
-      right: 15px;
-      top: 55px;
-      width: 66px;
+  .channel-users {
+    bottom: 0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    width: 220px;
+    
+    .header {
+      background-color: #f4f5f6;
     }
   }
-}
-
-.channel-users {
-  background-color: #f4f5f6;
-  bottom: 0;
-  padding: 10px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 240px;
 }
