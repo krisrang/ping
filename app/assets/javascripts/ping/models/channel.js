@@ -105,5 +105,5 @@ Ping.Channel = DS.Model.extend({
   memberCount: function() {
     var users = this.get('users');
     return users.filterBy('online').length;
-  }.property('users.@each')
+  }.property('users.@each.online')
 });

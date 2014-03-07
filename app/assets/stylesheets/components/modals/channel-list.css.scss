@@ -21,7 +21,7 @@
       }
       
       .channel-join { display: none; }
-      &.joinable .channel-join { display: block; }
+      &.joinable:hover .channel-join { display: block; }
       
       .channel-name {
         font-weight: bold;
