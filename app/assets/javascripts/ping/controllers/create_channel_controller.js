@@ -5,11 +5,21 @@ Ping.CreateChannelController = Ping.Controller.extend(Ping.ModalFunctionality, {
   actions: {
     createChannel: function() {
       var self = this,
-          channel = this.store.createRecord('channel', {
-            name: this.get('name'),
-            purpose: this.get('purpose'),
-            user: this.get('currentUser.model')
-          });
+          enteredName = this.get('name');
+          
+      var fixedName = Ping.Utilities.parameterize(enteredName);
+      
+      if (enteredName !== fixedName) {
+        this.set('name', fixedName);
+        alert(I18n.t('channel.create.name_fixed'));
+        return;
+      }
+          
+      var channel = this.store.createRecord('channel', {
+        name: fixedName,
+        purpose: this.get('purpose'),
+        user: this.get('currentUser.model')
+      });
 
       return channel.save().then(function() {
         self.send('closeModal');

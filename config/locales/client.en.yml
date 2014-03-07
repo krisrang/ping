@@ -153,6 +153,7 @@ en:
       create:
         title: "Create a channel"
         failed: "Creating channel failed"
+        name_fixed: "You've entered some disallowed characters in the name which we've fixed. Make sure it looks good and try again."
         
     channel_list:
       title: "Browse Channels"

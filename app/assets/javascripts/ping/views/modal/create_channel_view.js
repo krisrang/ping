@@ -10,12 +10,8 @@ Ping.CreateChannelView = Ping.ModalBodyView.extend({
     var controller = this.get('controller');
     Em.run.schedule('afterRender', function() {
       $("input[type='text']").keydown(function(e) {
-        if (e.keyCode === 13) {
-          e.preventDefault();
-          
-          if (controller.get('submitDisabled') === false) {
-            controller.send('createChannel');
-          }        
+        if (controller.get('submitDisabled') === false && e.keyCode === 13) {
+          controller.send('createChannel');
         }
       });
     });

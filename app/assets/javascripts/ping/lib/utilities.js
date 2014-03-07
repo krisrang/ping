@@ -1,4 +1,17 @@
 Ping.Utilities = {
+  STRING_PARAMETERIZE_REGEXP_1: (/[_|\/|\s]+/g),
+  STRING_PARAMETERIZE_REGEXP_2: (/[^a-z0-9\-]+/gi),
+  STRING_PARAMETERIZE_REGEXP_3: (/[\-]+/g),
+  STRING_PARAMETERIZE_REGEXP_4: (/^-+|-+$/g),
+  
+  parameterize: function(str) {
+    return str.replace(Ping.Utilities.STRING_PARAMETERIZE_REGEXP_1, '-')
+      .replace(Ping.Utilities.STRING_PARAMETERIZE_REGEXP_2, '')
+      .replace(Ping.Utilities.STRING_PARAMETERIZE_REGEXP_3, '-')
+      .replace(Ping.Utilities.STRING_PARAMETERIZE_REGEXP_4, '')
+      .toLowerCase();
+  },
+  
   translateSize: function(size) {
     switch (size) {
       case 'tiny': return 20;
