@@ -23,7 +23,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
     },
 
     createChannel: function() {
-      Ping.Route.showModal(this, 'createChannel', this.store.createRecord('channel'));
+      Ping.Route.showModal(this, 'createChannel');
     },
 
     showKeyboardShortcutsHelp: function() {

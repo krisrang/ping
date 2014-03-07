@@ -1,23 +1,26 @@
-Ping.CreateChannelController = Ping.ObjectController.extend(Ping.ModalFunctionality, {
+Ping.CreateChannelController = Ping.Controller.extend(Ping.ModalFunctionality, {
   needs: ['modal'],
-
-  rejectedNames: Em.A([]),
+  nameError: null,
 
   actions: {
     createChannel: function() {
       var self = this,
-          channel = this.get('model');
-
-      channel.set('user', this.get('currentUser.model'));
+          channel = this.store.createRecord('channel', {
+            name: this.get('name'),
+            purpose: this.get('purpose'),
+            user: this.get('currentUser.model')
+          });
 
       return channel.save().then(function() {
         self.send('closeModal');
         self.transitionToRoute('channel', channel);
       }, function(result) {
-        if (result.errors && result.errors.values.name) {
-          self.get('rejectedNames').pushObject(result.errors.values.name);
+        channel.deleteRecord();
+        
+        if (result.errors && result.errors.messages.name) {
+          self.set('nameError', result.errors.messages.name);
         } else {
-          self.flash(I18n.t('new_room.failed'), 'warning');
+          self.flash(I18n.t('channel.create.failed'), 'warning');
         }
       });
     }
@@ -31,12 +34,14 @@ Ping.CreateChannelController = Ping.ObjectController.extend(Ping.ModalFunctional
     // If blank, fail without a reason
     if (this.blank('name')) return Ping.InputValidation.create({ failed: true });
 
-    var name = this.get('name');
+    var name = this.get('name'),
+        error = this.get('nameError');
 
-    if (this.get('rejectedNames').contains(name)) {
+    if (error) {
+      this.set('nameError', null);
       return Ping.InputValidation.create({
         failed: true,
-        reason: I18n.t('channel.name.unique')
+        reason: error
       });
     }
 
@@ -61,7 +66,7 @@ Ping.CreateChannelController = Ping.ObjectController.extend(Ping.ModalFunctional
       ok: true,
       reason: I18n.t('channel.name.ok')
     });
-  }.property('name', 'rejectedNames.@each'),
+  }.property('name', 'nameError'),
 
   submitDisabled: function() {
     if (this.get('nameValidation.failed')) return true;

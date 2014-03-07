@@ -152,6 +152,7 @@ en:
         instructions: "Give your channel a purpose that describes what it will be used for."
       create:
         title: "Create a channel"
+        failed: "Creating channel failed"
         
     channel_list:
       title: "Browse Channels"
