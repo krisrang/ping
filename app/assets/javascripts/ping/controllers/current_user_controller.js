@@ -13,8 +13,9 @@ Ping.CurrentUserController = Ping.ObjectController.extend({
       type: 'DELETE'
     }).then(function () {
       self.set('content', null);
-      Ping.KeyValueStore.abandonLocal();
-      window.location.pathname = Ping.getURL('/');
+      localforage.clear().then(function(){
+        window.location.pathname = Ping.getURL('/');
+      });      
     });
   }
 });

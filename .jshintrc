@@ -12,6 +12,7 @@
     "Faye",
     "bootbox",
     "zxcvbn",
+    "localforage",
     "moment",
     "assetPath",
     "module",

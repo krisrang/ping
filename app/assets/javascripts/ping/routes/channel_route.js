@@ -16,5 +16,6 @@ Ping.ChannelRoute = Ping.RestrictedUserRoute.extend({
     
     channel.join();
     this.controllerFor('application').set('channel', channel.get('id'));
+    localforage.setItem('lastChannel', channel.get('id'));
   }
 });
