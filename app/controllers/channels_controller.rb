@@ -2,14 +2,11 @@ class ChannelsController < ApplicationController
   before_filter :check_xhr, only: [:show]
   
   def index
-    if params[:name]
-      channels = Channel.where(name: params[:name])
-      render json: channels
-      return
-    end
+    channels = params[:name] ?
+      Channel.where(name: params[:name]) :
+      Channel.all.includes([:users, :owner, :messages])
     
-    channels = Channel.all.includes([:users, :owner, :messages])
-    render json: channels
+    render json: channels, each_serializer: ChannelListSerializer
   end
 
   def create
@@ -30,7 +27,7 @@ class ChannelsController < ApplicationController
   end
 
   def show
-    channel = Channel.find(params[:id])
+    channel = Channel.find(params[:id]).includes([:users, :owner, :messages])
     render json: channel
   end  
 
@@ -49,7 +46,7 @@ class ChannelsController < ApplicationController
   def destroy
     channel = Channel.find(params[:id])
     channel.destroy
-    render json: channel
+    render json: success_json
   end
 
   private

@@ -5,9 +5,8 @@ Sidekiq.configure_server do |config|
 end
 
 Sidetiq.configure do |config|
-  # we only check for new jobs once every 2 seconds
-  # to cut down on cpu cost
-  config.resolution = 2
+  # check for new jobs once every second
+  config.resolution = 1
 end
 
 Sidekiq.configure_client { |config| config.redis = sidekiq_redis }

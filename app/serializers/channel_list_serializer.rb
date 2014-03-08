@@ -1,4 +1,4 @@
-class ChannelListSerializer < ApplicationShallowSerializer
+class ChannelListSerializer < ApplicationSerializer
   attributes :id, :name, :open, :topic, :purpose, :owner_id
   has_many :messages
   has_many :users
