@@ -15,6 +15,10 @@ Ping.ModalBodyView = Ping.View.extend({
 
     Em.run.schedule('afterRender', function() {
       self.$('input:first').focus();
+      
+      if ($('#ping-modal').hasClass('fade')) {
+        Em.run.later(self, function(){ this.$('input:first').focus(); }, 200);
+      }
     });
 
     var title = this.get('title');

@@ -160,6 +160,8 @@ en:
         title: "Create a channel"
         failed: "Creating channel failed"
         name_fixed: "You've entered some disallowed characters in the name which we've fixed. Make sure it looks good and try again."
+      update_name: "Update channel name"
+      update_purpose: "Update channel purpose"
         
     channel_list:
       title: "Browse Channels"

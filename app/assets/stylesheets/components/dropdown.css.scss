@@ -27,10 +27,12 @@
     
     &.menu-footer {
       background: $graybackground;
-      padding: 10px;
+      padding: 5px 10px 10px;
       border-top: 1px solid $gray;
       margin-top: 5px;
       border-radius: 0 0 $radius $radius;
+      
+      p { margin-bottom: 2px; }
     }
   }
 }

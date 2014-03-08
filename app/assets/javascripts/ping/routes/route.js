@@ -35,18 +35,16 @@ Ping.Route.reopenClass({
 
     @method showModal
   **/
-  showModal: function(router, name, model) {
+  showModal: function(router, name, model, param) {
     var className = name.dasherize() + '-modal';
     router.controllerFor('modal').set('modalClass', className);
     router.render(name, {into: 'modal', outlet: 'modalBody'});
     var controller = router.controllerFor(name);
     if (controller) {
-      if (model) {
-        controller.set('model', model);
-      }
-      if(controller && controller.onShow) {
-        controller.onShow();
-      }
+      if (controller && controller.onShow) controller.onShow();
+      
+      controller.set('model', model);
+      controller.set('parameter', param);
       controller.set('flashMessage', null);
     }
   }

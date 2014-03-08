@@ -1,6 +1,6 @@
-Ping.CreateChannelView = Ping.ModalBodyView.extend({
-  templateName: 'modal/create_channel',
-  title: I18n.t('channel.create.title'),
+Ping.EditChannelView = Ping.ModalBodyView.extend({
+  templateName: 'modal/edit_channel',
+  titleBinding: 'controller.title',
 
   didInsertElement: function() {
     this._super();
@@ -11,7 +11,7 @@ Ping.CreateChannelView = Ping.ModalBodyView.extend({
     Em.run.schedule('afterRender', function() {
       $("input[type='text']").keydown(function(e) {
         if (controller.get('submitDisabled') === false && e.keyCode === 13) {
-          controller.send('createChannel');
+          controller.send('saveChannel');
         }
       });
     });

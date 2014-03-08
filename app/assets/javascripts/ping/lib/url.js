@@ -1,7 +1,7 @@
 Ping.URL = Em.Object.createWithMixins({
   routeTo: function(path) {
 
-    if(Ping.get("requiresRefresh")){
+    if (Ping.get("requiresRefresh")){
       document.location.href = path;
       return;
     }

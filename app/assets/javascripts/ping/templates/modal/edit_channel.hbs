@@ -1,26 +1,31 @@
 <div class="modal-body">
   <div class="form-horizontal" role="form">
+    {{#if showName}}
     <div class="form-group">
       <label for="channelName" class="col-sm-2 control-label">{{i18n channel.name.label}}</label>
       <div class="col-sm-10">
-        {{input type="text" value=name class="form-control" id="channelName"}}
+        {{input type="text" value=name class="form-control" id="channelName" autofocus="autofocus"}}
         {{inputTip validation=nameValidation helpKey="channel.name.instructions"}}
       </div>
     </div>
+    {{/if}}
+    
+    {{#if showPurpose}}
     <div class="form-group">
       <label for="channelPurpose" class="col-sm-2 control-label">
         {{i18n channel.purpose.label}}
-        <p class="optional">{{i18n optional}}</p>
+        {{#unless model}}<p class="optional">{{i18n optional}}</p>{{/unless}}
       </label>
       <div class="col-sm-10">
         {{textarea value=purpose class="form-control" id="channelPurpose"}}
         <div class="tip help-block input-tip"><label>{{i18n channel.purpose.instructions}}</label></div>
       </div>
     </div>
+    {{/if}}
   </div>
 </div>
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default" {{action "closeModal"}}>{{i18n close}}</button>
-  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "createChannel"}}>{{i18n create}}</button>
+  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "saveChannel"}}>{{saveText}}</button>
 </div>

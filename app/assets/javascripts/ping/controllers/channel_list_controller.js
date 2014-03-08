@@ -27,17 +27,17 @@ Ping.ChannelListController = Ping.ArrayController.extend(Ping.ModalFunctionality
     return arrangedContent.filter(function(item) {
       return item.get('name').indexOf(filter) >= 0;
     });        
- }.property('arrangedContent.isLoaded', 'arrangedContent.@each', 'searchFilter'),
+  }.property('arrangedContent.isLoaded', 'arrangedContent.@each', 'searchFilter'),
  
- openChannels: function() {
+  openChannels: function() {
     var filteredContent = this.get('filteredContent');
     return filteredContent.filterBy('open');
- }.property('filteredContent.isLoaded', 'filteredContent.@each.open'),
+  }.property('filteredContent.isLoaded', 'filteredContent.@each.open'),
  
- closedChannels: function() {
+  closedChannels: function() {
     var filteredContent = this.get('filteredContent');
     return filteredContent.filterBy('closed');        
- }.property('filteredContent.isLoaded', 'filteredContent.@each.open'),
+  }.property('filteredContent.isLoaded', 'filteredContent.@each.open'),
   
   separateLists: function() {
     return !this.get('isSearching') && this.get('sortProperties.firstObject') === 'name';

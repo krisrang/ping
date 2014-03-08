@@ -15,6 +15,7 @@ MVP
 * ~~Channel list~~
   * ~~Channel name rules enforcement~~
 * Channel view
+  * ~~Channel rename~~
 * User settings
 
 Later
