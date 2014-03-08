@@ -8,8 +8,15 @@ Ping.ChannelController = Ping.ObjectController.extend({
       console.log(this.get('message'));
     },
     
-    sendFile: function() {
+    changeTopic: function() {
+      var topic = this.get('channelTopic'),
+          channel = this.get('model');
+          
+      channel.set('topic', topic);
+      channel.save();
       
+      this.set('channelTopic', '');
+      $('.channel-name').dropdown('toggle');
     }
   }
 });

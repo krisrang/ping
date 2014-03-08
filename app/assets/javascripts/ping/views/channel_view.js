@@ -3,7 +3,8 @@ Ping.ChannelView = Ping.View.extend({
   atBottom: true,
   
   didInsertElement: function() {
-    var self = this;
+    var self = this,
+        controller = this.get('controller');
     
     Em.run.schedule('afterRender', function() {
       self.fixScrollbar();
@@ -11,6 +12,10 @@ Ping.ChannelView = Ping.View.extend({
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));
       self.$('.messagelist').on('scroll', Ember.run.bind(self, self.messagesScrolled));
       $('.menu-footer').on('click', function(e) { e.preventDefault(); e.stopPropagation();});
+      
+      $("input.channel-topic-input").keydown(function(e) {
+        if (e.keyCode === 13) controller.send('changeTopic');
+      });
     });
   },
   
