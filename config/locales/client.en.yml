@@ -215,8 +215,8 @@ en:
         very_weak: "very weak"
         
     login_required:
-      message: "%{title} requires logging in,"
-      please: "please log in"
+      message: "%{title} requires signing in"
+      please: "Please sign in..."
     
     forgot_password:
       title: "Forgot Password"

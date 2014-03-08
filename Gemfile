@@ -30,7 +30,7 @@ gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidetiq'
 gem 'sinatra', require: nil
-gem 'sentry-raven', github: 'getsentry/raven-ruby'
+gem 'sentry-raven'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby'
 gem 'oj'

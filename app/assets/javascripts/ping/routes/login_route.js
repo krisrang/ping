@@ -1,13 +1,11 @@
 Ping.LoginRoute = Ping.Route.extend({
   renderTemplate: function() {
-    this.render('static');
-  }
-});
-
-Ping.LoginRoute.reopen({
+    this.render('login_required');
+  },
+  
   beforeModel: function() {
     if (!Ping.Settings.login_required) {
-      this.transitionTo('lobby');
+      this.transitionTo('welcome');
       return;
     }
 
