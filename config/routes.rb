@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :messages
 
-  get 'preferences' => 'default#empty'
+  get 'preferences' => 'channels#empty'
   
   resources :session, id: USERNAME_ROUTE_FORMAT, only: [:new, :create, :destroy] do
     collection do
@@ -46,5 +46,5 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'users/omniauth_callbacks#complete', via: [:get, :post]
   match '/auth/failure', to: 'users/omniauth_callbacks#failure', via: [:get, :post]
 
-  root 'default#index'
+  root 'channels#index'
 end

@@ -1,8 +1,6 @@
 Ping.ChannelRoute = Ping.RestrictedUserRoute.extend({
   model: function(params) {
-    return this.store.find('channel', { name: params.channel_name }).then(function(array) {
-      return array.get('firstObject');
-    });
+    return this.store.all('channel').findBy('name', params.channel_name);
   },
   
   serialize: function(model) {

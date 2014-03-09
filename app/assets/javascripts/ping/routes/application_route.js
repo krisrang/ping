@@ -19,7 +19,7 @@ Ping.ApplicationRoute = Ember.Route.extend({
     },
     
     channelList: function() {
-      Ping.Route.showModal(this, 'channelList', this.store.find('channel'));
+      Ping.Route.showModal(this, 'channelList', this.store.all('channel'));
     },
 
     editChannel: function(model, param) {
@@ -65,15 +65,14 @@ Ping.ApplicationRoute = Ember.Route.extend({
     
     if (!this.get('currentUser.isLoggedIn')) return;
     
-    this.store.findAll('channel').then(function(list){
-      controller.set('model', list);
-      self.controllerFor('channels').set('content', list);
-      
-      // switch to last loaded channel
-      localforage.getItem('lastChannel').then(function(id){
-        var channel = list.findBy('id', id);
-        if (channel) self.transitionTo('channel', channel);
-      });
+    var list = this.store.all('channel');
+    controller.set('model', list);
+    self.controllerFor('channels').set('content', list);
+    
+    // switch to last loaded channel
+    localforage.getItem('lastChannel').then(function(id){
+      var channel = list.findBy('id', id);
+      if (channel) self.transitionTo('channel', channel);
     });
   }
 });

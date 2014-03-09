@@ -4,7 +4,7 @@ Ping.Channel = DS.Model.extend({
   name: attr(),
   topic: attr(),
   purpose: attr(),
-  // open: attr('boolean'),
+  open: attr('boolean'),
   createdAt: attr('date'),
   owner: DS.belongsTo('user'),
   messages: DS.hasMany('message'),
@@ -20,8 +20,7 @@ Ping.Channel = DS.Model.extend({
   loaded: function() {
     this.subscribe();
     
-    if (Preloader.get('openChannels').contains(this.get('id'))) {
-      this.set('open', true);
+    if (this.get('open') === true) {
       this.userJoined(Ping.get('currentUserId'));
     }
   },

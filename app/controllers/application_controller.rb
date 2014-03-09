@@ -45,9 +45,13 @@ class ApplicationController < ActionController::Base
   def preload_current_user_data
     user = MultiJson.dump(CurrentUserSerializer.new(current_user, root: false))
     store_preloaded('currentUser', user)
-
-    open_channels = MultiJson.dump(current_user.channels.select(:id).map(&:id).uniq.map(&:to_s))
-    store_preloaded('openChannels', open_channels)
+    
+    channels = Channel.all.includes([:users, :owner, :messages])
+    open_channels = current_user.channels.select(:id).map(&:id).uniq
+    channels.each { |c| c.open = open_channels.include?(c.id) }
+    
+    channels_serialized = ActiveModel::ArraySerializer.new(channels, root: 'channels')
+    store_preloaded('channels', MultiJson.dump(channels_serialized))
   end
 
   def ensure_logged_in
@@ -67,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_empty
-    render 'default/empty'
+    render 'channels/empty'
   end
 
   def render_json_dump(obj)

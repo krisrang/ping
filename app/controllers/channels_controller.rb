@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_filter :check_xhr, only: [:show]
+  before_filter :check_xhr
   
   def index
     channels = params[:name] ?
