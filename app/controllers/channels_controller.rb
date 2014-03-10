@@ -2,11 +2,8 @@ class ChannelsController < ApplicationController
   before_filter :check_xhr
   
   def index
-    channels = params[:name] ?
-      Channel.where(name: params[:name]) :
-      Channel.all.includes([:users, :owner, :messages])
-    
-    render json: channels, each_serializer: ChannelListSerializer
+    channels = Channel.all.includes([:users, :owner, :messages])
+    render json: channels
   end
 
   def create
