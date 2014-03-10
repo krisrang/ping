@@ -11,6 +11,7 @@ Ping.Channel = DS.Model.extend({
   users: DS.hasMany('user'),
   
   closed: Em.computed.not('open'),
+  path: Ping.computed.url('id', "/channels/%@"),
 
   init: function() {
     this._super();
@@ -32,7 +33,7 @@ Ping.Channel = DS.Model.extend({
     if (this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
-    return Ping.ajax('/channels/' + this.get('id') + '/join', { type: 'POST' }).then(function() {
+    return Ping.ajax(this.get('path') + '/join', { type: 'POST' }).then(function() {
       self.set('open', true);
     });
   },
@@ -44,7 +45,7 @@ Ping.Channel = DS.Model.extend({
     if (!this.get('open')) return Em.RSVP.resolve();
 
     var self = this;
-    return Ping.ajax('/channels/' + this.get('id') + '/leave', { type: 'POST' }).then(function() {
+    return Ping.ajax(this.get('path') + '/leave', { type: 'POST' }).then(function() {
       self.set('open', false);
     });
   },
@@ -52,7 +53,7 @@ Ping.Channel = DS.Model.extend({
   subscribe: function() {
     if (this.get('subscription')) return;
 
-    var subscription = Ping.Faye.subscribe('/channels/' + this.get('id'), 
+    var subscription = Ping.Faye.subscribe(this.get('path'), 
       $.proxy(this.receive, this));
     this.set('subscription', subscription);
   },
@@ -104,5 +105,30 @@ Ping.Channel = DS.Model.extend({
   memberCount: function() {
     var users = this.get('users');
     return users.filterBy('online').length;
-  }.property('users.@each.online')
+  }.property('users.@each.online'),
+  
+  update: function(name, purpose) {
+    var self = this,
+        updateData = {};
+    
+    if (name) updateData.name = name;
+    if (purpose) updateData.purpose = purpose;
+    
+    return Ping.ajax(this.get('path'), { 
+      type: 'PATCH', data: { channel: updateData }
+    }).then(function(){
+      if (name) self.set('name', name);
+      if (purpose) self.set('purpose', purpose);
+    });
+  },
+  
+  setTopic: function(topic) {
+    var self = this;
+    
+    return Ping.ajax(this.get('path'), { 
+      type: 'PATCH', data: { channel: { topic: topic } }
+    }).then(function(){
+      self.set('topic', topic);
+    });
+  }
 });

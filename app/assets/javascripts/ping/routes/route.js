@@ -41,11 +41,11 @@ Ping.Route.reopenClass({
     router.render(name, {into: 'modal', outlet: 'modalBody'});
     var controller = router.controllerFor(name);
     if (controller) {
-      if (controller && controller.onShow) controller.onShow();
-      
       controller.set('model', model);
       controller.set('parameter', param);
       controller.set('flashMessage', null);
+      
+      if (controller && controller.onShow) controller.onShow();
     }
   }
 });

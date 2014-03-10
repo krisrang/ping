@@ -153,13 +153,17 @@ en:
         ok: "Channel name looks ok!"
         unique: "Channel name taken!"
         instructions: "Channel names must be lower case and cannot contain spaces."
+        name_fixed: "You've entered some disallowed characters in the name which we've fixed. Make sure it looks good and try again."
       purpose:
         label: "Purpose"
         instructions: "Give your channel a purpose that describes what it will be used for."
       create:
         title: "Create a channel"
-        failed: "Creating channel failed"
-        name_fixed: "You've entered some disallowed characters in the name which we've fixed. Make sure it looks good and try again."
+        failed: "Creating channel failed"      
+      save:
+        failed: "Updating channel failed"
+      topic:
+        failed: "Updating topic failed!"
       update_name: "Update channel name"
       update_purpose: "Update channel purpose"
         

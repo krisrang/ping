@@ -9,14 +9,17 @@ Ping.ChannelController = Ping.ObjectController.extend({
     },
     
     changeTopic: function() {
-      var topic = this.get('channelTopic'),
+      var self = this,
+          topic = this.get('channelTopic'),
           channel = this.get('model');
           
-      channel.set('topic', topic);
-      channel.save();
-      
-      this.set('channelTopic', '');
-      $('.channel-name').dropdown('toggle');
+      channel.setTopic(topic).then(
+        function() {
+          self.set('channelTopic', '');
+          $('.channel-name').dropdown('toggle');
+        }, function() {
+          bootbox.alert(I18n.t('channel.topic.failed'));
+      });      
     }
   }
 });

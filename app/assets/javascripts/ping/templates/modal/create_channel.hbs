@@ -1,6 +1,5 @@
 <div class="modal-body">
   <div class="form-horizontal" role="form">
-    {{#if editingName}}
     <div class="form-group">
       <label for="channelName" class="col-sm-2 control-label">{{i18n channel.name.label}}</label>
       <div class="col-sm-10">
@@ -8,9 +7,7 @@
         {{inputTip validation=nameValidation helpKey="channel.name.instructions"}}
       </div>
     </div>
-    {{/if}}
-    
-    {{#if editingPurpose}}
+
     <div class="form-group">
       <label for="channelPurpose" class="col-sm-2 control-label">
         {{i18n channel.purpose.label}}
@@ -21,11 +18,10 @@
         <div class="tip help-block input-tip"><label>{{i18n channel.purpose.instructions}}</label></div>
       </div>
     </div>
-    {{/if}}
   </div>
 </div>
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default" {{action "closeModal"}}>{{i18n close}}</button>
-  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "saveChannel"}}>{{i18n save}}</button>
+  <button type="button" class="btn btn-info" {{bind-attr disabled="submitDisabled"}} {{action "saveChannel"}}>{{i18n create}}</button>
 </div>
