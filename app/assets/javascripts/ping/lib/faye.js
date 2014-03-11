@@ -1,7 +1,7 @@
 Ping.Faye = (function(){
   var faye = new Faye.Client('/faye', {
-    timeout: 60,
-    retry: 3
+    timeout: 120,
+    retry: 5
   });
 
   faye.on('transport:down', function(){ Ping.set('connected', false); });

@@ -54,7 +54,7 @@ module Ping
       digest = Digest::MD5.hexdigest(ActionView::Base.assets_manifest.assets.values.sort.join)
       channel = "/global/asset-version"
 
-      Realtime.publish channel, digest
+      Realtime.publish(channel, digest)
       digest
     end
   end

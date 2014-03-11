@@ -12,8 +12,8 @@ Ember.Application.initializer({
       Ping.set("assetVersion", version);
 
       if (Ping.get("requiresRefresh")) {
-        bootbox.confirm(I18n.lookup("assets_changed_confirm"), function(result){
-          if (result) document.location.reload();
+        bootbox.alert(I18n.lookup("assets_changed_confirm"), function(){
+          document.location.reload();
         });
       }
     });

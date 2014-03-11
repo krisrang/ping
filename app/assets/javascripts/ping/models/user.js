@@ -19,6 +19,8 @@ Ping.User = DS.Model.extend({
   path: Ping.computed.url('username_lower', "/users/%@"),
   online: Ping.computed.isNot('status', 'offline'),
   
+  pingResponded: true,
+  
   init: function() {
     this._super();
     this.on('didLoad', this, this.loaded);
@@ -38,8 +40,15 @@ Ping.User = DS.Model.extend({
   },
   
   ping: function() {
+    var self = this;
+    
+    if (!this.get('pingResponded')) return;
+    this.set('pingResponded', false);
+    
     Ping.Faye.publish('/users/' + this.get('id'), 
-        { type: 'userstatus', status: this.get('status') });
+        { type: 'userstatus', status: this.get('status') }).then(function() {
+          self.set('pingResponded', true);
+        });
   },
   
   subscribe: function() {

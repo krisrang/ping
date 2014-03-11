@@ -1,5 +1,6 @@
 require_dependency 'realtime/csrf'
 require_dependency 'realtime/user_tracker'
+require_dependency 'realtime/data_sync'
 
 module Realtime
   def self.publish(channel, data)
@@ -16,8 +17,8 @@ module Realtime
   end
 
   def self.middleware_opts
-    { mount: '/faye', timeout: 25, engine: RailsRedis.new_faye_engine,
-      extensions: [Realtime::UserTracker.new] }
+    { mount: '/faye', timeout: 60, engine: RailsRedis.new_faye_engine,
+      extensions: [Realtime::UserTracker.new, Realtime::DataSync.new] }
   end
 
   private
