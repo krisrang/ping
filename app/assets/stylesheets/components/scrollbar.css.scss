@@ -2,35 +2,36 @@
 @import 'bourbon';
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    border: 1px solid #fff;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  @include transition(background-color .2s linear);
 }
 
 ::-webkit-scrollbar-thumb:vertical {
-    background-color: #d9d9de;
-    height: 100px;
+  background-color: #d9d9de;
+  height: 100px;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-    background-color: #d9d9de;
-    height: 8px !important;
+  background-color: #d9d9de;
+  height: 10px !important;
 }
 
 ::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
+  height: 10px;
+  width: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-corner {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .scroller:hover {
   &::-webkit-scrollbar-thumb,
   &::-webkit-scrollbar-thumb:hover {
-      background-color: #1f282d;
+    background-color: #1f282d;
   }
 }
 
@@ -46,6 +47,29 @@
   }
 }
 
-.ps-scrollbar-x {
-  display: none;
+.ps-container {
+  .ps-scrollbar-x {
+    display: none;
+  }
+
+  .ps-scrollbar-y {
+    visibility: visible;
+    wdith: 10px;
+  }
+
+  .ps-scrollbar-y-rail {
+    wdith: 10px;
+    background-color: #eee;
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+  }
+  
+  &:hover .ps-scrollbar-y {
+    background-color: #1f282d;
+  }
+  
+  &:hover .ps-scrollbar-y-rail {
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
+  }
 }
