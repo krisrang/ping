@@ -13,8 +13,10 @@ Ping.User = DS.Model.extend({
   previous_visit: attr('date'),
   last_seen: attr('date'),
   days_visited: attr('number'),
-  channels: DS.hasMany('channel'),
-  messages: DS.hasMany('message'),
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
+  channels: DS.hasMany('channel', {async: true}),
+  messages: DS.hasMany('message', {async: true}),
 
   path: Ping.computed.url('username_lower', "/users/%@"),
   online: Ping.computed.isNot('status', 'offline'),

@@ -6,9 +6,10 @@ Ping.Channel = DS.Model.extend({
   purpose: attr(),
   open: attr('boolean'),
   createdAt: attr('date'),
-  owner: DS.belongsTo('user'),
-  messages: DS.hasMany('message'),
-  users: DS.hasMany('user'),
+  updatedAt: attr('date'),
+  owner: DS.belongsTo('user', {async: true}),
+  messages: DS.hasMany('message', {async: true}),
+  users: DS.hasMany('user', {async: true}),
   
   closed: Em.computed.not('open'),
   path: Ping.computed.url('id', "/channels/%@"),
@@ -20,34 +21,26 @@ Ping.Channel = DS.Model.extend({
   
   loaded: function() {
     this.subscribe();
-    
-    if (this.get('open') === true) {
-      this.userJoined(Ping.get('currentUserId'));
-    }
   },
 
   join: function() {
-    this.subscribe();
-    this.userJoined(Ping.get('currentUserId'));
-
     if (this.get('open')) return Em.RSVP.resolve();
+    
+    this.userJoined(Ping.get('currentUserId'));    
 
     var self = this;
-    return Ping.ajax(this.get('path') + '/join', { type: 'POST' }).then(function() {
-      self.set('open', true);
-    });
+    return Ping.ajax(this.get('path') + '/join', { type: 'POST' }).
+      then(function() { self.set('open', true); });
   },
 
   leave: function() {
-    this.unsubscribe();
-    this.userLeft(Ping.get('currentUserId'));
-
     if (!this.get('open')) return Em.RSVP.resolve();
+    
+    this.userLeft(Ping.get('currentUserId'));    
 
     var self = this;
-    return Ping.ajax(this.get('path') + '/leave', { type: 'POST' }).then(function() {
-      self.set('open', false);
-    });
+    return Ping.ajax(this.get('path') + '/leave', { type: 'POST' }).
+      then(function() { self.set('open', false); });
   },
 
   subscribe: function() {

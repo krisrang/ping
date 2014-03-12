@@ -4,6 +4,7 @@ Ping.Message = DS.Model.extend({
   source: attr(),
   cooked: attr(),
   createdAt: attr('date'),
-  channel: DS.belongsTo('channel'),
-  user: DS.belongsTo('user')
+  updatedAt: attr('date'),
+  channel: DS.belongsTo('channel', {async: true}),
+  user: DS.belongsTo('user', {async: true})
 });
