@@ -4,16 +4,26 @@ Ping.ChannelView = Ping.View.extend({
   
   didInsertElement: function() {
     var self = this,
-        controller = this.get('controller');
+        controller = this.get('controller'),
+        topicInput = this.$("input.channel-topic-input");
     
     Em.run.schedule('afterRender', function() {
       self.fixScrollbar();
       self.messagesResized();
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));
       self.$('.messagelist').on('scroll', Ember.run.bind(self, self.messagesScrolled));
-      $('.menu-footer').on('click', function(e) { e.preventDefault(); e.stopPropagation();});
+      self.$('.menu-footer').on('click', function(e) { e.preventDefault(); e.stopPropagation();});
       
-      $("input.channel-topic-input").keydown(function(e) {
+      self.$('.channel-header').on('show.bs.dropdown', function(){
+        topicInput.val(controller.get('model.topic'));
+      });
+      
+      self.$('.channel-header').on('shown.bs.dropdown', function(){
+        topicInput.focus(function(){ this.select(); });
+        topicInput.focus();
+      });
+      
+      topicInput.keydown(function(e) {
         if (e.keyCode === 13) controller.send('changeTopic');
       });
     });
