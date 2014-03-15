@@ -1,13 +1,26 @@
 Ping.ChannelView = Ping.View.extend({
   classNames: ['channel'],
+  classNameBindings: ['sidebarOpen:open:closed'],
   atBottom: true,
+  sidebarOpen: false,
+  
+  actions: {
+    toggleSidebar: function() {
+      this.toggleProperty('sidebarOpen');
+      localforage.setItem('sidebarOpen', this.get('sidebarOpen'));
+    }
+  },
   
   didInsertElement: function() {
     var self = this,
-        controller = this.get('controller'),
-        topicInput = this.$("input.channel-topic-input");
+        controller = this.get('controller');
+        
+    localforage.getItem('sidebarOpen').then(function(open) {
+      self.set('sidebarOpen', open);
+    });
     
     Em.run.schedule('afterRender', function() {
+      var topicInput = self.$("input.channel-topic-input");
       self.fixScrollbar();
       self.messagesResized();
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));

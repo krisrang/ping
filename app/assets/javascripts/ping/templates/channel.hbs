@@ -3,6 +3,20 @@
     <h2><span class="prefix">#</span>{{name}}</h2> <i class="fa fa-chevron-down channelmenu"></i>
   </div>  
   <span class="channel-topic">{{topic}}</span>
+  
+  <div class="channel-header-right">
+    <div class="channel-search">
+      <i class="fa fa-search search-icon"></i>
+      {{#if isSearching}}
+      <a class="cancel-search" {{action "cancelSearch"}}><i class="fa fa-times-circle"></i></a>
+      {{/if}}
+      {{textField value=channelSearch placeholderKey="search" class="form-control input-sm channel-search-input"}}
+    </div>
+
+    <button class="btn btn-xs btn-default"><i class="fa fa-bars"></i></button>
+    <button class="btn btn-xs btn-default open-sidebar" {{action "toggleSidebar" target="view"}}><i class="fa fa-toggle-left"></i></button>
+    <button class="btn btn-xs btn-default close-sidebar" {{action "toggleSidebar" target="view"}}><i class="fa fa-toggle-right"></i></button>
+  </div>
 
   <ul class="channel-settings dropdown-menu" role="menu" aria-labelledby="dLabel">
     <li><a {{action "openArchives" this}}><i class="fa fa-list"></i> {{i18n channel.archives}}</a></li>
@@ -36,7 +50,7 @@
 
 {{render "composer" this}}
 
-<div class="channel-users">
+<div class="channel-sidebar">
   <div class="header">People</div>
 
   {{#each users}}

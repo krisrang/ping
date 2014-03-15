@@ -6,15 +6,23 @@ Ping.ComposerView = Ping.View.extend({
 
     Em.run.schedule('afterRender', function() {
       var textarea = self.$('textarea:first');
-      if (textarea && textarea.focus) textarea.focus();
+      textarea.focus();      
+      
     });
   }.observes('controller.id'),
   
   didInsertElement: function() {
-    var self = this;
+    var self = this,
+        controller = this.get('controller');
     
     Em.run.schedule('afterRender', function() {
       self.$('textarea').autosize({ callback: Ember.run.bind(self, self.composerResized) });
+      
+      self.$('textarea').keydown(function(e) {
+        if (e.keyCode === 13 && !e.shiftKey) {
+          controller.send('sendMessage');
+        }
+      });
     });
   },
   

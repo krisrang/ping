@@ -4,10 +4,6 @@
 @import 'bootswatch/variables';
 @import 'bootswatch/bootswatch';
 
-// 
-// RADIUS
-// 
-
 @border-radius-base:  3px;
 @border-radius-large: 4px;
 @border-radius-small: 3px;
@@ -30,18 +26,24 @@ form .help-block {
   }
 }
 
+@padding-base-vertical:     7px;
+@padding-base-horizontal:   15px;
+
 .btn {
-  padding: 7px 15px;
+  border-width: 2px;
 }
 
 .btn-default {
   color: @text-color;
   background: #fff;
-  border-width: 2px;
-  padding: 6px 14px;
   
   &:hover {
     background: #fff;
     color: @text-color;
   }
+}
+
+.fade {
+  -webkit-transition: opacity .15s linear,top .15s ease-out;
+          transition: opacity .15s linear,top .15s ease-out;
 }

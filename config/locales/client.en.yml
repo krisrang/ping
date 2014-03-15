@@ -79,6 +79,7 @@ en:
     optional: "(optional)"
     sort_by: "Sort by"
     created_by_on: "Created by %{by} on %{on}"
+    search: "Search"
 
     assets_changed_confirm: "Ping has been updated, would you like to refresh to get the latest version?"
 
