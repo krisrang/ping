@@ -52,10 +52,14 @@
 
 <div class="channel-sidebar">
   <div class="header">People</div>
+</div>
 
-  {{#each users}}
-    {{#if this.online}}
-      {{boundAvatar this imageSize="medium"}}
-    {{/if}}
+<div class="channel-users">
+  <a {{action "toggleUsers" target="view"}}><i class="fa fa-users"></i> {{memberCount}}</a>
+  
+  <ul class="channel-userlist">
+  {{#each usersByStatus}}
+    <li>{{#link-to "user" this}}<i {{bind-attr class=":presence status" title="status"}}></i> {{username}}{{/link-to}}</li>
   {{/each}}
+  </ul>
 </div>

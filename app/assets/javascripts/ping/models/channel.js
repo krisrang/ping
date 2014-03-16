@@ -97,8 +97,8 @@ Ping.Channel = DS.Model.extend({
   
   memberCount: function() {
     var users = this.get('users');
-    return users.filterBy('online').length;
-  }.property('users.@each.online'),
+    return users.toArray().length;
+  }.property('users.@each'),
   
   update: function(name, purpose) {
     var self = this,
@@ -123,5 +123,10 @@ Ping.Channel = DS.Model.extend({
     }).then(function(){
       self.set('topic', topic);
     });
-  }
+  },
+  
+  usersByStatus: function() {
+    var users = this.get('users');
+    return users.sortBy('offline');
+  }.property('users.@each.status')
 });

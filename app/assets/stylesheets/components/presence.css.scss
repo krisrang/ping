@@ -1,0 +1,20 @@
+@import 'variables';
+@import 'bourbon';
+
+.presence {
+  width: 8px;
+  height: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0 .15rem;
+  -moz-opacity: 1;
+  -webkit-opacity: 1;
+  opacity: 1;
+  -ms-filter: alpha(opacity=100);
+  filter: alpha(opacity=100);
+  
+  &.online { background-color: $online; }
+  &.offline { background-color: $offline; }
+}

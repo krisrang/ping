@@ -19,7 +19,8 @@ Ping.User = DS.Model.extend({
   messages: DS.hasMany('message', {async: true}),
 
   path: Ping.computed.url('username_lower', "/users/%@"),
-  online: Ping.computed.isNot('status', 'offline'),
+  offline: Em.computed.equal('status', 'offline'),
+  online: Em.computed.equal('status', 'online'),
   
   pingResponded: true,
   

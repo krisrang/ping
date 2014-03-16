@@ -53,12 +53,13 @@
       top: 0;
       right: 0;
       width: 355px;
-      padding: 10px 15px;
+      padding: 10px;
       
       .channel-search {
-        width: 250px;
+        width: 270px;
         display: inline-block;
         position: relative;
+        vertical-align: middle;
         
         .search-icon {
           position: absolute;
@@ -95,7 +96,6 @@
     bottom: 45px;
     left: 0;
     right: 350px;
-    z-index: 200;
     margin-bottom: 15px;
 
     .messagelist {
@@ -175,6 +175,42 @@
       border-bottom: 1px solid #e0e0e0;
     }
   }
+  
+  .channel-users {
+    position: absolute;
+    right: 10px;
+    width: 200px;
+    padding: 10px;
+    text-align: right;
+    z-index: 550;
+    
+    a:hover { text-decoration: none; }
+    
+    ul {
+      text-align: left;
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 5px;
+      display: none;
+      box-shadow: 0 1px 15px rgba(64, 54, 63, .25);
+      border-radius: $radius;
+      
+      a {
+        display: block;
+        padding: 2px 5px;
+        border-radius: $radius;
+        
+        &:hover {
+          text-decoration: none;
+          background: $darkblue;
+          color: #fff;
+        }
+      }
+    }
+  }
+  
+  &.show-users .channel-users ul { display: block; }
+  &.open .channel-users { top: 5px; right: 350px; }
   
   &.open .open-sidebar { display: none !important; }
   &.closed .close-sidebar { display: none !important; }

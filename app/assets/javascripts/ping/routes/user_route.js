@@ -6,7 +6,13 @@ Ping.UserRoute = Ping.RestrictedUserRoute.extend({
       return currentUser;
     }
 
-    return Ping.User.create({username: params.username});
+    // return Ping.User.create({username: params.username});
+  },
+  
+  serialize: function(model) {
+    return {
+      username: model.get('username_lower')
+    };
   },
 
   afterModel: function() {

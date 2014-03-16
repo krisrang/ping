@@ -1,13 +1,18 @@
 Ping.ChannelView = Ping.View.extend({
   classNames: ['channel'],
-  classNameBindings: ['sidebarOpen:open:closed'],
+  classNameBindings: ['sidebarOpen:open:closed', 'userlistOpen:show-users'],
   atBottom: true,
   sidebarOpen: false,
+  userlistOpen: false,
   
   actions: {
     toggleSidebar: function() {
       this.toggleProperty('sidebarOpen');
       localforage.setItem('sidebarOpen', this.get('sidebarOpen'));
+    },
+    
+    toggleUsers: function() {
+      this.toggleProperty('userlistOpen');
     }
   },
   
