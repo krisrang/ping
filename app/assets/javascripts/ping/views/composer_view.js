@@ -21,6 +21,7 @@ Ping.ComposerView = Ping.View.extend({
       self.$('textarea').keydown(function(e) {
         if (e.keyCode === 13 && !e.shiftKey) {
           controller.send('sendMessage');
+          e.preventDefault();
         }
       });
     });

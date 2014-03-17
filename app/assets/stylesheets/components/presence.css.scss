@@ -2,11 +2,10 @@
 @import 'bourbon';
 
 .presence {
-  width: 8px;
-  height: 8px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
   display: inline-block;
   margin: 0 .15rem;
   -moz-opacity: 1;

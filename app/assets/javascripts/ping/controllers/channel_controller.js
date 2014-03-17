@@ -3,11 +3,7 @@ Ping.ChannelController = Ping.ObjectController.extend({
     return this.get('owner.id') === this.get('currentUser.id');
   }.property('owner'),
   
-  actions: {
-    sendMessage: function() {
-      console.log(this.get('message'));
-    },
-    
+  actions: {   
     changeTopic: function() {
       var self = this,
           topic = this.get('channelTopic'),

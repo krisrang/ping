@@ -7,8 +7,10 @@ class MessagesController < ApplicationController
   def create
     message = Message.new(message_params)
     message.user = current_user
+    message.cooked = message.source
 
     if message.save
+      Realtime.publish("/channels/#{message.channel.id}", {type: "message", message: message})
       render json: message
     else
       render json: { errors: { messages: message.errors, values: message_params } }, status: 422

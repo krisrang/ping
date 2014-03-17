@@ -31,4 +31,9 @@ module Realtime
     Faye.ensure_reactor_running!
     new_middleware(nil)
   end
+  
+  def self.full_client
+    Faye.ensure_reactor_running!
+    Faye::Client.new("http://localhost:#{Settings.port || 5000}/faye")
+  end
 end

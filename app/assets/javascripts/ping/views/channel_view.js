@@ -27,7 +27,7 @@ Ping.ChannelView = Ping.View.extend({
     Em.run.schedule('afterRender', function() {
       var topicInput = self.$("input.channel-topic-input");
       self.fixScrollbar();
-      self.messagesResized();
+      self.messagesChanged();
       self.$('.channel-composer').on('resize', Ember.run.bind(self, self.composerResized));
       self.$('.messagelist').on('scroll', Ember.run.bind(self, self.messagesScrolled));
       self.$('.menu-footer').on('click', function(e) { e.preventDefault(); e.stopPropagation();});
@@ -56,7 +56,7 @@ Ping.ChannelView = Ping.View.extend({
   composerResized: function() {
     var height = this.$('.channel-composer').outerHeight();
     this.$('.channel-messages').css('bottom', height);
-    this.messagesResized();
+    this.messagesChanged();
   },
   
   messagesScrolled: function() {
@@ -65,7 +65,7 @@ Ping.ChannelView = Ping.View.extend({
     this.set('atBottom', bottom);
   },
   
-  messagesResized: function(newchannel) {
+  messagesChanged: function() {
     var self = this,
         messages = this.$('.messagelist');
     if (!messages) return;
@@ -75,10 +75,10 @@ Ping.ChannelView = Ping.View.extend({
       self.fixScrollbar();
       
       // scroll messages to bottom if user was at the bottom
-      if (newchannel || self.get('atBottom')) {
+      if (self.get('atBottom')) {
         var toScroll = messages.prop("scrollHeight") - messages.outerHeight();
         messages.scrollTop(toScroll);
       }
     });
-  }.observes('controller.content')
+  }.observes('controller.model', 'controller.model.messages.@each')
 });

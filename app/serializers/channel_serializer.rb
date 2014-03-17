@@ -8,11 +8,11 @@ class ChannelSerializer < ApplicationSerializer
     object.owner
   end
   
-  # def include_users?
-  #   !!options[:embed]
-  # end
+  def include_users?
+    !!options[:embed]
+  end
   
-  # def include_messages?
-  #   !!options[:embed]
-  # end
+  def include_messages?
+    !!options[:embed]
+  end
 end

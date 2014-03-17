@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     open_channels = current_user.channels.select(:id).map(&:id).uniq
     channels.each { |c| c.open = open_channels.include?(c.id) }
     
-    channels_serialized = ActiveModel::ArraySerializer.new(channels, root: 'channels')
+    channels_serialized = ActiveModel::ArraySerializer.new(channels, root: 'channels', embed: true)
     store_preloaded('channels', MultiJson.dump(channels_serialized))
   end
 

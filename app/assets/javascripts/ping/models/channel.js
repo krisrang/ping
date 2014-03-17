@@ -92,7 +92,15 @@ Ping.Channel = DS.Model.extend({
   },
 
   newMessage: function(message) {
-    console.log(message);
+    var self = this,
+        channel = this.store.getById('channel', message.channel_id);
+    if (!channel) return;
+    
+    this.store.findById('user', message.user_id).then(function(user) {
+      var msg = self.store.createRecord('message', message);
+      msg.set('user', user);
+      channel.get('messages').pushObject(msg);
+    });
   },
   
   memberCount: function() {
